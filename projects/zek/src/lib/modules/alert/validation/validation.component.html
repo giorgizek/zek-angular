@@ -1,0 +1,8 @@
+<div *ngFor="let alert of alerts" class="alert {{ cssAlert(alert) }} alert-dismissible fade show mt-3" role="alert">
+    <button (click)="remove(alert)" type="button" class="btn-close" aria-label="Close"></button>
+    <div *ngFor="let message of alert.messages">
+        <i *ngIf="cssIcon(alert)" class="{{ cssIcon(alert) }}"></i>
+        {{message}}
+    </div>
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,263 @@
+﻿import { Router, ActivatedRoute } from '@angular/router';
+import { ViewChild, Directive } from '@angular/core';
+declare let bootstrap: any;
+
+// import { IService } from '../services/base.service';
+// import { BaseComponent } from './base.component';
+// import { AlertService } from '../modules/alert/shared/alert.service';
+// import { PagerService, PagedList, Pager } from '../modules/pager';
+// import { PrintType } from '../models/print.model';
+// import { TranslateService } from '@ngx-translate/core';
+// import { isEmptyFilter } from '../utils';
+// import { ModalComponent } from '../modules/modal/modal.component';
+
+// @Directive()
+// export class ListBaseComponent<TService extends IService = IService> extends BaseComponent<PagedList> {
+//     filter: any;
+//     saveFilter = true;
+//     sortFields: any;
+//     private internalFilter: any;
+//     isFiltered: boolean = false;
+//     protected readonly pagerService: PagerService;
+//     selectedIds: any[] = [];
+//     pager = new Pager();
+//     sumModel: any;
+
+
+//     @ViewChild('filterModal', { static: false }) protected readonly filterModal?: ModalComponent | null;
+//     approveModel: { ids?: number[], comment?: string } = {};
+//     @ViewChild('approveModal', { static: false }) protected readonly approveModal?: ModalComponent | null;
+//     @ViewChild('disapproveModal', { static: false }) protected readonly disapproveModal?: ModalComponent | null;
+
+//     constructor(
+//         protected readonly service: TService,
+//         readonly translateService: TranslateService,
+//         alertService: AlertService,
+//         route: ActivatedRoute,
+//         router: Router) {
+//         super(alertService, route, router);
+
+//         this.pagerService = new PagerService();
+//     }
+
+//     override init() {
+//         super.init();
+
+//         this.reset();
+//         this.initDefaultFilter();
+//         this.initStoredFilter();
+//         this.assignFilter();
+
+//         //this.selectedIds = [];
+//         //this.pagedList = new PagedList();
+//     }
+//     override async bindModel(): Promise<void> {
+//         this.selectedIds = [];
+//         this.model = await this.service.getAll(this.internalFilter).toPromise();
+//         if (this.model)
+//             this.pager = this.pagerService.getPager(this.model.pager ? this.model.pager.totalItemCount : 0, this.internalFilter.page, this.internalFilter.pageSize);
+//         else
+//             this.pager = new Pager();
+//         //this.pagedList.pager = this.pager;
+//     }
+
+
+//     protected initDefaultFilter() {
+//     }
+//     private initStoredFilter() {
+//         let filterParam = this.getParam('filter');
+
+//         if (filterParam) {
+//             const tmp = localStorage.get('filter');
+//             if (tmp && tmp.url && tmp.url === this.url && tmp.filter) {
+//                 this.filter = Object.assign({}, tmp.filter);
+//                 //we dont need this.assignFilter(); because after initStoredFilter(); will be assigned.
+//             } else {
+//                 localStorage.removeItem('filter');
+//             }
+//         } else {
+//             localStorage.removeItem('filter');
+//         }
+//     }
+//     changePage(page: number) {
+//         this.internalFilter.page = page;
+//         this.filter.page = page;
+//         this.refresh();
+//         this.autoSaveFilter();
+//     }
+//     changePageSize(pageSize: number) {
+//         this.internalFilter.pageSize = pageSize;
+//         this.filter.pageSize = pageSize;
+//         this.changePage(1);
+//     }
+//     showFilter() {
+//         this.filterModal?.show();
+//     }
+//     search() {
+//         //this.filterModal?.hide();
+//         this.assignFilter();
+//         this.changePage(1);
+//         //this.internalAutoSaveFilter();
+//     }
+//     protected assignFilter() {
+//         this.internalFilter = Object.assign({}, this.filter);
+//         this.isFiltered = !isEmptyFilter(this.internalFilter);
+//     }
+//     private autoSaveFilter() {
+//         if (this.saveFilter)
+//             this.internalSaveFilter()
+//     }
+//     private internalSaveFilter() {
+//         localStorage.set('filter', {
+//             url: this.url,
+//             filter: this.internalFilter
+//         });
+//     }
+//     reset() {
+//         this.filter = { page: 1, pageSize: 25 };
+//         this.assignFilter();
+//     }
+//     refresh() {
+//         this.bindModel();
+//     }
+
+
+//     create() {
+//         const url = this.router.url.split(';')[0];
+//         this.router.navigate([url, 'create', { returnUrl: url + ';filter=1' }]);
+//     }
+//     async delete(id: number) {
+//         let data = await this.service.delete(id).toPromise();
+//         if (data?.success) {
+//             let message = await this.translateService.get('Core.Alert.Deleted').toPromise();
+//             this.alertService.error(message, null, 'fas fa-trash')
+//             this.refresh();
+//         }
+//     }
+//     async delete2(id: number, id2: number) {
+//         let data = await this.service.delete2(id, id2).toPromise()
+//         if (data?.success) {
+//             let message = await this.translateService.get('Core.Alert.Deleted').toPromise();
+//             this.alertService.error(message, null, 'fas fa-trash')
+//             this.refresh();
+//         }
+//     }
+
+//     edit(id: number) {
+//         this.router.navigate([this.url, id, { returnUrl: this.url + ';filter=1' }]);
+//     }
+//     edit2(id: number, id2: number) {
+//         this.router.navigate([this.url, id, id2, { returnUrl: this.url + ';filter=1' }]);
+//     }
+//     select(item: any) {
+//         item.selected = !item.selected;
+//         let id = item.id;
+//         if (id) {
+//             if (item.selected) {
+//                 this.selectedIds.push(id);
+//             } else {
+//                 this.selectedIds = this.selectedIds.filter(item => item !== id);
+//             }
+//         }
+//     }
+
+
+
+//     showApproveModal(id: number) {
+//         if (!id || !this.approveModal) return;
+
+//         let tmp = { ids: [id] };
+//         this.approveModel = {};
+//         this.approveModal.show(tmp);
+//     }
+//     showApproveSelectedModal() {
+//         let tmp = { ids: this.getSelectedIds() };
+//         if (!tmp.ids || tmp.ids.length === 0 || !this.approveModal) return;
+
+//         this.approveModel = {};
+//         this.approveModal.show(tmp);
+//     }
+//     async approve(m: any) {
+//         if (!m) return;
+
+//         let data = await this.service.approve(m).toPromise();
+//         if (!data || data.length === 0)
+//             return;
+
+//         let message = await this.translateService.get('Core.Alert.Approved').toPromise();
+//         this.alertService.success(message, undefined, 'fas fa-thumbs-up')
+//         this.refresh();
+//     }
+
+
+//     showDisapproveModal(id: number) {
+//         if (!id || !this.disapproveModal) return;
+
+//         let tmp = { ids: [id] };
+//         this.approveModel = {};
+//         this.disapproveModal.show(tmp);
+//     }
+//     showDisapproveSelectedModal() {
+//         let tmp = { ids: this.getSelectedIds() };
+//         if (!tmp.ids || tmp.ids.length === 0 || !this.disapproveModal) return;
+
+//         this.approveModel = {};
+//         this.disapproveModal.show(tmp);
+//     }
+//     async disapprove(m: any) {
+//         if (!m || !this.approveModel) return;
+
+//         m.comment = String.tryTrim(this.approveModel.comment);
+//         if (!m.comment) delete m.comment;
+
+//         let data = await this.service.disapprove(m).toPromise();
+//         if (!data || data.length === 0)
+//             return;
+
+//         let message = await this.translateService.get('Core.Alert.Disapproved').toPromise();
+//         this.alertService.success(message, undefined, 'fas fa-thumbs-down')
+//         this.refresh();
+//     }
+
+//     getSelectedIds() {
+//         return this.selectedIds;
+//         // if (!this.pagedList || !this.pagedList.data) return [];
+
+//         // let ids = [];
+//         // for (const item of this.pagedList.data) {
+//         //     if (!item.selected || !item.id) continue;
+
+//         //     ids.push(item.id);
+//         // }
+//         // return ids;
+//     }
+
+//     showSum() { }
+//     async sum() {
+//         this.sumModel = null;
+//         let data = await this.service.sum(this.internalFilter).toPromise();
+//         if (data) {
+//             this.sumModel = data;
+//             this.showSum();
+//         } else {
+//             let message = await this.translateService.get('Core.Alert.SumError').toPromise();
+//             this.alertService.error(message);
+//         }
+//     }
+
+//     export(fileTypeId: number) {
+//         this.service.export(this.internalFilter, fileTypeId).subscribe(data => {
+//             this.downloadFile(data, 'export.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+//         });
+//     }
+
+
+//     override print(printType?: PrintType) {
+//         if (!this.model || !this.model.data) return;
+
+//         let ids = this.getSelectedIds();
+//         for (const id of ids) {
+//             super.print(id, printType);
+//         }
+//     }
+// }
