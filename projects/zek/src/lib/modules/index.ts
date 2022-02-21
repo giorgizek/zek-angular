@@ -9,6 +9,7 @@ export * from './list-toolbar';
 export * from './loading';
 export * from './modal';
 export * from './page-title';
+export * from './pager';
 export * from './safe-html';
 export * from './safe-style';
 export * from './select2';

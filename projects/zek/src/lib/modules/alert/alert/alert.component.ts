@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AlertType } from '../../../utils';
+import { AlertType } from '../../../models';
 import { BootstrapHelper } from '../../../utils/bootstrap.helper';
 
 @Component({

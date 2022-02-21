@@ -1,10 +1,9 @@
-import { Input, Directive } from '@angular/core';
+import { Input, Directive, Type } from '@angular/core';
 import { ActivatedRoute, Router, PRIMARY_OUTLET } from '@angular/router';
+import { AppBaseModule } from '../app-base.module';
 
-//import { AlertService } from '../modules/alert/shared/alert.service';
-// import { WebApiClient } from '../services/web.api';
 import { PrintType } from '../models/print.model';
-// import { AppBaseModule } from '../app-base.module';
+import { WebApiClient } from '../services';
 import { CoreComponent } from './core.component';
 
 @Directive()
@@ -70,30 +69,30 @@ export class BaseComponent<TModel = any> extends CoreComponent {
             document.body.removeChild(a);
         }
     }
-    // print(id?: number | null, printType?: PrintType) {
-    //     const split = this.url.split('/');
-    //     if (split.length < 2) {
-    //         return;
-    //     }
-    //     const template = split[1];
-    //     let api = AppBaseModule.injector.get(WebApiClient);
+    print(id?: number | null, printType?: PrintType) {
+        const split = this.url.split('/');
+        if (split.length < 2) {
+            return;
+        }
+        const template = split[1];
+        let api = AppBaseModule.injector.get<WebApiClient>(WebApiClient as Type<WebApiClient>);
 
-    //     let actionName: string;
+        let actionName: string;
 
 
-    //     switch (printType) {
-    //         case PrintType.Pdf:
-    //             actionName = 'PrintPdfIdLink';
-    //             break;
+        switch (printType) {
+            case PrintType.Pdf:
+                actionName = 'PrintPdfIdLink';
+                break;
 
-    //         default:
-    //             actionName = 'ShowIdLink'
-    //             break;
-    //     }
-    //     api.getString(`api/Reports/${actionName}`, { template, id }).subscribe(url => {
-    //         if (url) {
-    //             window.open(url, '_blank');
-    //         }
-    //     });
-    // }
+            default:
+                actionName = 'ShowIdLink'
+                break;
+        }
+        api.getString(`api/Reports/${actionName}`, { template, id }).subscribe(url => {
+            if (url) {
+                window.open(url, '_blank');
+            }
+        });
+    }
 }

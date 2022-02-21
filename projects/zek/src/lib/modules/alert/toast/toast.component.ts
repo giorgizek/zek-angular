@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AlertType, BootstrapHelper } from '../../../utils';
+import { BootstrapHelper } from '../../../utils';
 //declare let bootstrap: any;
 
-import { AlertService, Toast } from '../shared/alert.service';
+import { AlertService, Toast } from '../../../services/alert.service';
+import { AlertType } from '../../../models';
 
 @Component({
     selector: 'app-toast',

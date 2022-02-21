@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AlertType } from '../../../utils';
+import { AlertType } from '../../../models';
 
-import { AlertService, Alert } from '../shared/alert.service';
+import { AlertService, Alert } from '../../../services/alert.service';
 
 @Component({
     selector: 'app-validation',
@@ -38,7 +38,6 @@ export class ValidationComponent implements OnInit, OnDestroy {
     remove(alert: Alert) {
         this.alerts = this.alerts.filter(x => x !== alert);
     }
-
 
     cssIcon(alert: Alert) {
         if (!alert) {
@@ -94,4 +93,3 @@ export class ValidationComponent implements OnInit, OnDestroy {
         }
     }
 }
-

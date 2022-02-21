@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subject } from 'rxjs';
-import { AlertType } from '../../../utils';
-import { BootstrapHelper } from '../../../utils/bootstrap.helper';
+import { AlertType } from '../models';
+import { BootstrapHelper } from '../utils/bootstrap.helper';
 
 export class BaseAlert {
     type?: AlertType | null;

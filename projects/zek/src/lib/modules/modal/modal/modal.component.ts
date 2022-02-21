@@ -2,7 +2,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { CoreComponent } from '../../../components';
 import { BootstrapHelper, ComponentType, handler, RandomHelper } from '../../../utils';
-import { ValidEventArgs } from '../valid-event-args.model';
+import { ValidEventArgs } from '../../../models/valid-event-args.model';
 
 declare let bootstrap: any;
 

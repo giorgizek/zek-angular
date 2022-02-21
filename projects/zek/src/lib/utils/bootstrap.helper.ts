@@ -1,4 +1,4 @@
-import { AlertType } from './alert-type';
+import { AlertType } from '../models/alert-type';
 import { StringHelper } from './string-helper';
 
 export enum ComponentType {

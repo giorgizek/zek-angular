@@ -98,26 +98,30 @@ export class DateHelper {
     };
 
 
-    static getAge(v: Date, now?: Date | null) {
-        if (!now)
-            now = new Date();
-        let timeDiff = now.getTime() - v.getTime();
+    static getAge(value?: Date | string | null, now?: Date | null) {
+        if (value === undefined || value === null || value === '' || value !== value) return null;
+        
+        const date = this.toDate(value);
+
+        let nowTime = now ? now.getTime() : Date.now();
+        let timeDiff = nowTime - date.getTime();
+
         return Math.floor((timeDiff / 86400000) / 365.25);//86400000 = (1000 * 60 * 60 * 24) = 1000 millisecond * 60second  * 60minute * 24hour
     };
-    static subtractDays(v: Date, date?: Date | null) {
+    static subtractDays(value: Date, date?: Date | null) {
         if (!date)
             return null;
 
         date = this.toDate(date);
-        let timeDiff = date.getTime() - v.getTime();
+        let timeDiff = date.getTime() - value.getTime();
         return Math.floor(timeDiff / 86400000);//86400000 = (1000 * 60 * 60 * 24) = 1000 millisecond * 60second  * 60minute * 24hour
     };
-    static subtractMinutes(v: Date, date?: Date | null) {
+    static subtractMinutes(value: Date, date?: Date | null) {
         if (!date)
             return null;
 
         date = this.toDate(date);
-        let timeDiff = date.getTime() - v.getTime();
+        let timeDiff = date.getTime() - value.getTime();
         return Math.floor(((timeDiff % 86400000) % 3600000) / 60000);;
     };
 
