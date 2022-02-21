@@ -1,0 +1,33 @@
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar">
+    <div class="btn-group me-2" role="group" aria-label="Action group">
+        <button *ngIf="showCreate" type="button" class="btn btn-primary" (click)="create()"><i class="fas fa-plus"></i> {{ 'Core.Action.Create' | translate }}</button>
+    </div>
+    <div class="btn-group me-2" role="group" aria-label="Filter group">
+        <button *ngIf="showFilter" type="button" class="btn btn-secondary" [ngClass]="{'btn-outline-success': isFiltered, 'btn-secondary': !isFiltered }" (click)="filter()" data-bs-toggle0="modal" data-bs-backdrop0="static" data-bs-target0="#filter-modal"><i class="fas fa-filter"></i> {{ 'Core.Action.Filter' | translate }}</button>
+        <button type="button" class="btn btn-secondary" title="{{ 'Core.Action.Refresh' | translate }}" (click)="refresh()"><i class="fas fa-sync"></i></button>
+    </div>
+    <div *ngIf="showPrint" class="btn-group me-2" role="group" aria-label="Print group">
+        <button type="button" class="btn btn-secondary" (click)="print(printType.Pdf)"><i class="fas fa-print"></i> {{ 'Core.Action.Print' | translate }}</button>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><button type="button" class="dropdown-item" (click)="print(printType.Show)"><i class="fas fa-print"></i> {{ 'Core.Action.Print' | translate }}</button></li>
+                <li><button type="button" class="dropdown-item" (click)="print(printType.Pdf)"><i class="fas fa-file-pdf"></i> {{ 'Core.Action.Print' | translate }} PDF</button></li>
+            </ul>
+        </div>
+    </div>
+    <div *ngIf="showSum" class="btn-group me-2" role="group" aria-label="Sum group">
+        <button type="button" class="btn btn-secondary" (click)="sum()"><i class="fas fa-sigma"></i> {{ 'Core.Action.Sum' | translate }}</button>
+    </div>
+    <div *ngIf="showExport" class="btn-group me-2" role="group" aria-label="Export group">
+        <div class="btn-group" role="group">
+            <button id="btn-group-export" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-download"></i> {{ 'Core.Action.Export' | translate }}</button>
+            <ul class="dropdown-menu" aria-labelledby="btn-group-export">
+                <li><a class="dropdown-item" href="javascript:void(0)" (click)="exportExcel()"><i class="fas fa-file-excel"></i> Excel</a></li>
+            </ul>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</div>

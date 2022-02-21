@@ -1,15 +1,15 @@
 <div class="toast-container position-fixed top-0 end-0 p-3">
-    <!-- <div *ngFor="let toast of toasts" class="toast fade show {{ cssAlert(toast) }}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+    <div *ngFor="let toast of toasts" class="toast fade show border-0 {{ toast.css }}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
         <div class="toast-header">
-            <span class="me-1" *ngIf="cssIcon(toast)"><i class="{{ cssIcon(toast) }}"></i></span>
+            <span class="me-1" *ngIf="icon && toast.icon"><i class="{{ toast.icon }}"></i></span>
             <strong class="me-auto" *ngIf="toast.title">{{ toast.title }}</strong>
             <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close" (click)="remove(toast)"></button>
         </div>
         <div class="toast-body">
             {{ toast.message }}
         </div>
-    </div> -->
-    <div *ngFor="let toast of toasts" class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+    </div>
+    <!-- <div *ngFor="let toast of toasts" class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
         <div class="toast-body">
             <div class="row">
                 <div class="col-auto pe-1 border-start border-8 {{toast.borderColor}}">
@@ -24,5 +24,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

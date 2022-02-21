@@ -8,6 +8,7 @@ export class BaseAlert {
     type?: AlertType | null;
     icon?: string | null;
     title?: string | null;
+    css?: string | null;
     // id?: string;
 }
 
