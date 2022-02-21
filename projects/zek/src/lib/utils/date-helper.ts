@@ -80,15 +80,15 @@ export class DateHelper {
 
         return date;
     };
-    static isToday(v: Date) {
+    static isToday(date: Date) {
         let today = new Date();
-        return this.isSameDate(v, today);
+        return this.isSameDate(date, today);
     };
-    static clone(v: Date) {
-        return new Date(+v);
+    static clone(date: Date) {
+        return new Date(+date);
     };
-    static isAnotherMonth(v: Date, date: Date) {
-        return date && v.getMonth() !== date.getMonth();
+    static isAnotherMonth(a: Date, b: Date) {
+        return b && a.getMonth() !== b.getMonth();
     };
     static isWeekend(v: Date,): boolean {
         return v.getDay() === 0 || v.getDay() === 6;

@@ -1,6 +1,7 @@
 export * from './alert-type';
 export * from './captcha.model';
 export * from './ctor';
+export * from './file.model';
 export * from './filter.model';
 export * from './gender.model';
 export * from './key-pair.model';
@@ -9,6 +10,6 @@ export * from './month.model';
 export * from './pager.model';
 export * from './print.model';
 export * from './tree.model';
-
+export * from './valid-event-args.model';
 
 //export * from './';
