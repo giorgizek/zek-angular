@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgModel } from '@angular/forms';
 
 @Component({
-    selector: 'app-field-validator, [app-field-validator]',
+    selector: 'zek-field-validator, [zek-field-validator]',
     host: { '[class]': '"invalid-tooltip"' },
     templateUrl: './field-validator.component.html'
 })

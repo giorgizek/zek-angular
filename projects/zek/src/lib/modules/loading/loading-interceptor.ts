@@ -1,7 +1,7 @@
 import { Injectable, ExistingProvider } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Observable, ReplaySubject, throwError, Subject } from 'rxjs';
-import { catchError, finalize, map } from 'rxjs/operators';
+import { Observable, ReplaySubject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })

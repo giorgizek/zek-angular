@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-grid-toolbar',
+    selector: 'zek-grid-toolbar',
     templateUrl: './grid-toolbar.component.html'
 })
 export class GridToolbarComponent {

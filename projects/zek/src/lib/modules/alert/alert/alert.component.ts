@@ -3,7 +3,7 @@ import { AlertType } from '../../../models';
 import { BootstrapHelper } from '../../../utils/bootstrap.helper';
 
 @Component({
-    selector: 'app-alert',
+    selector: 'zek-alert',
     templateUrl: './alert.component.html',
     styles: [':host { display: block; }']
 })

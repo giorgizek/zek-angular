@@ -7,7 +7,7 @@ import { AlertService, Toast } from '../../../services/alert.service';
 import { AlertType } from '../../../models';
 
 @Component({
-    selector: 'app-toast',
+    selector: 'zek-toast',
     styleUrls: ['./toast.component.css'],
     templateUrl: './toast.component.html'
 })

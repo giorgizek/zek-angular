@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { RandomHelper, StringHelper } from '../../utils';
 
 @Component({
-  selector: 'app-select2,[app-select2]',
+  selector: 'zek-select2,[zek-select2]',
   templateUrl: './select2.component.html',
   styleUrls: ['./select2.component.css']
 

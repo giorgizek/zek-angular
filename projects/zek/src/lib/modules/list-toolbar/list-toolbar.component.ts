@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PrintType } from '../../models/print.model';
 
 @Component({
-    selector: 'app-list-toolbar',
+    selector: 'zek-list-toolbar',
     templateUrl: './list-toolbar.component.html'
 })
 export class ListToolbarComponent {

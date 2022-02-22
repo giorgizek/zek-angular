@@ -1,3 +1,3 @@
-export class Captcha {
+export interface Captcha {
     captcha?: string | null;
 }

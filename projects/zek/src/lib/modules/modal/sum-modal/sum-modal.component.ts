@@ -2,7 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-    selector: 'app-sum-modal',
+    selector: 'zek-sum-modal',
     templateUrl: './sum-modal.component.html'
 })
 export class SumComponent {

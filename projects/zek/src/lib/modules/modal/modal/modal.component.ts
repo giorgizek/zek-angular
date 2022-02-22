@@ -7,7 +7,7 @@ import { ValidEventArgs } from '../../../models/valid-event-args.model';
 declare let bootstrap: any;
 
 @Component({
-    selector: 'app-modal',
+    selector: 'zek-modal',
     templateUrl: './modal.component.html'
 })
 export class ModalComponent extends CoreComponent {
@@ -174,7 +174,7 @@ export class ModalComponent extends CoreComponent {
 }
 
 @Component({
-    selector: 'app-delete-modal',
+    selector: 'zek-delete-modal',
     templateUrl: './modal.component.html'
 })
 export class DeleteModalComponent extends ModalComponent {
@@ -188,7 +188,7 @@ export class DeleteModalComponent extends ModalComponent {
 }
 
 @Component({
-    selector: 'app-approve-modal',
+    selector: 'zek-approve-modal',
     templateUrl: './modal.component.html'
 })
 export class ApproveModalComponent extends ModalComponent {
@@ -201,7 +201,7 @@ export class ApproveModalComponent extends ModalComponent {
     }
 }
 @Component({
-    selector: 'app-submit-modal',
+    selector: 'zek-submit-modal',
     templateUrl: './modal.component.html'
 })
 export class SubmitModalComponent extends ModalComponent {
@@ -214,7 +214,7 @@ export class SubmitModalComponent extends ModalComponent {
     }
 }
 @Component({
-    selector: 'app-disapprove-modal',
+    selector: 'zek-disapprove-modal',
     templateUrl: './modal.component.html'
 })
 export class DisapproveModalComponent extends ModalComponent {
@@ -228,7 +228,7 @@ export class DisapproveModalComponent extends ModalComponent {
 }
 
 @Component({
-    selector: 'app-restore-modal',
+    selector: 'zek-restore-modal',
     templateUrl: './modal.component.html'
 })
 export class RestoreModalComponent extends ModalComponent {

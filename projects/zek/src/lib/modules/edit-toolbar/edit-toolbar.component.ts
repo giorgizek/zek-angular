@@ -2,7 +2,7 @@
 import { PrintType } from '../../models/print.model';
 
 @Component({
-    selector: 'app-edit-toolbar',
+    selector: 'zek-edit-toolbar',
     templateUrl: './edit-toolbar.component.html'
 })
 export class EditToolbarComponent {

@@ -1,13 +1,13 @@
 import { Injectable, } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { KeyPair, LoginToken, LoginTokenDTO } from '../models';
+import { KeyPair, LoginToken } from '../models';
 import { StorageHelper } from '../utils';
 import { BitwiseHelper } from '../utils/bitwise-helper';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private subject = new BehaviorSubject<boolean>(false);//todo check if need BehaviorSubject
-    private model?: LoginToken | null = null;
+    protected model?: LoginToken | null = null;
     private expired: Date | null = null;
 
     private oldValueIsAuthenticated: boolean = false;
@@ -33,7 +33,7 @@ export class AuthService {
         return this.subject.asObservable();
     }
 
-    login(tmp?: LoginTokenDTO | null) {
+    login(tmp?: LoginToken | null) {
         if (tmp) {
             //Globals.setServerDate(tmpModel.currentDateTime);
 
@@ -60,7 +60,7 @@ export class AuthService {
         }
         return this.model;
     }
-    private getExpired(): Date | undefined | null {
+    protected getExpired(): Date | undefined | null {
         if (!this.expired) {
             const tmp = this.getUser();
             if (tmp && tmp.expired) {

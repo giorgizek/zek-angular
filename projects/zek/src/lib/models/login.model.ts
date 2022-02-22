@@ -1,23 +1,18 @@
 import { Captcha } from './captcha.model';
 
-export class LoginToken {
-    id?: number;
-    userName?: string;
-    roles?: string[];
-    //permissions?: KeyPair<number, number>[];
-    permissions?: { [id: number] : number; };
-    token?: string;
-    expired?: string;
-    fullName?: string
-    position?: string
-}
-export class LoginTokenDTO extends LoginToken {
-    //currentDateTime: Date;
+export interface LoginToken {
+    id?: number | null;
+    userName?: string | null;
+    roles?: string[] | null;
+    permissions?: { [id: number]: number; } | null;
+    token?: string | null;
+    expired?: string | null;
+    fullName?: string | null;
+    position?: string | null;
 }
 
-export class LoginDTO extends Captcha {
+export interface Login extends Captcha {
     userName?: string;
     rememberMe?: boolean;
     password?: string;
-    company?: string;
 }

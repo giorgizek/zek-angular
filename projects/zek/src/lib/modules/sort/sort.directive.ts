@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 
-@Directive({ selector: '[app-sort]' })
+@Directive({ selector: '[zek-sort]' })
 export class SortDirective implements AfterViewInit {
     private innerHtml: string = '';
 

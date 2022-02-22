@@ -11,7 +11,7 @@ const DATE_VALUE_ACCESSOR = {
 };
 
 @Directive({
-    selector: '[app-date],input[type=date][formControlName],input[type=date][formControl],input[type=date][ngModel]',//,input[type=date][ngModel]
+    selector: '[zek-date],input[type=date][formControlName],input[type=date][formControl],input[type=date][ngModel]',//,input[type=date][ngModel]
     providers: [DATE_VALUE_ACCESSOR],
     host: {
         //არაა საჭირო ეს ევენტი ისედაც მუშაობს'(change)': 'onChange($event.target.value)',

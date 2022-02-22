@@ -3,7 +3,7 @@ import { KeyPair } from '../../../models/key-pair.model';
 import { RandomHelper } from '../../../utils';
 
 @Component({
-    selector: 'app-sort-button-group',
+    selector: 'zek-sort-button-group',
     templateUrl: './sort-button-group.component.html'
 })
 export class SortButtonGroupComponent {

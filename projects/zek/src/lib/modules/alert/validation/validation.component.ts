@@ -5,7 +5,7 @@ import { AlertType } from '../../../models';
 import { AlertService, Alert } from '../../../services/alert.service';
 
 @Component({
-    selector: 'app-validation',
+    selector: 'zek-validation',
     templateUrl: './validation.component.html',
     styles: [':host { display: block; }']
 })

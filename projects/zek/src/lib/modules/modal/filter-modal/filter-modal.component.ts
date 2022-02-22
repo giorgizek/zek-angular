@@ -2,7 +2,7 @@
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-    selector: 'app-filter-modal',
+    selector: 'zek-filter-modal',
     templateUrl: './filter-modal.component.html'
 })
 export class FilterModalComponent extends ModalComponent {

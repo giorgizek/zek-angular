@@ -5,7 +5,7 @@ import { LoadingInterceptor } from './loading-interceptor';
 
 
 @Component({
-    selector: 'app-loading',
+    selector: 'zek-loading',
     styleUrls: ['./loading.component.css'],
     template: `
 <div *ngIf="show" id="loading" class="progress">

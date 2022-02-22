@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, ContentChild, AfterContentInit } from '@angular/core';
 
 @Component({
-    selector: 'app-card',
+    selector: 'zek-card',
     templateUrl: './card.component.html',
     styles: [':host { display: block; }']
 })

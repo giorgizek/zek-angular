@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 @Component({
-    selector: 'app-wizard',
+    selector: 'zek-wizard',
     templateUrl: './wizard.component.html'
 })
 export class WizardComponent {

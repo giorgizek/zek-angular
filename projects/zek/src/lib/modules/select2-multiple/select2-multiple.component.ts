@@ -4,7 +4,7 @@ import { RandomHelper, StringHelper } from '../../utils';
 
 
 @Component({
-  selector: 'app-select2-multiple,[app-select2-multiple]',
+  selector: 'zek-select2-multiple,[zek-select2-multiple]',
   templateUrl: './select2-multiple.component.html'
 })
 

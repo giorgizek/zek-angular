@@ -2,7 +2,7 @@
 import { Pager } from '../../../models';
 
 @Component({
-    selector: 'app-pager',
+    selector: 'zek-pager',
     templateUrl: './pager.component.html',
     styles: [':host { display: block; }']
 })

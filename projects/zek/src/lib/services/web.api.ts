@@ -11,8 +11,8 @@ import { AuthService } from './auth.service';
 @Injectable({ providedIn: 'root' })
 export class WebApiClient {
     constructor(
-        private readonly http: HttpClient,
-        private readonly authService: AuthService,
+        protected readonly http: HttpClient,
+        protected readonly authService: AuthService,
         @Inject('env') private readonly env: any) {
     }
 
@@ -42,7 +42,7 @@ export class WebApiClient {
 
 
 
-    private toHttpParams(obj: any) {
+    protected toHttpParams(obj: any) {
         if (!obj)
             return undefined;
 
@@ -112,7 +112,7 @@ export class WebApiClient {
 
 
 
-    private getHeaders(): HttpHeaders {
+    protected getHeaders(): HttpHeaders {
         let httpHeaders = new HttpHeaders();
         httpHeaders = httpHeaders.set('Content-Type', 'application/json');
         const tmp = this.authService.getUser();
