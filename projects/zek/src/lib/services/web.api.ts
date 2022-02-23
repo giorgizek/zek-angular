@@ -8,16 +8,21 @@ import { AuthService } from './auth.service';
 //import { deleteNullProperties } from '../utils';
 //import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 
-@Injectable({ providedIn: 'root' })
+
+export interface WebApiConfig {
+    baseUrl: string;
+}
+
+@Injectable()
 export class WebApiClient {
     constructor(
         protected readonly http: HttpClient,
         protected readonly authService: AuthService,
-        @Inject('env') private readonly env: any) {
+        @Inject(API_BASE_URL) private readonly baseUrl: string) {
     }
 
     get<T = any>(url: string, params?: any): Observable<T> {
-        return this.http.get<T>(this.env.apiUrl + url, { headers: this.getHeaders(), params: this.toHttpParams(params) });
+        return this.http.get<T>(this.baseUrl + url, { headers: this.getHeaders(), params: this.toHttpParams(params) });
         /*.catch(catchError(this.handleError(url)))
         .do((res: Response) => {
             // Handle success, maybe display notification
@@ -31,13 +36,13 @@ export class WebApiClient {
     }
 
     getString(url: string, params?: object): Observable<string | null> {
-        return this.http.get(this.env.apiUrl + url, { headers: this.getHeaders(), responseType: 'text', params: this.toHttpParams(params) });
+        return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'text', params: this.toHttpParams(params) });
     }
     getBytes(url: string, params?: any): Observable<ArrayBuffer> {
-        return this.http.get(this.env.apiUrl + url, { headers: this.getHeaders(), responseType: 'arraybuffer', params: this.toHttpParams(params) });
+        return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'arraybuffer', params: this.toHttpParams(params) });
     }
     getBlob(url: string, params?: any): Observable<Blob> {
-        return this.http.get(this.env.apiUrl + url, { headers: this.getHeaders(), responseType: 'blob', params: this.toHttpParams(params) });
+        return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'blob', params: this.toHttpParams(params) });
     }
 
 
@@ -91,20 +96,20 @@ export class WebApiClient {
     //}
 
     post<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.post<T>(this.env.apiUrl + url, body, { headers: this.getHeaders() });
+        return this.http.post<T>(this.baseUrl + url, body, { headers: this.getHeaders() });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     put<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.put<T>(this.env.apiUrl + url, body, { headers: this.getHeaders() });
+        return this.http.put<T>(this.baseUrl + url, body, { headers: this.getHeaders() });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     delete(url: string, body?: any | null): Observable<any> {
-        return this.http.request('delete', this.env.apiUrl + url, { body, headers: this.getHeaders() });
-        //return this.http.delete(environment.apiUrl + url, { headers: this.getHeaders() });
+        return this.http.request('delete', this.baseUrl + url, { body, headers: this.getHeaders() });
+        //return this.http.delete(environment.url + url, { headers: this.getHeaders() });
         //.pipe(
         //catchError(this.handleError(url))
         //);
@@ -140,6 +145,7 @@ export class WebApiClient {
 
 
 import { HttpParameterCodec } from '@angular/common/http';
+import { API_BASE_URL } from '../tokens';
 export class CustomHttpParamEncoder implements HttpParameterCodec {
     encodeKey(key: string): string {
         return encodeURIComponent(key);

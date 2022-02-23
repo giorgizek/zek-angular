@@ -27,15 +27,25 @@ export class HtmlHelper {
     }
 
 
-    static loadScript(src: string, async = true) {
-        let script = document.createElement('script');
+    static loadScript(src: string, nonce?: string, async = true, defer = true) {
+        const script = document.createElement('script');
+        script.innerHTML = '';
         script.src = src;
         script.type = 'text/javascript';
+
+        if (nonce) {
+            script.nonce = nonce;
+        }
+
         if (async) {
             script.async = true;
         }
+        if (defer) {
+            script.defer = true;
+        }
 
-        document.getElementsByTagName('head')[0].appendChild(script);
+        document.head.appendChild(script);
+        //2022-02-24 document.getElementsByTagName('head')[0].appendChild(script);
     }
     static loadScripts(...scripts: string[]) {
         var promises: any[] = [];

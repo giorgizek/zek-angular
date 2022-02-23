@@ -21,6 +21,7 @@
     "@ngx-translate/core": "^14.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "zek": "0.0.57",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
-import { Directive, ElementRef, Input, OnDestroy, forwardRef, HostListener, OnChanges, SimpleChanges, Inject } from '@angular/core'
+import { Directive, ElementRef, OnDestroy, forwardRef, HostListener, OnChanges, SimpleChanges, Inject } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DATE_FORMAT, LANGUAGE } from '../../tokens';
 import { DateHelper } from '../../utils';
 
 declare let Datepicker: any;
@@ -9,6 +10,8 @@ const DATE_VALUE_ACCESSOR = {
     useExisting: forwardRef(() => DateValueAccessor),
     multi: true,
 };
+
+
 
 @Directive({
     selector: '[zek-date],input[type=date][formControlName],input[type=date][formControl],input[type=date][ngModel]',//,input[type=date][ngModel]
@@ -24,7 +27,19 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
     private oldValue?: Date | null = null;
 
     constructor(private el: ElementRef,
-        @Inject('env') readonly env: any) {
+        @Inject(DATE_FORMAT) format: string,
+        @Inject(LANGUAGE) language: string,
+        @Inject('env') env: any) {
+
+        if (env) {
+            if (env.datepickerFormat) {
+                format = env.datepickerFormat;
+            }
+            if (env.lang) {
+                language = env.lang;
+            }
+        }
+
         if (el.nativeElement.type === 'date') {
             el.nativeElement.type = 'text'//change input type to text to override browser default date editor
         }
@@ -38,8 +53,8 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
 
             //datesDisabled: []
             daysOfWeekHighlighted: [0, 6],
-            format: env.datepickerFormat,
-            language: env.lang,
+            format: format,
+            language: language,
 
             //prevArrow: '«',
             //nextArrow: '»',
