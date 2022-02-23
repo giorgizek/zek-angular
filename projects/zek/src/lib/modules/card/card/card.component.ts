@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, ContentChild, AfterContentInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, ContentChild, AfterContentInit, Input } from '@angular/core';
 
 @Component({
     selector: 'zek-card',
@@ -16,6 +16,14 @@ export class CardComponent implements AfterViewInit {
     @ViewChild('bodyRef') private bodyRef: ElementRef | undefined;
     // @ViewChild('contentRef') private contentRef: ElementRef | undefined;
     @ViewChild('footerRef') private footerRef: ElementRef | undefined;
+
+    private _css = '';
+    get css() {
+        return this._css;
+    }
+    @Input() set css(value) {
+        this._css = value || '';
+    }
 
     showHeader = true;
     showBody = true;
