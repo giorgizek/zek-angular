@@ -12,7 +12,7 @@ export interface DatepickerConfig {
   exports: [DateValueAccessor]
 })
 export class DatepickerModule {
-  public static forRoot(config: DatepickerConfig, environment: any): ModuleWithProviders<DatepickerModule> {
+  public static forRoot(config: DatepickerConfig, environment?: any | null): ModuleWithProviders<DatepickerModule> {
 
     return {
       ngModule: DatepickerModule,
@@ -25,7 +25,7 @@ export class DatepickerModule {
     };
   }
 
-  public static forChild(config: DatepickerConfig, environment: any) {
+  public static forChild(config: DatepickerConfig, environment?: any | null) {
     return this.forRoot(config, environment);
   }
 }

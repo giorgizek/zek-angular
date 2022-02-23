@@ -29,7 +29,7 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
     constructor(private el: ElementRef,
         @Inject(DATE_FORMAT) format: string,
         @Inject(LANGUAGE) language: string,
-        @Inject('env') env: any) {
+        @Inject('env') env?: any | null) {
 
         if (env) {
             if (env.datepickerFormat) {
