@@ -4,7 +4,7 @@ import { KeyPair, LoginToken } from '../models';
 import { StorageHelper } from '../utils';
 import { BitwiseHelper } from '../utils/bitwise-helper';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthService {
     private subject = new BehaviorSubject<boolean>(false);//todo check if need BehaviorSubject
     protected model?: LoginToken | null = null;

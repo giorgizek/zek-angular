@@ -1,6 +1,6 @@
 import { Input, Directive, Type } from '@angular/core';
 import { ActivatedRoute, Router, PRIMARY_OUTLET } from '@angular/router';
-import { AppBaseModule } from '../app-base.module';
+import { AppBaseModule } from '../zek.module';
 
 import { PrintType } from '../models/print.model';
 import { WebApiClient } from '../services';
@@ -9,7 +9,6 @@ import { CoreComponent } from './core.component';
 @Directive()
 export class BaseComponent<TModel = any> extends CoreComponent {
     constructor(
-        // protected readonly alertService: AlertService,
         protected readonly route: ActivatedRoute,
         protected readonly router: Router
     ) {

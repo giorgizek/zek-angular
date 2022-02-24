@@ -10,7 +10,7 @@ import { AlertType } from '../models';
 export type HandleError = <T = any>(operation?: string, result?: T, show?: boolean) => (error: HttpErrorResponse) => Observable<T>;//Added '= any'
 
 /** Handles HttpClient errors */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class HttpErrorHandler {
     constructor(
         private readonly alertService: AlertService,

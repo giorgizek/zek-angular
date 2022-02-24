@@ -9,6 +9,4 @@ export * from './lib/modules';
 export * from './lib/services';
 export * from './lib/utils';
 
-
-export * from './lib/app-base.module';
-export * from './lib/web-api.module';
+export * from './lib/zek.module';

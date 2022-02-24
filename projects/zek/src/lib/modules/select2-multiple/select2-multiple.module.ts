@@ -15,7 +15,6 @@ import { Select2MultipleComponent } from './select2-multiple.component';
   exports: [
     Select2MultipleComponent
   ],
-  providers: []
 })
 
 export class Select2MultipleModule {

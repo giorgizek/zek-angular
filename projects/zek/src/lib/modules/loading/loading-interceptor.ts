@@ -4,7 +4,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
     private pendingRequests = 0;
     private pendingRequestsStatus = new ReplaySubject<boolean>(1);

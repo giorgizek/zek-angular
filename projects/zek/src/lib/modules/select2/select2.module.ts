@@ -15,7 +15,6 @@ import { Select2Component } from './select2.component';
   exports: [
     Select2Component
   ],
-  providers: []
 })
 
 export class Select2Module {

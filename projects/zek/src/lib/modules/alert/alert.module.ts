@@ -6,16 +6,15 @@ import { ToastComponent } from './toast/toast.component';
 import { ValidationComponent } from './validation/validation.component';
 
 @NgModule({
-     imports: [
-         CommonModule
-     ],
+    imports: [
+        CommonModule
+    ],
     declarations: [
         AlertComponent,
         ValidationComponent,
         ToastComponent,
     ],
     providers: [
-        
     ],
     exports: [
         AlertComponent,

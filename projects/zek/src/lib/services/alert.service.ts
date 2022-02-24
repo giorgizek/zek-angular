@@ -20,7 +20,7 @@ export class Toast extends BaseAlert {
     message?: string | null;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AlertService {
     private alertSubject = new Subject<any>();
     private toastSubject = new Subject<any>();
