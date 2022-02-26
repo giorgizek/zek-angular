@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-    constructor(private readonly authService: AuthService, private readonly router: Router) { }
+    constructor(protected readonly authService: AuthService, protected readonly router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         if (!this.authService.isAuthenticated()) {

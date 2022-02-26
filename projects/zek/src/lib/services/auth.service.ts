@@ -13,7 +13,7 @@ export class AuthService {
     private oldValueIsAuthenticated: boolean = false;
     isAuthenticated(): boolean {
         let expired = this.getExpired();
-        if (!expired) expired = new Date(0);//Date.minDate();
+        if (!expired) expired = new Date(0);
 
         const newValue = new Date() < expired;
         if (this.oldValueIsAuthenticated != newValue) {
