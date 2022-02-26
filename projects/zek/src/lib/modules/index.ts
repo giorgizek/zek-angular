@@ -12,6 +12,7 @@ export * from './modal';
 export * from './page-title';
 export * from './pager';
 export * from './readonly';
+export * from './recaptcha/index';
 export * from './safe-html';
 export * from './safe-style';
 export * from './select2';

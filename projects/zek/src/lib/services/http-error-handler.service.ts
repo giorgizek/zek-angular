@@ -62,7 +62,7 @@ export class HttpErrorHandler {
                                 const messages = errors[property];
                                 if (messages instanceof Array) {
                                     for (let message of messages) {
-                                        const messageKey = `Core.Validation.${message}`;
+                                        const messageKey = `Validation.${message}`;
                                         let translatedMessage = this.translateService.instant(messageKey);
                                         // if translation not found then use message
                                         if (messageKey == translatedMessage) {
@@ -70,8 +70,8 @@ export class HttpErrorHandler {
                                         }
 
                                         if (property) {
-                                            const propertyKey = `App.Fields.${property}`;
-                                            let translatedProperty = this.translateService.instant(`App.Fields.${property}`);
+                                            const propertyKey = `Fields.${property}`;
+                                            let translatedProperty = this.translateService.instant(`Fields.${property}`);
                                             // if translation not found then use property
                                             if (propertyKey == translatedProperty){
                                                 translatedProperty = property

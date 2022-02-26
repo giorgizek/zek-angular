@@ -1,6 +1,6 @@
 {
   "name": "zek",
-  "version": "0.0.85",
+  "version": "0.0.90",
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0"

@@ -27,10 +27,10 @@ export class HtmlHelper {
     }
 
 
-    static loadScript(src: string, nonce?: string, async = true, defer = true) {
+    static loadScript(url: string, nonce?: string, async = true, defer = true) {
         const script = document.createElement('script');
         script.innerHTML = '';
-        script.src = src;
+        script.src = url;
         script.type = 'text/javascript';
 
         if (nonce) {
