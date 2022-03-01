@@ -126,7 +126,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     async delete(id: number) {
         let data = await this.service.delete(id).toPromise();
         if (data?.success) {
-            let message = await this.translateService.get('Core.Alert.Deleted').toPromise();
+            let message = await this.translateService.get('Alert.Deleted').toPromise();
             this.alertService.error(message, null, 'fas fa-trash')
             this.refresh();
         }
@@ -134,7 +134,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     async delete2(id: number, id2: number) {
         let data = await this.service.delete2(id, id2).toPromise()
         if (data?.success) {
-            let message = await this.translateService.get('Core.Alert.Deleted').toPromise();
+            let message = await this.translateService.get('Alert.Deleted').toPromise();
             this.alertService.error(message, null, 'fas fa-trash')
             this.refresh();
         }
@@ -181,7 +181,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         if (!data || data.length === 0)
             return;
 
-        let message = await this.translateService.get('Core.Alert.Approved').toPromise();
+        let message = await this.translateService.get('Alert.Approved').toPromise();
         this.alertService.success(message, undefined, 'fas fa-thumbs-up')
         this.refresh();
     }
@@ -211,7 +211,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         if (!data || data.length === 0)
             return;
 
-        let message = await this.translateService.get('Core.Alert.Disapproved').toPromise();
+        let message = await this.translateService.get('Alert.Disapproved').toPromise();
         this.alertService.success(message, undefined, 'fas fa-thumbs-down')
         this.refresh();
     }
@@ -237,7 +237,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
             this.sumModel = data;
             this.showSum();
         } else {
-            let message = await this.translateService.get('Core.Alert.SumError').toPromise();
+            let message = await this.translateService.get('Alert.SumError').toPromise();
             this.alertService.error(message);
         }
     }

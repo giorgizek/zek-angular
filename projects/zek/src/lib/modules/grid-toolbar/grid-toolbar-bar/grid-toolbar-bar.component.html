@@ -3,16 +3,16 @@
 </button>
 <ul class="dropdown-menu">
     <li><button *ngIf="showEdit" (click)="edit()" type="button" class="dropdown-item" [disabled]="!editEnabled">
-        <i class="fas fa-pencil-alt"></i> {{ 'Core.Action.Edit' | translate }}
+        <i class="fas fa-pencil-alt"></i> {{ 'Action.Edit' | translate }}
     </button></li>
     <li><button *ngIf="showApprove" (click)="approve()" type="button" class="dropdown-item" [disabled]="!approveEnabled">
         <i class="fas fa-thumbs-up"></i> {{ approveText | translate }}
     </button></li>
     <li><button *ngIf="showDelete" (click)="delete()" type="button" class="dropdown-item" [disabled]="!deleteEnabled">
-        <i class="fas fa-trash"></i> {{ 'Core.Action.Delete' | translate }}
+        <i class="fas fa-trash"></i> {{ 'Action.Delete' | translate }}
     </button></li>
     <li><button *ngIf="showRestore" (click)="restore()" type="button" class="dropdown-item" [disabled]="!restoreEnabled">
-        <i class="fas fa-history"></i> {{ 'Core.Action.Restore' | translate }}
+        <i class="fas fa-history"></i> {{ 'Action.Restore' | translate }}
     </button></li>
     <ng-content></ng-content>
 </ul>

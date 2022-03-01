@@ -151,7 +151,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
     }
 
     if (success) {
-      let message = await this.translateService.get('Core.Alert.SaveSuccess').toPromise();
+      let message = await this.translateService.get('Alert.SaveSuccess').toPromise();
       this.alertService.success(message, null, 'fas fa-save');
 
       if (navigateToReturnUrl === true) {
@@ -165,7 +165,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
       //   this.router.navigate([this.router.url.substring(0, this.router.url.length - 6), id]);
       // }
     } else {
-      let message = await this.translateService.get('Core.Alert.SaveError').toPromise();
+      let message = await this.translateService.get('Alert.SaveError').toPromise();
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
@@ -174,11 +174,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
   protected override async internalApprove(model?: any): Promise<boolean> {
     let data = await this.service.approve(model).toPromise();
     if (data && data.length > 0) {
-      let message = await this.translateService.get('Core.Alert.Approved').toPromise();
+      let message = await this.translateService.get('Alert.Approved').toPromise();
       this.alertService.success(message, null, 'fas fa-save');
       return true;
     } else {
-      let message = await this.translateService.get('Core.Alert.ApproveError').toPromise();
+      let message = await this.translateService.get('Alert.ApproveError').toPromise();
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
@@ -187,11 +187,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
   protected override async internalDisapprove(model?: any): Promise<boolean> {
     let data = await this.service.disapprove(model).toPromise();
     if (data && data.length > 0) {
-      let message = await this.translateService.get('Core.Alert.Disapproved').toPromise();
+      let message = await this.translateService.get('Alert.Disapproved').toPromise();
       this.alertService.success(message, null, 'fas fa-save');
       return true;
     } else {
-      let message = await this.translateService.get('Core.Alert.DisapproveError').toPromise();
+      let message = await this.translateService.get('Alert.DisapproveError').toPromise();
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
@@ -200,11 +200,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
   protected async internalSubmit(model?: any): Promise<boolean> {
     let data = await this.service.approve(model).toPromise();
     if (data && data.length > 0) {
-      let message = await this.translateService.get('Core.Alert.Submitted').toPromise();
+      let message = await this.translateService.get('Alert.Submitted').toPromise();
       this.alertService.success(message, null, 'fas fa-save');
       return true;
     } else {
-      let message = await this.translateService.get('Core.Alert.SubmitError').toPromise();
+      let message = await this.translateService.get('Alert.SubmitError').toPromise();
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
@@ -230,7 +230,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
   async restore() {
     let data = await this.service.restore(this.id).toPromise()
     if (data?.success) {
-      let message = await this.translateService.get('Core.Alert.Restored').toPromise();
+      let message = await this.translateService.get('Alert.Restored').toPromise();
       this.alertService.success(message);
       this.load();
     }

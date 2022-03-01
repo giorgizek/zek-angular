@@ -24,7 +24,7 @@ export class GridToolbarComponent {
     @Input() showRestore = false;
     @Input() restoreEnabled = true;
 
-    @Input() approveText = 'Core.Action.Approve';
+    @Input() approveText = 'Action.Approve';
     @Input() showApprove = false;
     @Input() approveEnabled = false;
 

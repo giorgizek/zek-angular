@@ -6,7 +6,7 @@
     </button>
     <button *ngIf="sortFields && sortFields.length > 0" class="btn btn-light dropdown-toggle" type="button" id="{{elementName}}" data-bs-toggle="dropdown" aria-expanded="false">
         <ng-container *ngIf="sortField; else elseFieldBlock">{{ sortField.value | translate }}</ng-container>
-        <ng-template #elseFieldBlock>{{ 'Core.Action.Sort' | translate }}</ng-template>
+        <ng-template #elseFieldBlock>{{ 'Action.Sort' | translate }}</ng-template>
     </button>
     <ul *ngIf="sortFields && sortFields.length > 0" class="dropdown-menu" [attr.aria-labelledby]="elementName">
         <li><a *ngFor="let item of sortFields" class="dropdown-item" href="javascript:void(0)" (click)="sortFieldClick(item)">{{ (item.value) | translate }}</a></li>

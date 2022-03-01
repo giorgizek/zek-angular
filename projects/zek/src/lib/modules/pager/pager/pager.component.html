@@ -33,7 +33,7 @@
                     {{pager.pageSize}}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="page-size-button">
-                    <li><h6 class="dropdown-header">{{ 'Core.Pagination.PageSize' | translate }}</h6></li>
+                    <li><h6 class="dropdown-header">{{ 'Pagination.PageSize' | translate }}</h6></li>
                     <li><a class="dropdown-item" [class.active]="pager.pageSize === 10" (click)="setPageSize(10)" href="javascript:void(0)">10</a></li>
                     <li><a class="dropdown-item" [class.active]="pager.pageSize === 20" (click)="setPageSize(20)" href="javascript:void(0)">20</a></li>
                     <li><a class="dropdown-item" [class.active]="pager.pageSize === 50" (click)="setPageSize(50)" href="javascript:void(0)">50</a></li>
