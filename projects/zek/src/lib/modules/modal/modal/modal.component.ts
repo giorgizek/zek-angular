@@ -182,7 +182,7 @@ export class DeleteModalComponent extends ModalComponent {
         super(translate);
         this.icon = 'fas fa-fas fa-trash';
         translate.get('Action.Delete').subscribe((res: string) => this.title = res);
-        translate.get('Action.DeleteQuestion').subscribe((res: string) => this.text = res);
+        translate.get('Alert.DeleteQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Delete;
     }
 }
@@ -196,7 +196,7 @@ export class ApproveModalComponent extends ModalComponent {
         super(translate);
         this.icon = 'fas fa-thumbs-up';
         translate.get('Action.Approve').subscribe((res: string) => this.title = res);
-        translate.get('Action.ApproveQuestion').subscribe((res: string) => this.text = res);
+        translate.get('Alert.ApproveQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
     }
 }
@@ -209,7 +209,7 @@ export class SubmitModalComponent extends ModalComponent {
         super(translate);
         this.icon = 'fas fa-thumbs-up';
         translate.get('Action.Submit').subscribe((res: string) => this.title = res);
-        translate.get('Action.SubmitQuestion').subscribe((res: string) => this.text = res);
+        translate.get('Alert.SubmitQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
     }
 }
@@ -222,7 +222,7 @@ export class DisapproveModalComponent extends ModalComponent {
         super(translate);
         this.icon = 'fas fa-thumbs-down';
         translate.get('Action.Disapprove').subscribe((res: string) => this.title = res);
-        translate.get('Action.DisapproveQuestion').subscribe((res: string) => this.text = res);
+        translate.get('Alert.DisapproveQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Delete;
     }
 }
