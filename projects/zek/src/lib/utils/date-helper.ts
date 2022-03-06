@@ -22,9 +22,9 @@ export class DateHelper {
         return new Date(0);
     };
 
-    static equals(date1?: Date | null, date2?: Date | null) {
-        let val1 = (date1 === undefined || date1 === null) ? null : date1;
-        let val2 = (date2 === undefined || date2 === null) ? null : date2;
+    static equals(value1?: Date | null, value2?: Date | null) {
+        let val1 = (value1 === undefined || value1 === null) ? null : value1;
+        let val2 = (value2 === undefined || value2 === null) ? null : value2;
 
 
         if (val1 === val2) {
@@ -38,7 +38,12 @@ export class DateHelper {
         return val1.getTime() === val2.getTime();
     }
 
-    static toISODateString(date: Date) {
+    static toISODateString(value: Date | string) {
+        let date = this.parseDate(value);
+
+        if (!date)
+            return null;
+
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
@@ -100,7 +105,7 @@ export class DateHelper {
 
     static getAge(value?: Date | string | null, now?: Date | null) {
         if (value === undefined || value === null || value === '' || value !== value) return null;
-        
+
         const date = this.toDate(value);
 
         let nowTime = now ? now.getTime() : Date.now();
@@ -127,7 +132,7 @@ export class DateHelper {
 
 
 
-    
+
 
 
 
