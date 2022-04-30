@@ -1,5 +1,5 @@
 import { Injectable, } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { KeyPair, LoginToken } from '../models';
 import { StorageHelper } from '../utils';
 import { BitwiseHelper } from '../utils/bitwise-helper';
@@ -18,6 +18,10 @@ export class AuthService {
         const newValue = new Date() < expired;
         if (this.oldValueIsAuthenticated != newValue) {
             this.oldValueIsAuthenticated = newValue;
+
+            if (this.onSignedInSubject) {
+                this.onSignedInSubject.next(newValue);
+            }
             this.subject.next(newValue);
 
             //if user is signed in and expired we need to logout (remove from localStorage)
@@ -29,9 +33,27 @@ export class AuthService {
         return newValue;
     }
 
+    /**
+    * @deprecated The method should not be used. please use onSignedIn
+    */
     isSignedIn() {
         return this.subject.asObservable();
     }
+
+    private onSignedInSubject?: BehaviorSubject<boolean>;//BehaviorSubject is for initial firt value = false
+    private onSignedInObservable?: Observable<boolean>;
+    public get onSignedIn(): Observable<boolean> {
+        if (!this.onSignedInSubject) {
+            this.onSignedInSubject = new BehaviorSubject<boolean>(false);
+            this.onSignedInObservable = this.onSignedInSubject.asObservable();
+        }
+
+        if (!this.onSignedInObservable)
+            throw new Error("onExecuteObservable is undefined");
+
+        return this.onSignedInObservable;
+    }
+
 
     login(tmp?: LoginToken | null) {
         if (tmp) {

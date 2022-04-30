@@ -4,19 +4,20 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { IService } from '../services';
 import { BaseComponent } from './base.component';
-import { PagedList, Pager, PrintType } from '../models';
+import { FilterBase, PagedList, Pager, PrintType } from '../models';
 import { ModalComponent } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
 import { FilterHelper, PagerHelper, StorageHelper, StringHelper } from '../utils';
+import { firstValueFrom } from 'rxjs';
 declare let bootstrap: any;
 
 
 @Directive()
 export class ListBaseComponent<TService extends IService = IService> extends BaseComponent<PagedList> {
-    filter: any;
+    filter: any = new FilterBase();
     saveFilter = true;
     sortFields: any;
-    private internalFilter: any;
+    protected internalFilter: any = new FilterBase();
     isFiltered: boolean = false;
     selectedIds: any[] = [];
     pager = new Pager();
@@ -50,7 +51,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     }
     override async bindModel(): Promise<void> {
         this.selectedIds = [];
-        this.model = await this.service.getAll(this.internalFilter).toPromise();
+        this.model = await firstValueFrom(this.service.getAll(this.internalFilter));
         if (this.model)
             this.pager =  PagerHelper.get(this.model.pager ? this.model.pager.totalItemCount : 0, this.internalFilter.page, this.internalFilter.pageSize);
         else
@@ -124,17 +125,17 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         this.router.navigate([url, 'create', { returnUrl: url + ';filter=1' }]);
     }
     async delete(id: number) {
-        let data = await this.service.delete(id).toPromise();
+        let data = await firstValueFrom(this.service.delete(id));
         if (data?.success) {
-            let message = await this.translateService.get('Alert.Deleted').toPromise();
+            let message = await firstValueFrom(this.translateService.get('Alert.Deleted'));
             this.alertService.error(message, null, 'fas fa-trash')
             this.refresh();
         }
     }
     async delete2(id: number, id2: number) {
-        let data = await this.service.delete2(id, id2).toPromise()
+        let data = await firstValueFrom(this.service.delete2(id, id2))
         if (data?.success) {
-            let message = await this.translateService.get('Alert.Deleted').toPromise();
+            let message = await firstValueFrom(this.translateService.get('Alert.Deleted'));
             this.alertService.error(message, null, 'fas fa-trash')
             this.refresh();
         }
@@ -177,11 +178,11 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     async approve(m: any) {
         if (!m) return;
 
-        let data = await this.service.approve(m).toPromise();
+        let data = await firstValueFrom(this.service.approve(m));
         if (!data || data.length === 0)
             return;
 
-        let message = await this.translateService.get('Alert.Approved').toPromise();
+        let message = await firstValueFrom(this.translateService.get('Alert.Approved'));
         this.alertService.success(message, undefined, 'fas fa-thumbs-up')
         this.refresh();
     }
@@ -207,11 +208,11 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         m.comment = StringHelper.tryTrim(this.approveModel.comment);
         if (!m.comment) delete m.comment;
 
-        let data = await this.service.disapprove(m).toPromise();
+        let data = await firstValueFrom(this.service.disapprove(m));
         if (!data || data.length === 0)
             return;
 
-        let message = await this.translateService.get('Alert.Disapproved').toPromise();
+        let message = await firstValueFrom(this.translateService.get('Alert.Disapproved'));
         this.alertService.success(message, undefined, 'fas fa-thumbs-down')
         this.refresh();
     }
@@ -232,12 +233,12 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     showSum() { }
     async sum() {
         this.sumModel = null;
-        let data = await this.service.sum(this.internalFilter).toPromise();
+        let data = await firstValueFrom(this.service.sum(this.internalFilter));
         if (data) {
             this.sumModel = data;
             this.showSum();
         } else {
-            let message = await this.translateService.get('Alert.SumError').toPromise();
+            let message = await firstValueFrom(this.translateService.get('Alert.SumError'));
             this.alertService.error(message);
         }
     }

@@ -13,6 +13,7 @@ export * from './loading';
 export * from './modal';
 export * from './page-title';
 export * from './pager';
+export * from './password';
 export * from './readonly';
 export * from './recaptcha/index';
 export * from './safe-html';

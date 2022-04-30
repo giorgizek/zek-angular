@@ -67,9 +67,9 @@ export class ModalComponent extends CoreComponent {
 
     @Input() title?: string | null;
 
-    @Input() text?: string;
+    @Input() text?: string | null;
 
-    @Input() icon?: string;
+    @Input() icon?: string | null;
 
     @Input() okButtonText?: string | null;
 

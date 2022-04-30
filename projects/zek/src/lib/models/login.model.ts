@@ -7,8 +7,11 @@ export interface LoginToken {
     permissions?: { [id: number]: number; } | null;
     token?: string | null;
     expired?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
     fullName?: string | null;
     position?: string | null;
+    company?: string | null;
 }
 
 export interface Login extends Captcha {

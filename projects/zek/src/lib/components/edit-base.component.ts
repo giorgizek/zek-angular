@@ -8,6 +8,7 @@ import { ModalComponent } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IService } from '../services';
+import { firstValueFrom } from 'rxjs';
 // import { IObjectConstructor } from '../models/ctor';
 // import { IService } from '../services/base.service';
 // import { AlertService } from '../modules/alert/shared/alert.service';
@@ -141,7 +142,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
 
   protected override async internalSave(navigateToReturnUrl?: boolean | null): Promise<boolean> {
     this.alertService.clear();
-    let data = await this.service.save(this.model).toPromise();
+    let data = await firstValueFrom(this.service.save(this.model));
     let success = false;
     if (typeof data === 'number' && data > 0) {
       success = true;
@@ -151,7 +152,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
     }
 
     if (success) {
-      let message = await this.translateService.get('Alert.SaveSuccess').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.SaveSuccess'));
       this.alertService.success(message, null, 'fas fa-save');
 
       if (navigateToReturnUrl === true) {
@@ -165,46 +166,46 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
       //   this.router.navigate([this.router.url.substring(0, this.router.url.length - 6), id]);
       // }
     } else {
-      let message = await this.translateService.get('Alert.SaveError').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.SaveError'));
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
   }
 
   protected override async internalApprove(model?: any): Promise<boolean> {
-    let data = await this.service.approve(model).toPromise();
+    let data = await firstValueFrom(this.service.approve(model));
     if (data && data.length > 0) {
-      let message = await this.translateService.get('Alert.Approved').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.Approved'));
       this.alertService.success(message, null, 'fas fa-save');
       return true;
     } else {
-      let message = await this.translateService.get('Alert.ApproveError').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.ApproveError'));
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
   }
 
   protected override async internalDisapprove(model?: any): Promise<boolean> {
-    let data = await this.service.disapprove(model).toPromise();
+    let data = await firstValueFrom(this.service.disapprove(model));
     if (data && data.length > 0) {
-      let message = await this.translateService.get('Alert.Disapproved').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.Disapproved'));
       this.alertService.success(message, null, 'fas fa-save');
       return true;
     } else {
-      let message = await this.translateService.get('Alert.DisapproveError').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.DisapproveError'));
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
   }
 
   protected async internalSubmit(model?: any): Promise<boolean> {
-    let data = await this.service.approve(model).toPromise();
+    let data = await firstValueFrom(this.service.approve(model));
     if (data && data.length > 0) {
-      let message = await this.translateService.get('Alert.Submitted').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.Submitted'));
       this.alertService.success(message, null, 'fas fa-save');
       return true;
     } else {
-      let message = await this.translateService.get('Alert.SubmitError').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.SubmitError'));
       this.alertService.error(message, null, 'fas fa-save');
       return false;
     }
@@ -215,9 +216,9 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
 
   protected override async getModel() {
     if (this.id2)
-      return await (this.service.get2(this.id, this.id2)).toPromise();
+      return await firstValueFrom(this.service.get2(this.id, this.id2));
     else
-      return await this.service.get(this.id).toPromise();
+      return await firstValueFrom(this.service.get(this.id));
   }
   protected override initCreate() {
     this.model = {} as TModel;
@@ -228,9 +229,9 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
   }
 
   async restore() {
-    let data = await this.service.restore(this.id).toPromise()
+    let data = await firstValueFrom(this.service.restore(this.id))
     if (data?.success) {
-      let message = await this.translateService.get('Alert.Restored').toPromise();
+      let message = await firstValueFrom(this.translateService.get('Alert.Restored'));
       this.alertService.success(message);
       this.load();
     }
