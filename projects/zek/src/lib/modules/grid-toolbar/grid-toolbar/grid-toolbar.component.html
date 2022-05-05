@@ -5,6 +5,9 @@
     <button *ngIf="showApprove" (click)="approve()" type="button" class="btn btn-success" title="{{ approveText | translate }}" [disabled]="!approveEnabled">
         <i class="fas fa-thumbs-up"></i>
     </button>
+    <button *ngIf="showDisapprove" (click)="disapprove()" type="button" class="btn btn-success" title="{{ disapproveText | translate }}" [disabled]="!disapproveEnabled">
+        <i class="fas fa-thumbs-up"></i>
+    </button>
     <button *ngIf="showDelete" (click)="delete()" type="button" class="btn btn-danger" title="{{ 'Action.Delete' | translate }}" [disabled]="!deleteEnabled">
         <i class="fas fa-trash"></i>
     </button>

@@ -28,6 +28,10 @@ export class GridToolbarComponent {
     @Input() showApprove = false;
     @Input() approveEnabled = false;
 
+    @Input() disapproveText = 'Action.Disapprove';
+    @Input() showDisapprove = false;
+    @Input() disapproveEnabled = false;
+
     @Output() onEdit = new EventEmitter<any>();
     edit() {
         //this.router.navigate([this.router.url, this.model]);
@@ -44,6 +48,10 @@ export class GridToolbarComponent {
         this.onApprove.emit(this.model)
     }
 
+    @Output() onDisapprove = new EventEmitter<any>();
+    disapprove() {
+        this.onDisapprove.emit(this.model)
+    }
 
     @Output() onRestore = new EventEmitter<any>();
     restore() {
