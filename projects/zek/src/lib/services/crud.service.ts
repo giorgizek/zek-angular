@@ -35,7 +35,7 @@ export class CrudService extends BaseService implements IService {
         return this.api.get(`api/${this.controller}/${id}/${id2}`).pipe(catchError(this.handleError('get2', null)));
     }
 
-    getAll(filter?: any) {
+    getAll(filter?: any) : Observable<PagedList>{
         return this.api.get(`api/${this.controller}`, filter).pipe(catchError(this.handleError('getAll')));
     }
     sum(filter?: any) {
@@ -67,7 +67,7 @@ export class CrudService extends BaseService implements IService {
     }
 
 
-    export(model: any, fileTypeId: any) {
+    export(model: any, fileTypeId: any) : Observable<Blob | null> {
         return this.api.getBlob(`api/${this.controller}/Export/${fileTypeId}`, model).pipe(catchError(this.handleError('export', null)));
     }
 }

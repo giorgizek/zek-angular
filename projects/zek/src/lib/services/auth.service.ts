@@ -56,6 +56,7 @@ export class AuthService {
 
 
     login(tmp?: LoginToken | null) {
+        this.model = undefined;
         if (tmp) {
             //Globals.setServerDate(tmpModel.currentDateTime);
 
