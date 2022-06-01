@@ -1,5 +1,5 @@
 <div class="btn-group btn-group-sm" role="group" aria-label="Table action group">
-    <button *ngIf="showEdit" (click)="edit()" type="button" class="btn btn-primary" title="{{ 'Action.Edit' | translate }}" [disabled]="!editEnabled">
+    <button *ngIf="showEdit" (click)="edit()" type="button" class="btn btn-secondary" title="{{ 'Action.Edit' | translate }}" [disabled]="!editEnabled">
         <i class="fa-solid fa-pencil"></i>
     </button>
     <button *ngIf="showApprove" (click)="approve()" type="button" class="btn btn-success" title="{{ approveText | translate }}" [disabled]="!approveEnabled">
