@@ -26,10 +26,6 @@
       "zek": [
         "dist/zek/zek",
         "dist/zek"
-      ],
-      "zek-validator": [
-        "dist/zek-validator/zek-validator",
-        "dist/zek-validator"
       ]
     }
   },
