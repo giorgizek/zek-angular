@@ -45,18 +45,22 @@ export class ObjectHelper {
             return value;
 
         let output: any = {};
-        Object.keys(value).forEach((key: any) => {
-            const v = value[key];
-            
-            if (this.isObject(v))
-            {
-                output[key] = this.deepCopy(v);
-                
-            } else{
-                Object.assign(output, { [key]: v });
-            }
-        });
-        
+        if (Array.isArray(value)) {
+            output = value.map(x => this.deepCopy(x));
+        }
+        else {
+            Object.keys(value).forEach((key: any) => {
+                const v = value[key];
+
+                if (this.isObject(v)) {
+                    output[key] = this.deepCopy(v);
+
+                } else {
+                    Object.assign(output, { [key]: v });
+                }
+            });
+        }
+
         return output as T;
     }
 
