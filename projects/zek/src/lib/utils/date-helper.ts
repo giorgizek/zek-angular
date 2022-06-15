@@ -34,6 +34,15 @@ export class DateHelper {
         return dates;
     }
 
+    static dateOnly(value: Date) {
+        let year = value.getFullYear();
+        let month = value.getMonth();
+        let day = value.getDate();
+        let date = new Date(Date.UTC(year, month, day));
+
+        return date;
+    }
+
     static toISODateString(value: Date | string) {
         let date = this.parseDate(value);
 
@@ -41,10 +50,12 @@ export class DateHelper {
             return null;
 
         let year = date.getFullYear();
+        // Add +1 to month since 0 is January
         let month = date.getMonth() + 1;
         let day = date.getDate();
 
         let str = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        //str = year.toString() + "-" + (month + 1).toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
         return str;
     }
 
@@ -53,8 +64,8 @@ export class DateHelper {
     static addTime(value: Date, time: string | undefined | null) {
         let tmp = TimeHelper.parseTime(time);
         if (!tmp) return value;
-    
-        let  timeDate = new Date('1970-01-01T' + time + 'Z');
+
+        let timeDate = new Date('1970-01-01T' + time + 'Z');
         let date = value;
         date.setTime(date.getTime() + timeDate.getTime());
         return date;
