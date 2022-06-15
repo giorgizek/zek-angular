@@ -1,4 +1,4 @@
-import { DateHelper } from "./date-helper";
+import { OverlapHelper } from "./overlap-helper";
 
 export class TimeHelper {
     static parseTime(value: any): string | null {
@@ -33,21 +33,21 @@ export class TimeHelper {
     };
 
 
-    static Intersects(start1: string, end1: string, start2: string, end2: string): boolean {
+    static intersects(start1: string, end1: string, start2: string, end2: string): boolean {
         let startDate1 = this.toDate(start1);
         let endDate1 = this.toDate(end1);
         let startDate2 = this.toDate(start2);
         let endDate2 = this.toDate(end2);
 
-        return DateHelper.Intersects(startDate1, endDate1, startDate2, endDate2);
+        return OverlapHelper.intersects(startDate1, endDate1, startDate2, endDate2);
     }
 
-    static Overlaps(start1: string, end1: string, start2: string, end2: string): boolean {
+    static overlaps(start1: string, end1: string, start2: string, end2: string): boolean {
         let startDate1 = this.toDate(start1);
         let endDate1 = this.toDate(end1);
         let startDate2 = this.toDate(start2);
         let endDate2 = this.toDate(end2);
 
-        return DateHelper.Overlaps(startDate1, endDate1, startDate2, endDate2);
+        return OverlapHelper.overlaps(startDate1, endDate1, startDate2, endDate2);
     }
 }

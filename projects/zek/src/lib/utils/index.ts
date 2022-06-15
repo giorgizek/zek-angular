@@ -9,6 +9,7 @@ export * from './handler';
 export * from './html-helper';
 export * from './math-helper';
 export * from './object-helper';
+export * from './overlap-helper';
 export * from './pager-helper';
 export * from './random-helper';
 export * from './storage-helper';

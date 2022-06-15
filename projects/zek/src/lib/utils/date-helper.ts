@@ -1,22 +1,8 @@
-export enum PeriodRelation {
-    After,
-    StartTouching,
-    StartInside,
-    InsideStartTouching,
-    EnclosingStartTouching,
-    Enclosing,
-    EnclosingEndTouching,
-    ExactMatch,
-    Inside,
-    InsideEndTouching,
-    EndInside,
-    EndTouching,
-    Before,
-}
+import { TimeHelper } from "./time-helper";
+
+
 
 export class DateHelper {
-
-
 
     static minDate() {
         return new Date(0);
@@ -38,6 +24,16 @@ export class DateHelper {
         return val1.getTime() === val2.getTime();
     }
 
+    static getDates(start: Date, end: Date) {
+        var dates = new Array<Date>();
+        var date = new Date(start.valueOf());
+        while (date <= end) {
+            dates.push(new Date(date));
+            date = this.addDays(date, 1);
+        }
+        return dates;
+    }
+
     static toISODateString(value: Date | string) {
         let date = this.parseDate(value);
 
@@ -54,7 +50,15 @@ export class DateHelper {
 
 
 
-
+    static addTime(value: Date, time: string | undefined | null) {
+        let tmp = TimeHelper.parseTime(time);
+        if (!tmp) return value;
+    
+        let  timeDate = new Date('1970-01-01T' + time + 'Z');
+        let date = value;
+        date.setTime(date.getTime() + timeDate.getTime());
+        return date;
+    };
     static addYears(v: Date, years: number): Date {
         if (!years) return v;
 
@@ -129,78 +133,6 @@ export class DateHelper {
         let timeDiff = date.getTime() - value.getTime();
         return Math.floor(((timeDiff % 86400000) % 3600000) / 60000);;
     };
-
-
-
-
-
-
-
-
-    static GetRelation(start1: Date, end1: Date, start2: Date, end2: Date): PeriodRelation {
-        if (end2 < start1) {
-            return PeriodRelation.After;
-        }
-        if (start2 > end1) {
-            return PeriodRelation.Before;
-        }
-        if (start2 == start1 && end2 == end1) {
-            return PeriodRelation.ExactMatch;
-        }
-        if (end2 == start1) {
-            return PeriodRelation.StartTouching;
-        }
-        if (start2 == end1) {
-            return PeriodRelation.EndTouching;
-        }
-        if (this.HasInside2(start1, end1, start2, end2)) {
-            if (start2 == start1) {
-                return PeriodRelation.EnclosingStartTouching;
-            }
-            return end2 == end1 ? PeriodRelation.EnclosingEndTouching : PeriodRelation.Enclosing;
-        }
-        let periodContainsMyStart = this.HasInside(start2, end2, start1);
-        let periodContainsMyEnd = this.HasInside(start2, end2, end1);
-        if (periodContainsMyStart && periodContainsMyEnd) {
-            if (start2 == start1) {
-                return PeriodRelation.InsideStartTouching;
-            }
-            return end2 == end1 ? PeriodRelation.InsideEndTouching : PeriodRelation.Inside;
-        }
-        if (periodContainsMyStart) {
-            return PeriodRelation.StartInside;
-        }
-        if (periodContainsMyEnd) {
-            return PeriodRelation.EndInside;
-        }
-
-        throw new Error("invalid period relation of '" + start1 + "-" + end1 + "' and '" + start2 + "-" + end2 + "'");
-    }
-
-    static HasInside(start: Date, end: Date, date: Date): boolean {
-        return date >= start && date <= end;
-    }
-
-    static HasInside2(start1: Date, end1: Date, start2: Date, end2: Date): boolean {
-        return this.HasInside(start1, end1, start2) && this.HasInside(start1, end1, end2);
-    }
-
-    static Intersects(start1: Date, end1: Date, start2: Date, end2: Date): boolean {
-        return this.HasInside(start1, end1, start2) || this.HasInside(start1, end1, end2) || (start2 < start1 && end2 > end1);
-    }
-
-    static Overlaps(start1: Date, end1: Date, start2: Date, end2: Date): boolean {
-        var relation = this.GetRelation(start1, end1, start2, end2);
-        return relation != PeriodRelation.After &&
-            relation != PeriodRelation.StartTouching &&
-            relation != PeriodRelation.EndTouching &&
-            relation != PeriodRelation.Before;
-    }
-
-
-
-
-
 
 
 
