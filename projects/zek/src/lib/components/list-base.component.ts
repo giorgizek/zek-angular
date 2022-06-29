@@ -7,7 +7,7 @@ import { BaseComponent } from './base.component';
 import { FilterBase, PagedList, Pager, PrintType } from '../models';
 import { ModalComponent } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
-import { FilterHelper, PagerHelper, StorageHelper, StringHelper } from '../utils';
+import { FilterHelper, ObjectHelper, PagerHelper, StorageHelper, StringHelper } from '../utils';
 import { firstValueFrom } from 'rxjs';
 declare let bootstrap: any;
 
@@ -205,8 +205,10 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     async disapprove(m: any) {
         if (!m || !this.approveModel) return;
 
-        m.comment = StringHelper.tryTrim(this.approveModel.comment);
-        if (!m.comment) delete m.comment;
+        if ( typeof m === 'object'){
+            m.comment = StringHelper.tryTrim(this.approveModel.comment);
+            if (!m.comment) delete m.comment;
+        }
 
         let data = await firstValueFrom(this.service.disapprove(m));
         if (!data || data.length === 0)
