@@ -35,5 +35,8 @@
       }
     }
   },
-  "defaultProject": "zek"
+  "defaultProject": "zek",
+  "cli": {
+    "analytics": false
+  }
 }
