@@ -1,0 +1,4 @@
+:host > .toast-container {
+  z-index: 999999;
+  opacity: 0.9;
+}

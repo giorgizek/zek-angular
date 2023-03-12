@@ -1,0 +1,25 @@
+<div *ngIf="!hide && showInput" class="input-group">
+    <input type="text" class="form-control" [ngClass]="{ 'ng-valid required': !required || value, 'ng-invalid': required && !value }" (keyup)="_onKey($event)" title="ID = {{value}}" [value]="text" [attr.readonly]="true">
+    <button type="button" [disabled]="disabled || readOnly" class="btn btn-outline-secondary" (click)="showModal()">
+        <i class="fa-solid fa-ellipsis"></i>
+    </button>
+    <button type="button" [disabled]="disabled || readOnly" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" (click)="delete()" href="javascript:void(0)"> <i class="fa-solid fa-trash"></i> Delete <kbd>delete</kbd> </a></li>
+    </ul>
+</div>
+<div *ngIf="!hide || disabled || readOnly" class="modal fade" [id]="modalId" tabindex="-1" aria-labelledby="bb-modal-label" aria-hidden="true">
+    <div class="modal-dialog {{_sizeCss}}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="{{modalId}}-label">{{'Action.Choose' | translate }}</h5>
+                <button type="button" (click)="close()" class="btn-close" data-bs-dismiss2="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

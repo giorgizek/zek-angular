@@ -1,0 +1,18 @@
+<div class="btn-group btn-group-sm" role="group" aria-label="Table action group">
+    <button *ngIf="showEdit" (click)="edit()" type="button" class="btn btn-secondary" title="{{ 'Action.Edit' | translate }}" [disabled]="!editEnabled">
+        <i class="fa-solid fa-pencil"></i>
+    </button>
+    <button *ngIf="showApprove" (click)="approve()" type="button" class="btn btn-success" title="{{ approveText | translate }}" [disabled]="!approveEnabled">
+        <i class="fa-solid fa-thumbs-up"></i>
+    </button>
+    <button *ngIf="showDisapprove" (click)="disapprove()" type="button" class="btn btn-danger" title="{{ disapproveText | translate }}" [disabled]="!disapproveEnabled">
+        <i class="fa-solid fa-thumbs-down"></i>
+    </button>
+    <button *ngIf="showDelete" (click)="delete()" type="button" class="btn btn-danger" title="{{ 'Action.Delete' | translate }}" [disabled]="!deleteEnabled">
+        <i class="fa-solid fa-trash"></i>
+    </button>
+    <button *ngIf="showRestore" (click)="restore()" type="button" class="btn btn-success" title="{{ 'Action.Restore' | translate }}" [disabled]="!restoreEnabled">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+    </button>
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,18 @@
+<div (keydown.enter)="keyDown($event)" class="modal fade" data-bs-backdrop="static" id="filter-modal" tabindex="-1" attr.aria-labelledby="modal-lable-{{elementId}}" aria-hidden="true">
+    <div class="modal-dialog" [class.modal-lg]="!xl" [class.modal-xl]="xl" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-lable-{{elementId}}">{{ 'Action.Filter' | translate }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="ok()"><i class="fa-solid fa-filter"></i> {{ 'Action.Filter' | translate }}</button>
+                <button *ngIf="showCancel" type="button" class="btn btn-secondary" id="modal-cancel-button-{{elementId}}" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i> {{ 'Action.Cancel' | translate }}</button>
+                <button type="button" class="btn btn-secondary" (click)="reset()"><i class="fa-solid fa-xmark"></i> {{ 'Action.Reset' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

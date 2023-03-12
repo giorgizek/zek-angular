@@ -1,0 +1,8 @@
+<div class="position-relative m-4">
+  <div class="progress" style="height: 1px;">
+    <div class="progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <!-- left: 33%!important -->
+  <!-- [style.left.%]="item.progress" -->
+  <button *ngFor="let item of stepsArray" [attr.style]="('width:2rem; height:2rem; left:' + item.progress + '%!important') | safe:'style'" type="button" class="position-absolute top-0 translate-middle btn btn-sm btn-primary rounded-pill">{{ item.step }}</button>
+</div>

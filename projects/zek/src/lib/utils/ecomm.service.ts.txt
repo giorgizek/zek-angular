@@ -1,0 +1,28 @@
+import { Component, Injectable, Input } from '@angular/core';
+import { randomHex } from '.';
+
+@Injectable()
+export class EcommService {
+    submit(transactionId: string) {
+
+        let form = document.createElement('form');
+        form.id = 'ecomm_form_' + randomHex();
+        form.name = form.id;
+        form.method = 'POST';
+        form.action = 'https://ecommerce.ufc.ge/ecomm2/ClientHandler';
+
+
+        let trans_id = document.createElement('input');
+        trans_id.type = 'hidden';
+        trans_id.name = 'trans_id';
+        trans_id.id = 'trans_id';
+        trans_id.value = transactionId;
+
+        form.appendChild(trans_id);  
+
+        //document.getElementsByTagName('body')[0].appendChild(trans_id);
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+}

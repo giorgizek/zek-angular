@@ -1,0 +1,12 @@
+<ng-container *ngIf="field">
+    <ng-container *ngIf="field.invalid && (field.dirty || field.touched || field.formDirective?.submitted)">
+        <ng-container *ngIf="field.errors">
+            <ng-container *ngIf="field.errors.required">{{ 'Validation.Required' | translate }}</ng-container>
+            <ng-container *ngIf="field.errors.minlength">{{ 'Validation.MinLengthFormat' | translate:{ value: field.errors.minlength.requiredLength } }}</ng-container>
+            <ng-container *ngIf="field.errors.maxlength">{{ 'Validation.MaxLengthFormat' | translate:{ value: field.errors.maxlength.requiredLength } }}</ng-container>
+            <ng-container *ngIf="field.errors.email">{{ 'Validation.Pattern' | translate }}</ng-container>
+            <ng-container *ngIf="field.errors.pattern">{{ 'Validation.Pattern' | translate }}</ng-container><!-- {{ field.errors.pattern.requiredPattern }} -->
+            <ng-container *ngIf="field.errors.server">{{field.errors.server}}</ng-container>
+        </ng-container>
+    </ng-container>
+</ng-container>

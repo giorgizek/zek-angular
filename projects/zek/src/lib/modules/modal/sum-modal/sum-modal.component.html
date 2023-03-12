@@ -1,0 +1,13 @@
+<zek-modal #sumModal [showCancel]="false" [title]="'Action.Sum' | translate">
+    <table class="table table-striped table-borderless table-hover">
+        <tbody>
+            <tr *ngFor="let item of model">
+                <td class="w-75">{{item.key}}</td>
+                <td class="w-25">
+                    <ng-container *ngIf="item.key != 'Count'; else elseBlock">{{item.value | number:'1.2' }}</ng-container>
+                    <ng-template #elseBlock>{{item.value}}</ng-template>
+                </td>
+            <tr>
+        </tbody>
+    </table>
+</zek-modal>

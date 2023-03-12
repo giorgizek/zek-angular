@@ -1,0 +1,14 @@
+<div class="dropdown" id="dropdown-{{id}}">
+    <button class="btn btn-{{css}} dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{label}} <ng-container *ngIf="!_text">{{placeholder}}</ng-container> {{_text}}
+    </button>
+    <ul class="dropdown-menu">
+        <ng-container *ngIf="normalized">
+            <li><a class="dropdown-item" href="javascript:void(0)" *ngFor="let item of normalized" (click)="toggleChecked(item)">
+                    <span *ngIf="item.checked"><i class="fa-regular fa-square-check"></i></span>
+                    <span *ngIf="!item.checked"><i class="fa-regular fa-square"></i></span>
+                    {{item.value}}
+                </a></li>
+        </ng-container>
+    </ul>
+</div>

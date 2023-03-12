@@ -1,0 +1,8 @@
+<h1 class="h2 pt-3 pb-2 mb-3 border-bottom">
+    <i *ngIf="icon" class="{{icon}}"></i><ng-container *ngIf="icon">&nbsp;</ng-container>{{ title }}&nbsp;<ng-container *ngIf="isEditPage">
+        <small class="text-muted" *ngIf="modelId && modelId > 0 else elseBlock">[<ng-container>{{ 'Action.Edit' | translate }}</ng-container>]</small>
+        <ng-template #elseBlock>
+            <small class="text-muted">[<ng-container>{{ 'Action.Create' | translate }}</ng-container>]</small>
+        </ng-template>
+    </ng-container>
+</h1>

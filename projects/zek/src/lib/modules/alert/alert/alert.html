@@ -1,0 +1,14 @@
+<div class="alert {{cssAlert}} alert-dismissible fade show" role="alert">
+    <button *ngIf="_showClose" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="row">
+        <div class="col-auto pe-1" *ngIf="cssIcon">
+            <span class="flex-shrink-0"><i class="{{cssIcon}}"></i></span>
+        </div>
+        <div class="col-auto">
+            <div *ngIf="title">
+                <h5 class="alert-heading">{{title}}</h5>
+            </div>
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

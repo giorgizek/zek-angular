@@ -1,0 +1,12 @@
+<div class="progress" [style.height.px]="height" [title]="_title" >
+    <div class="progress-bar bg-{{background}}" role="progressbar"
+        [class.progress-bar-striped]="striped || animated"
+        [class.progress-bar-animated]="animated"
+        [style.width.%]="value"
+        [attr.aria-valuenow]="value"
+        aria-valuemin="0"
+        aria-valuemax="100">
+        <ng-container *ngIf="showValue">{{value}}%</ng-container>
+        <ng-content></ng-content>
+    </div>
+</div>

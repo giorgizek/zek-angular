@@ -1,0 +1,16 @@
+<div class="form-check" [class.form-check-inline]="inline">
+    <input #input class="form-check-input" type="radio"
+    [id]="inputId"
+    [checked]="checked"
+    [disabled]="disabled"
+    [attr.name]="name"
+    [attr.value]="value"
+    [required]="required"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledby"
+    [attr.aria-describedby]="ariaDescribedby"
+    (change)="_onInputInteraction($event)">
+    <label [for]="inputId">
+        <ng-content></ng-content>
+    </label>
+</div>

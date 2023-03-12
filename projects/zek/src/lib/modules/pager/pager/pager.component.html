@@ -1,0 +1,49 @@
+<div *ngIf="pager" class="row">
+    <div [ngClass]="{ 'col-sm-8': showPageSize, 'col-sm-12': !showPageSize}">
+        <nav aria-label="Pagination">
+            <ul class="pagination" [ngClass]="{ 'justify-content-center': pagerAlign === 'center', 'justify-content-end': pagerAlign === 'end'}">
+                <li [class.disabled]="pager.isFirstPage" class="page-item">
+                    <a class="page-link" (click)="setPage(1)" href="javascript:void(0)" [attr.aria-disabled]="pager.isFirstPage ? 'true' : null" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li [class.disabled]="!pager.hasPreviousPage" class="page-item">
+                    <a class="page-link" (click)="setPage(pager.pageNumber - 1)" href="javascript:void(0)" [attr.aria-disabled]="!pager.hasPreviousPage ? 'true' : null" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li *ngFor="let page of pager.pages" [class.active]="page === pager.pageNumber" class="page-item"><a class="page-link" (click)="setPage(page)" href="javascript:void(0)">{{page}}</a></li>
+                <li [class.disabled]="!pager.hasNextPage" class="page-item">
+                    <a class="page-link" (click)="setPage(pager.pageNumber + 1)" href="javascript:void(0)" [attr.aria-disabled]="!pager.hasNextPage ? 'true' : null" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li [class.disabled]="pager.isLastPage" class="page-item">
+                    <a class="page-link" (click)="setPage(pager.pageCount)" href="javascript:void(0)" [attr.aria-disabled]="pager.isLastPage ? 'true' : null" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-sm-4" *ngIf="showPageSize">
+        <div class="float-end">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="page-size-button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{pager.pageSize}}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="page-size-button">
+                    <li><h6 class="dropdown-header">{{ 'Pagination.PageSize' | translate }}</h6></li>
+                    <li><a class="dropdown-item" [class.active]="pager.pageSize === 10" (click)="setPageSize(10)" href="javascript:void(0)">10</a></li>
+                    <li><a class="dropdown-item" [class.active]="pager.pageSize === 20" (click)="setPageSize(20)" href="javascript:void(0)">20</a></li>
+                    <li><a class="dropdown-item" [class.active]="pager.pageSize === 50" (click)="setPageSize(50)" href="javascript:void(0)">50</a></li>
+                    <li><a class="dropdown-item" [class.active]="pager.pageSize === 100" (click)="setPageSize(100)" href="javascript:void(0)">100</a></li>
+                    <li><a class="dropdown-item" [class.active]="pager.pageSize === 500" (click)="setPageSize(500)" href="javascript:void(0)">500</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="float-end mt-2">
+            {{pager.firstItemOnPage}} - {{pager.lastItemOnPage}} of {{pager.totalItemCount}} &nbsp;
+        </div>
+    </div>
+</div>
