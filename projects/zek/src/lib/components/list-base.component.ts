@@ -52,8 +52,14 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
     override async bindModel(): Promise<void> {
         this.selectedIds = [];
         this.model = await firstValueFrom(this.service.getAll(this.internalFilter));
-        if (this.model)
-            this.pager = PagerHelper.get(this.model.pager ? this.model.pager.totalItemCount : 0, this.internalFilter.page, this.internalFilter.pageSize);
+        if (this.model) {
+            let totalCount = this.model.totalItemCount;//
+            if (!totalCount && this.model.pager) {
+                totalCount = this.model.pager ? (this.model.pager.totalItemCount || 0) : 0;
+            }
+            this.pager = PagerHelper.get(totalCount, this.internalFilter.page, this.internalFilter.pageSize);
+
+        }
         else
             this.pager = new Pager();
         //this.pagedList.pager = this.pager;
