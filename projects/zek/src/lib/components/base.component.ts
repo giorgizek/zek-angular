@@ -88,7 +88,6 @@ export class BaseComponent<TModel = any> extends CoreComponent {
 
         let actionName: string;
 
-
         switch (printType) {
             case PrintType.Pdf:
                 actionName = 'PrintPdfIdLink';
