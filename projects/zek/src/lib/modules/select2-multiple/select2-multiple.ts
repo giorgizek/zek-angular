@@ -5,10 +5,10 @@ import { RandomHelper, StringHelper } from '../../utils';
 
 @Component({
     selector: 'zek-select2-multiple,[zek-select2-multiple]',
-    templateUrl: './select2-multiple.component.html'
+    templateUrl: './select2-multiple.html'
 })
 
-export class Select2MultipleComponent {
+export class ZekSelect2Multiple {
     filter?: string | null;
     text?: string | null;
 

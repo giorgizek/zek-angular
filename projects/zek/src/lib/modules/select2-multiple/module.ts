@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Select2MultipleComponent } from './select2-multiple.component';
+import { ZekSelect2Multiple } from './select2-multiple';
 
 @NgModule({
   imports: [
@@ -10,12 +10,12 @@ import { Select2MultipleComponent } from './select2-multiple.component';
     FormsModule
   ],
   declarations: [
-    Select2MultipleComponent
+    ZekSelect2Multiple
   ],
   exports: [
-    Select2MultipleComponent
+    ZekSelect2Multiple
   ],
 })
 
-export class Select2MultipleModule {
+export class ZekSelect2MultipleModule {
 }

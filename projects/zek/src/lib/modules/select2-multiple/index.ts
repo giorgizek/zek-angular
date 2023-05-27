@@ -1,2 +1,2 @@
-export * from './select2-multiple.module';
-export * from './select2-multiple.component';
+export * from './module';
+export * from './select2-multiple';
