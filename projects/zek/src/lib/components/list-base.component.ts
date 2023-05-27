@@ -138,7 +138,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         let data = await firstValueFrom(this.service.delete(id));
         if (data?.success) {
             let message = await firstValueFrom(this.translate.get('Alert.Deleted'));
-            this.alert.error(message, null, 'fas fa-trash')
+            this.alert.error(message, null, 'fa-solid fa-trash')
             this.refresh();
         }
     }
@@ -147,7 +147,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         let data = await firstValueFrom(this.service.delete2(id, id2))
         if (data?.success) {
             let message = await firstValueFrom(this.translate.get('Alert.Deleted'));
-            this.alert.error(message, null, 'fas fa-trash')
+            this.alert.error(message, null, 'fa-solid fa-trash')
             this.refresh();
         }
     }
@@ -204,7 +204,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
             return;
 
         let message = await firstValueFrom(this.translate.get('Alert.Approved'));
-        this.alert.success(message, undefined, 'fas fa-thumbs-up')
+        this.alert.success(message, undefined, 'fa-solid fa-thumbs-up')
         this.refresh();
     }
 
@@ -237,7 +237,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
             return;
 
         let message = await firstValueFrom(this.translate.get('Alert.Disapproved'));
-        this.alert.success(message, undefined, 'fas fa-thumbs-down')
+        this.alert.success(message, undefined, 'fa-solid fa-thumbs-down')
         this.refresh();
     }
 

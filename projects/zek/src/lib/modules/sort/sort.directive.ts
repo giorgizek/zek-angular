@@ -61,9 +61,9 @@ export class SortDirective implements AfterViewInit {
 
         this.el.nativeElement.innerHTML = (this.innerHtml || '')
             + '<span class="float-end' + (tmpAsc === 1 ? ' text-muted' : '') + '">'
-            + (tmpAsc === 1 ? '<i class="fas fa-sort"></i>' : '')
-            + (tmpAsc === 2 ? '<i class="fas fa-sort-up"></i>' : '')
-            + (tmpAsc === 3 ? '<i class="fas fa-sort-down"></i>' : '')
+            + (tmpAsc === 1 ? '<i class="fa-solid fa-sort"></i>' : '')
+            + (tmpAsc === 2 ? '<i class="fa-solid fa-sort-up"></i>' : '')
+            + (tmpAsc === 3 ? '<i class="fa-solid fa-sort-down"></i>' : '')
             + '</span>';
     }
 

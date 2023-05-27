@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-light btn-sm" data-bs-toggle="dropdown">
-    <i class="fas fa-ellipsis-h"></i>
+    <i class="fa-solid fa-ellipsis"></i>
 </button>
 <ul class="dropdown-menu">
     <li><button *ngIf="showEdit" (click)="edit()" type="button" class="dropdown-item" [disabled]="!editEnabled">
@@ -12,10 +12,10 @@
         <i class="fa-solid fa-thumbs-down"></i> {{ disapproveText | translate }}
     </button></li>
     <li><button *ngIf="showDelete" (click)="delete()" type="button" class="dropdown-item" [disabled]="!deleteEnabled">
-        <i class="fas fa-trash"></i> {{ 'Action.Delete' | translate }}
+        <i class="fa-solid fa-trash"></i> {{ 'Action.Delete' | translate }}
     </button></li>
     <li><button *ngIf="showRestore" (click)="restore()" type="button" class="dropdown-item" [disabled]="!restoreEnabled">
-        <i class="fas fa-history"></i> {{ 'Action.Restore' | translate }}
+        <i class="fa-solid fa-clock-rotate-left"></i> {{ 'Action.Restore' | translate }}
     </button></li>
     <ng-content></ng-content>
 </ul>

@@ -51,17 +51,17 @@ export class BootstrapHelper {
 
         switch (type) {
             case ComponentType.Delete:
-                return 'fas fa-trash';
+                return 'fa-solid fa-trash';
 
             // case ComponentType.Danger:
             case ComponentType.Warning:
-                return 'fas fa-exclamation-triangle';
+                return 'fa-solid fa-triangle-exclamation';
 
             case ComponentType.Info:
-                return 'fas fa-info-circle';
+                return 'fa-solid fa-circle-info';
 
             default:
-                return 'fas fa-check';
+                return 'fa-solid fa-check';
         }
     }
 

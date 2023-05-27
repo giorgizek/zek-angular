@@ -269,7 +269,7 @@ export class ZekModal extends CoreComponent {
 export class ZekDeleteModal extends ZekModal {
     constructor(translate: TranslateService) {
         super(translate);
-        this.icon = 'fas fa-fas fa-trash';
+        this.icon = 'fa-solid fa-trash';
         translate.get('Action.Delete').subscribe((res: string) => this.title = res);
         translate.get('Alert.DeleteQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Delete;
@@ -283,7 +283,7 @@ export class ZekDeleteModal extends ZekModal {
 export class ZekApproveModal extends ZekModal {
     constructor(translate: TranslateService) {
         super(translate);
-        this.icon = 'fas fa-thumbs-up';
+        this.icon = 'fa-solid fa-thumbs-up';
         translate.get('Action.Approve').subscribe((res: string) => this.title = res);
         translate.get('Alert.ApproveQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
@@ -296,7 +296,7 @@ export class ZekApproveModal extends ZekModal {
 export class ZekSubmitModal extends ZekModal {
     constructor(translate: TranslateService) {
         super(translate);
-        this.icon = 'fas fa-thumbs-up';
+        this.icon = 'fa-solid fa-thumbs-up';
         translate.get('Action.Submit').subscribe((res: string) => this.title = res);
         translate.get('Alert.SubmitQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
@@ -309,7 +309,7 @@ export class ZekSubmitModal extends ZekModal {
 export class ZekDisapproveModal extends ZekModal {
     constructor(translate: TranslateService) {
         super(translate);
-        this.icon = 'fas fa-thumbs-down';
+        this.icon = 'fa-solid fa-thumbs-down';
         translate.get('Action.Disapprove').subscribe((res: string) => this.title = res);
         translate.get('Alert.DisapproveQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Delete;
@@ -323,7 +323,7 @@ export class ZekDisapproveModal extends ZekModal {
 export class ZekRestoreModal extends ZekModal {
     constructor(translate: TranslateService) {
         super(translate);
-        this.icon = 'fas fa-redo';
+        this.icon = 'fa-solid fa-rotate-right';
         translate.get('Action.Restore').subscribe((res: string) => this.title = res);
         translate.get('Action.RestoreQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;

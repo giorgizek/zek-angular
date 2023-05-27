@@ -54,12 +54,12 @@ export class ZekValidation implements OnInit, OnDestroy {
 
         switch (alert.type) {
             case AlertType.Success:
-                return 'fas fa-check';
+                return 'fa-solid fa-check';
             case AlertType.Danger:
             case AlertType.Warning:
-                return 'fas fa-exclamation-triangle';
+                return 'fa-solid fa-triangle-exclamation';
             case AlertType.Info:
-                return 'fas fa-info-circle';
+                return 'fa-solid fa-circle-info';
             default:
                 return;
         }

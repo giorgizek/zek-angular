@@ -1,8 +1,8 @@
 <div class="btn-group me-3" role="group" aria-label="Sort group">
     <button type="button" class="btn btn-light" (click)="ascDescClick()">
-        <span *ngIf="asc === undefined || asc === null"><i class="fas fa-sort-alt fa-fw"></i></span>
-        <span *ngIf="asc === true"><i class="fas fa-sort-alpha-down fa-fw"></i></span>
-        <span *ngIf="asc === false"><i class="fas fa-sort-alpha-up fa-fw"></i></span>
+        <span *ngIf="asc === undefined || asc === null"><i class="fa-solid fa-sort fa-fw"></i></span>
+        <span *ngIf="asc === true"><i class="fa-solid fa-arrow-down-z-a fa-fw"></i></span>
+        <span *ngIf="asc === false"><i class="fa-solid fa-arrow-up-z-a fa-fw"></i></span>
     </button>
     <button *ngIf="sortFields && sortFields.length > 0" class="btn btn-light dropdown-toggle" type="button" id="{{elementName}}" data-bs-toggle="dropdown" aria-expanded="false">
         <ng-container *ngIf="sortField; else elseFieldBlock">{{ sortField.value | translate }}</ng-container>
@@ -11,4 +11,4 @@
     <ul *ngIf="sortFields && sortFields.length > 0" class="dropdown-menu" [attr.aria-labelledby]="elementName">
         <li><a *ngFor="let item of sortFields" class="dropdown-item" href="javascript:void(0)" (click)="sortFieldClick(item)">{{ (item.value) | translate }}</a></li>
     </ul>
-</div>
+</div><i class=""></i>

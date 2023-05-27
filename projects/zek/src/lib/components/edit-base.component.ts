@@ -143,7 +143,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
 
         if (success) {
             let message = await firstValueFrom(this.translate.get('Alert.SaveSuccess'));
-            this.alert.success(message, null, 'fas fa-save');
+            this.alert.success(message, null, 'fa-solid fa-floppy-disk');
 
             if (navigateToReturnUrl === true) {
                 this.navigateReturnUrl();
@@ -157,7 +157,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
             // }
         } else {
             let message = await firstValueFrom(this.translate.get('Alert.SaveError'));
-            this.alert.error(message, null, 'fas fa-save');
+            this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }
@@ -166,11 +166,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
         let data = await firstValueFrom(this.service.approve(model));
         if (data && data.length > 0) {
             let message = await firstValueFrom(this.translate.get('Alert.Approved'));
-            this.alert.success(message, null, 'fas fa-save');
+            this.alert.success(message, null, 'fa-solid fa-floppy-disk');
             return true;
         } else {
             let message = await firstValueFrom(this.translate.get('Alert.ApproveError'));
-            this.alert.error(message, null, 'fas fa-save');
+            this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }
@@ -179,11 +179,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
         let data = await firstValueFrom(this.service.disapprove(model));
         if (data && data.length > 0) {
             let message = await firstValueFrom(this.translate.get('Alert.Disapproved'));
-            this.alert.success(message, null, 'fas fa-save');
+            this.alert.success(message, null, 'fa-solid fa-floppy-disk');
             return true;
         } else {
             let message = await firstValueFrom(this.translate.get('Alert.DisapproveError'));
-            this.alert.error(message, null, 'fas fa-save');
+            this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }
@@ -192,11 +192,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
         let data = await firstValueFrom(this.service.approve(model));
         if (data && data.length > 0) {
             let message = await firstValueFrom(this.translate.get('Alert.Submitted'));
-            this.alert.success(message, null, 'fas fa-save');
+            this.alert.success(message, null, 'fa-solid fa-floppy-disk');
             return true;
         } else {
             let message = await firstValueFrom(this.translate.get('Alert.SubmitError'));
-            this.alert.error(message, null, 'fas fa-save');
+            this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }

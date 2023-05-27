@@ -5,8 +5,8 @@
     <ng-container *ngIf="textField">
       <li *ngFor="let item of filteredData">
         <a href="javascript:void(0)" (click)="selectItem(item)" class="dropdown-item">
-          <span *ngIf="item.selected"><i class="far fa-check-square"></i></span>
-          <span *ngIf="!item.selected"><i class="far fa-square"></i></span>
+          <span *ngIf="item.selected"><i class="fa-regular fa-square-check"></i></span>
+          <span *ngIf="!item.selected"><i class="fa-regular fa-square"></i></span>
           {{item[textField]}}
         </a>
       </li>
@@ -14,8 +14,8 @@
     <ng-container *ngIf="!textField">
       <li *ngFor="let item of filteredData">
         <a href="javascript:void(0)" (click)="selectItem(item)" class="dropdown-item">
-          <span *ngIf="item.selected"><i class="far fa-check-square"></i></span>
-          <span *ngIf="!item.selected"><i class="far fa-square"></i></span>
+          <span *ngIf="item.selected"><i class="fa-regular fa-square-check"></i></span>
+          <span *ngIf="!item.selected"><i class="fa-regular fa-square"></i></span>
           {{item}}
         </a>
       </li>
