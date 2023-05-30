@@ -114,7 +114,9 @@ export class WebApiClient {
         //catchError(this.handleError(url))
         //);
     }
-
+    patch<T = any>(url: string, body?: any | null): Observable<T> {
+        return this.http.patch<T>(this.baseUrl + url, body, { headers: this.getHeaders() });
+    }
 
 
     protected getHeaders(): HttpHeaders {
