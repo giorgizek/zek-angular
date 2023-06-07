@@ -87,37 +87,37 @@ export class BootstrapHelper {
 
 
 
-    static getAlertType(type?: string | null): AlertType | null {
-        if (!type) return null;
+    // static getAlertType(type?: string | null): AlertType | null {
+    //     if (!type) return null;
 
-        let v = StringHelper.firstUpper(type);
-        if (!v)
-            return null;
+    //     let v = StringHelper.firstUpper(type);
+    //     if (!v)
+    //         return null;
 
-        var enumValue = (<any>AlertType)[v];
-        if (!enumValue)
-            return null;
+    //     var enumValue = (<any>AlertType)[v];
+    //     if (!enumValue)
+    //         return null;
 
 
-        return enumValue;
-    }
+    //     return enumValue;
+    // }
     static cssAlert(type?: AlertType | null): string {
         switch (type) {
-            case AlertType.Primary:
+            case 'primary':
                 return 'alert-primary';
-            case AlertType.Secondary:
+            case 'secondary':
                 return 'alert-secondary';
-            case AlertType.Success:
+            case 'success':
                 return 'alert-success';
-            case AlertType.Danger:
+            case 'danger':
                 return 'alert-danger';
-            case AlertType.Warning:
+            case 'warning':
                 return 'alert-warning';
-            case AlertType.Info:
+            case 'info':
                 return 'alert-info';
-            case AlertType.Light:
+            case 'light':
                 return 'alert-light';
-            case AlertType.Dark:
+            case 'dark':
                 return 'alert-dark';
             default:
                 return 'alert-secondary';
@@ -125,13 +125,13 @@ export class BootstrapHelper {
     }
     static cssAlertIcon(type?: AlertType | null): string {
         switch (type) {
-            case AlertType.Success:
+            case 'success':
                 return 'fa-solid fa-circle-check';
-            case AlertType.Danger:
+            case 'danger':
                 return 'fa-solid fa-circle-xmark';
-            case AlertType.Warning:
+            case 'warning':
                 return 'fa-solid fa-circle-exclamation';
-            case AlertType.Info:
+            case 'info':
                 return 'fa-solid fa-circle-info';
             default:
                 return '';

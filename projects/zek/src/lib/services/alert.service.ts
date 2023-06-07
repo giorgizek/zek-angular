@@ -65,22 +65,22 @@ export class AlertService {
 
 
     success(message: string, title?: string | null, icon?: string | null) {
-        this.show(message, title, AlertType.Success, icon);
+        this.show(message, title, 'success', icon);
     }
     error(message: string, title?: string | null, icon?: string | null) {
-        this.show(message, title, AlertType.Danger, icon);
+        this.show(message, title, 'danger', icon);
     }
     warning(message: string, title?: string | null, icon?: string | null) {
-        this.show(message, title, AlertType.Warning, icon);
+        this.show(message, title, 'warning', icon);
     }
     info(message: string, title?: string | null, icon?: string | null) {
-        this.show(message, title, AlertType.Info, icon);
+        this.show(message, title, 'info', icon);
     }
     private show(message: string, title?: string | null, alertType?: AlertType | null, icon?: string | null) {
-        if (!icon || icon.length == 0)
+        if (!icon) {
             icon = BootstrapHelper.cssAlertIcon(alertType)
+        }
 
         this.toastSubject.next(<Toast>{ message, title, type: alertType, icon });//, id: `${this.id++}`
-        //$.notify(message, alertType ? AlertType[alertType].toLowerCase() : undefined, icon);
     }
 }

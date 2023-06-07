@@ -1,10 +1,15 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BootstrapHelper } from '../../../utils';
+import { BootstrapHelper, Convert } from '../../../utils';
 //declare let bootstrap: any;
 
 import { AlertService, Toast } from '../../../services/alert.service';
 import { AlertType } from '../../../models';
+import { NumberInput } from '../../../components';
+
+function clamp(v: number, min = 100, max = 10000) {
+    return Math.max(min, Math.min(max, v));
+}
 
 @Component({
     selector: 'zek-toast',
@@ -12,17 +17,29 @@ import { AlertType } from '../../../models';
     templateUrl: './toast.html'
 })
 export class ZekToast implements OnInit, OnDestroy {
-    @Input() timeOut?: number;
+    @Input()
+    get delay(): number {
+        return this._delay;
+    }
+    set delay(v: NumberInput) {
+        let tmp = clamp(Convert.toNumber(v) || 0);
+        if (this._delay !== tmp) {
+            this._delay = tmp;
+        }
+    }
+    _delay: number = 3000;
+    
+    
     @Input() icon = true;
 
     toasts: any[] = [];
-    private subscription?: Subscription;
-    private timeout: any;
+    private _subscription?: Subscription;
+    private _timeout: any;
 
     constructor(private readonly alertService: AlertService) { }
 
     ngOnInit() {
-        this.subscription = this.alertService.getToast().subscribe((toast: Toast) => {
+        this._subscription = this.alertService.getToast().subscribe((toast: Toast) => {
             if (!toast) {
                 // clear alerts when an empty alert is received
                 this.toasts = [];
@@ -33,12 +50,12 @@ export class ZekToast implements OnInit, OnDestroy {
             this.cssInit(toast);
             this.toasts.unshift(toast);
 
-            this.timeout = setTimeout(() => {
+            this._timeout = setTimeout(() => {
                 this.remove(toast);
                 // let toastEl = document.getElementById(`toast-${toast.id}`);
                 // let t = new bootstrap.Toast(toastEl);
                 // t.show();
-            }, 3000);
+            }, this._delay);
 
 
             // let toastElList = [].slice.call(document.querySelectorAll('.toast'))
@@ -56,8 +73,8 @@ export class ZekToast implements OnInit, OnDestroy {
 
 
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+        if (this._subscription) {
+            this._subscription.unsubscribe();
         }
         this.clearTimeout();
     }
@@ -71,9 +88,9 @@ export class ZekToast implements OnInit, OnDestroy {
     }
 
     clearTimeout() {
-        if (this.timeout) {
-            clearTimeout(this.timeout);
-            this.timeout = null;
+        if (this._timeout) {
+            clearTimeout(this._timeout);
+            this._timeout = null;
         }
     }
 
@@ -83,39 +100,39 @@ export class ZekToast implements OnInit, OnDestroy {
             return;
 
 
-        if (this.icon) {
+        if (this.icon && !toast.icon) {
             toast.icon = BootstrapHelper.cssAlertIcon(toast.type);
         }
 
         var v = toast as any;
         switch (toast.type) {
-            case AlertType.Primary:
+            case 'primary':
                 v.css = 'bg-primary text-white';
                 break;
-            case AlertType.Success:
+            case 'success':
                 v.css = 'bg-success text-white';
                 // v.iconColor = 'text--accent-green';
                 // v.borderColor = 'border--accent-green';
                 break;
-            case AlertType.Danger:
+            case 'danger':
                 v.css = 'bg-danger text-white';
                 // v.iconColor = 'text--accent-red';
                 // v.borderColor = 'border--accent-red';
                 break;
-            case AlertType.Warning:
+            case 'warning':
                 v.css = 'bg-warning text-dark';
                 // v.iconColor = 'text--accent-yellow';
                 // v.borderColor = 'border--accent-yellow';
                 break;
-            case AlertType.Info:
+            case 'info':
                 v.css = 'bg-info text-white';
                 // v.iconColor = 'text--accent-blue';
                 // v.borderColor = 'border--accent-blue';
                 break;
-            case AlertType.Light:
+            case 'light':
                 v.css = 'bg-light text-dark';
                 break;
-            case AlertType.Dark:
+            case 'dark':
                 v.css = 'bg-dark text-white';
                 break;
 

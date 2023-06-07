@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BooleanInput } from '../../../components';
+import { BooleanInput, CoreComponent } from '../../../components';
 import { AlertType } from '../../../models';
 import { Convert } from '../../../utils';
 import { BootstrapHelper } from '../../../utils/bootstrap.helper';
@@ -9,28 +9,16 @@ import { BootstrapHelper } from '../../../utils/bootstrap.helper';
     templateUrl: './alert.html',
     styles: [':host { display: block; }']
 })
-export class ZekAlert {
-    private _type: AlertType | string | null | undefined = AlertType.Info;
+export class ZekAlert extends CoreComponent {
+    private _type: AlertType | null | undefined = 'info';
     @Input()
-    get type(): AlertType | string | null | undefined {
+    get type(): AlertType | null | undefined {
         return this._type;
     }
-    set type(v: AlertType | string | null | undefined) {
+    set type(v: AlertType | null | undefined) {
         if (v !== this._type) {
             this._type = v
-
-            this.cssAlert = '';
-            this.cssIcon = '';
-            if (typeof v === 'string') {
-                let enumValue = BootstrapHelper.getAlertType(v);
-                if (enumValue) {
-                    this.cssAlert = BootstrapHelper.cssAlert(enumValue);
-                    this.cssIcon = BootstrapHelper.cssAlertIcon(enumValue);
-                }
-            } else {
-                this.cssAlert = BootstrapHelper.cssAlert(v);
-                this.cssIcon = BootstrapHelper.cssAlertIcon(v);
-            }
+            this.init();
         }
     }
 
@@ -46,16 +34,12 @@ export class ZekAlert {
     @Input() title?: string | null;
 
 
+    override init() {
+        this.cssAlert = BootstrapHelper.cssAlert(this._type);
+        this.cssIcon = BootstrapHelper.cssAlertIcon(this._type);
+    }
+
     cssAlert = '';
     cssIcon = '';
-
-
-    // cssIcon() {
-    //     return BootstrapHelper.cssAlertIcon(this._type);
-    // }
-
-    // cssAlert() {
-    //     return BootstrapHelper.cssAlert(this._type);
-    // }
 }
 

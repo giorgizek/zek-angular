@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AlertType } from '../../../models';
-
 import { AlertService, Alert } from '../../../services/alert.service';
+import { BootstrapHelper } from '../../../utils';
 
 @Component({
     selector: 'zek-validation',
@@ -52,17 +51,7 @@ export class ZekValidation implements OnInit, OnDestroy {
             return;
         }
 
-        switch (alert.type) {
-            case AlertType.Success:
-                return 'fa-solid fa-check';
-            case AlertType.Danger:
-            case AlertType.Warning:
-                return 'fa-solid fa-triangle-exclamation';
-            case AlertType.Info:
-                return 'fa-solid fa-circle-info';
-            default:
-                return;
-        }
+        return BootstrapHelper.cssAlertIcon(alert.type);
     }
 
     cssAlert(alert: Alert) {
@@ -70,26 +59,6 @@ export class ZekValidation implements OnInit, OnDestroy {
             return;
         }
 
-        // return css class based on alert type
-        switch (alert.type) {
-            case AlertType.Primary:
-                return 'alert-primary';
-            case AlertType.Secondary:
-                return 'alert-secondary';
-            case AlertType.Success:
-                return 'alert-success';
-            case AlertType.Danger:
-                return 'alert-danger';
-            case AlertType.Warning:
-                return 'alert-warning';
-            case AlertType.Info:
-                return 'alert-info';
-            case AlertType.Light:
-                return 'alert-light';
-            case AlertType.Dark:
-                return 'alert-dark';
-            default:
-                return 'alert-secondary';
-        }
+        return BootstrapHelper.cssAlert(alert.type);
     }
 }

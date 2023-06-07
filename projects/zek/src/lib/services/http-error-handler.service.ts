@@ -129,7 +129,7 @@ export class HttpErrorHandler {
                             }
                         }
                     }
-                    this.alert.addRange(AlertType.Danger, errorMessages);
+                    this.alert.addRange('danger', errorMessages);
                 }
                 break;
 
