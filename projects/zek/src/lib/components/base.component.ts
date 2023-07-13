@@ -5,7 +5,7 @@ import { AppBaseModule } from '../zek.module';
 import { PrintType } from '../models/print.model';
 import { WebApiClient } from '../services';
 import { CoreComponent } from './core.component';
-import { BooleanInput } from './types';
+import { BooleanInput, StringInput } from './types';
 import { Convert, UrlHelper } from '../utils';
 
 @Directive()
@@ -63,7 +63,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
         this.navigateReturnUrl();
     }
 
-    downloadFile(blob: Blob | null, fileName: string, type: string) {
+    downloadFile(blob: Blob | null, fileName: string, type: StringInput) {
         if (!blob) return;
 
         const nav = (window.navigator as any);
@@ -73,6 +73,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
             let a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = fileName;
+            a.target = '_blank';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
