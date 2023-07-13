@@ -1,4 +1,5 @@
 export * from './alert-type';
+export * from './approve-model';
 export * from './captcha.model';
 export * from './ctor';
 export * from './edit-base.model';

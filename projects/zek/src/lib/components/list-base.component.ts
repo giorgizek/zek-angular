@@ -1,19 +1,18 @@
 ﻿import { Router, ActivatedRoute } from '@angular/router';
-import { ViewChild, Directive } from '@angular/core';
+import { ViewChild, Directive, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { IService } from '../services';
+import { CrudService, IService } from '../services';
 import { BaseComponent } from './base.component';
-import { FilterBase, PagedList, Pager, PrintType } from '../models';
+import { FilterBase, PagedList, Pager, PrintType, approveModel } from '../models';
 import { ZekModal } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
 import { FilterHelper, PagerHelper, StorageHelper, StringHelper, UrlHelper } from '../utils';
 import { firstValueFrom } from 'rxjs';
 // declare let bootstrap: any;
 
-
 @Directive()
-export class ListBaseComponent<TService extends IService = IService> extends BaseComponent<PagedList> {
+export class ListBaseComponent<TService extends IService = IService, TPagedListData = any> extends BaseComponent<PagedList<TPagedListData>> {
     filter: any = new FilterBase();
     saveFilter = true;
     sortFields: any;
@@ -25,9 +24,13 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
 
 
     @ViewChild('filterModal', { static: false }) protected readonly filterModal?: ZekModal | null;
-    approveModel: { ids?: number[], comment?: string } = {};
+
+    approveModel: approveModel = {};
     @ViewChild('approveModal', { static: false }) protected readonly approveModal?: ZekModal | null;
+    protected approvedMesage = 'Alert.Approved';
+
     @ViewChild('disapproveModal', { static: false }) protected readonly disapproveModal?: ZekModal | null;
+    protected disapprovedMesage = 'Alert.Disapproved';
 
     constructor(
         protected readonly service: TService,
@@ -53,7 +56,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         this.selectedIds = [];
         this.model = await firstValueFrom(this.service.getAll(this.internalFilter));
         if (this.model) {
-            let totalCount = this.model.totalItemCount;//
+            let totalCount = this.model.totalItemCount;
             if (!totalCount && this.model.pager) {
                 totalCount = this.model.pager ? (this.model.pager.totalItemCount || 0) : 0;
             }
@@ -203,8 +206,8 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         if (!data || data.length === 0)
             return;
 
-        let message = await firstValueFrom(this.translate.get('Alert.Approved'));
-        this.alert.success(message, undefined, 'fa-solid fa-thumbs-up')
+        let message = await firstValueFrom(this.translate.get(this.approvedMesage));
+        this.alert.success(message, null, 'fa-solid fa-thumbs-up')
         this.refresh();
     }
 
@@ -227,6 +230,7 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         if (!m || !this.approveModel) return;
 
         if (typeof m === 'object') {
+            m.status = this.approveModel.status;
             m.comment = StringHelper.tryTrim(this.approveModel.comment);
             if (!m.comment) delete m.comment;
         }
@@ -236,8 +240,8 @@ export class ListBaseComponent<TService extends IService = IService> extends Bas
         if (!data || data.length === 0)
             return;
 
-        let message = await firstValueFrom(this.translate.get('Alert.Disapproved'));
-        this.alert.success(message, undefined, 'fa-solid fa-thumbs-down')
+        let message = await firstValueFrom(this.translate.get(this.disapprovedMesage));
+        this.alert.success(message, null, 'fa-solid fa-thumbs-down')
         this.refresh();
     }
 

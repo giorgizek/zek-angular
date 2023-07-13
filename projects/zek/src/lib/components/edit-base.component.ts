@@ -25,7 +25,7 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
     @ViewChild('f', { static: false }) form?: NgForm;
 
 
-    approveModel: { ids?: number[], comment?: string } = {};
+    approveModel: { ids?: number[], comment?: string | null } = {};
     @ViewChild('approveModal', { static: false }) protected readonly approveModal?: ZekModal;
     @ViewChild('disapproveModal', { static: false }) protected readonly disapproveModal?: ZekModal;
     // @ViewChild('submitModal', { static: false }) protected readonly submitModal?: ModalComponent;
