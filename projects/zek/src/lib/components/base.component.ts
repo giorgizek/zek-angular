@@ -63,7 +63,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
         this.navigateReturnUrl();
     }
 
-    downloadFile(blob: Blob | null, fileName: string, type: StringInput) {
+    downloadFile(blob: Blob | null, fileName: string, type?: string | null) {
         if (!blob) return;
 
         const nav = (window.navigator as any);
