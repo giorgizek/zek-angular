@@ -1,2 +1,2 @@
-export * from './password.module';
-export * from './password.component';
+export * from './module';
+export * from './password';

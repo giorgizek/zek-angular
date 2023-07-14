@@ -4,9 +4,9 @@ import { RandomHelper } from '../../../utils';
 
 @Component({
     selector: 'zek-sort-button-group',
-    templateUrl: './sort-button-group.component.html'
+    templateUrl: './sort-button-group.html'
 })
-export class SortButtonGroupComponent {
+export class ZekSortButtonGroup {
     elementName: string = '';
 
     /**

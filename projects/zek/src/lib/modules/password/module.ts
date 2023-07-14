@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PasswordComponent } from './password.component';
+import { ZekPassword } from './password';
 import { FormsModule } from '@angular/forms';
 import { ValidatorModule } from '../validator';
 
@@ -11,8 +11,8 @@ import { ValidatorModule } from '../validator';
         ValidatorModule
     ],
     declarations: [
-        PasswordComponent,
+        ZekPassword,
     ],
-    exports: [PasswordComponent]
+    exports: [ZekPassword]
 })
 export class PasswordModule { }

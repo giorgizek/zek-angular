@@ -4,9 +4,9 @@ import { Convert } from '../../utils';
 
 @Component({
     selector: 'zek-password',
-    templateUrl: './password.component.html'
+    templateUrl: './password.html'
 })
-export class PasswordComponent {
+export class ZekPassword {
     @Input() name = 'Password';
 
     private _required: boolean = false;

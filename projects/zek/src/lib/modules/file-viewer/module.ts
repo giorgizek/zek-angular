@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ZekFileViewer } from './file-viewer';
 import { ZekModalModule } from '../modal';
-import { SafeModule } from '../safe';
+import { ZekSafeModule } from '../safe';
 
 
 @NgModule({
     imports: [
         CommonModule,
         ZekModalModule,
-        SafeModule
+        ZekSafeModule
     ],
     declarations: [
         ZekFileViewer

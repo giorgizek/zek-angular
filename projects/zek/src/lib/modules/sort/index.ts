@@ -1,3 +1,3 @@
-export * from './sort.module';
-export * from './sort.directive';
-export * from './sort-button-group/sort-button-group.component';
+export * from './module';
+export * from './sort';
+export * from './sort-button-group/sort-button-group';

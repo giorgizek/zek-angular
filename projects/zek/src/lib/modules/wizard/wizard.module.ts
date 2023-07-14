@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { WizardComponent } from './wizard/wizard.component';
 import { WizardComponent2 } from './wizard2/wizard2.component';
-import { SafeModule } from '../safe';
+import { ZekSafeModule } from '../safe';
 
 @NgModule({
     imports: [
         CommonModule,
-        SafeModule
+        ZekSafeModule
     ],
     declarations: [
         WizardComponent,

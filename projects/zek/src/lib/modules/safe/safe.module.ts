@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SafePipe } from './safe.pipe';
+import { ZekSafePipe } from './safe.pipe';
 
 @NgModule({
     imports: [
         CommonModule
     ],
-    declarations: [SafePipe],
-    exports: [SafePipe]
+    declarations: [ZekSafePipe],
+    exports: [ZekSafePipe]
 })
-export class SafeModule { }
+export class ZekSafeModule { }

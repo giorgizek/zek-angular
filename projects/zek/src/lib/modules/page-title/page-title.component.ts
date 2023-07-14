@@ -12,7 +12,7 @@ export class PageTitleComponent {
     @Input() title?: string;
 
 
-    private _isEditPage: boolean = true;
+    private _isEditPage: boolean = false;
     @Input()
     get isEditPage(): boolean {
         return this._isEditPage;
