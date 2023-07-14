@@ -1,6 +1,6 @@
 export class JwtHelper {
 
-    static decodeJwt(token: any) {
+    static decode(token: any) {
         let base64Url = token.split('.')[1]
         let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
