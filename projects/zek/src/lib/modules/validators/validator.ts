@@ -1,5 +1,4 @@
 // import { AbstractControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms'
-
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 // export const range = (range?: Array<number> | null): ValidatorFn => {
@@ -39,29 +38,53 @@ export function nullValidator(control: AbstractControl): ValidationErrors | null
 export class Validators {
 
     /**
-   * @description
-   * Validator that requires the control's value to be less than or equal to the provided number.
-   *
-   * @usageNotes
-   *
-   * ### Validate against a range 0 - 15
-   *
-   * ```typescript
-   * const control = new FormControl(16, Validators.max([0,15]));
-   *
-   * console.log(control.errors); // {range: {min: 0, max: 15, actual: 16}}
-   * ```
-   *
-   * @returns A validator function that returns an error map with the
-   * `range` property if the validation check fails, otherwise `null`.
-   *
-   * @see `updateValueAndValidity()`
-   *
-   */
+    * @description
+    * Validator that requires the control's value to be less than or equal to the provided number.
+    *
+    * @usageNotes
+    *
+    * ### Validate against a range 0 - 15
+    *
+    * ```typescript
+    * const control = new FormControl(16, Validators.max([0,15]));
+    *
+    * console.log(control.errors); // {range: {min: 0, max: 15, actual: 16}}
+    * ```
+    *
+    * @returns A validator function that returns an error map with the
+    * `range` property if the validation check fails, otherwise `null`.
+    *
+    * @see `updateValueAndValidity()`
+    *
+    */
     static range(min: number, max: number): ValidatorFn {
         return rangeValidator([min, max]);
     }
 
+
+    /**
+* @description
+* Validator that requires the control's value to be less than or equal to the provided number.
+*
+* @usageNotes
+*
+* ### Validate against a range 0 - 15
+*
+* ```typescript
+* const control = new FormControl(16, Validators.max([0,15]));
+*
+* console.log(control.errors); // {range: {min: 0, max: 15, actual: 16}}
+* ```
+*
+* @returns A validator function that returns an error map with the
+* `range` property if the validation check fails, otherwise `null`.
+*
+* @see `updateValueAndValidity()`
+*
+*/
+    static match(value: string): ValidatorFn {
+        return matchValidator(value);
+    }
 }
 
 
@@ -81,6 +104,33 @@ export function rangeValidator(range: Array<number>): ValidatorFn {
             return { 'range': { 'min': min, 'max': max, 'actual': control.value } };
         }
 
+        return null;
+    };
+}
+
+
+export function matchValidator(input: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        if (isEmptyInputValue(control.value)) {
+            return null;  // don't validate empty values to allow optional controls
+        }
+
+        const targetCtrl = control.get(input);
+        let targetValue: any;
+        if (!targetCtrl) {
+            let el = document.getElementById(input) as any;
+            if (el) {
+                targetValue = el.value;
+            } else {
+                return null;
+            }
+        } else {
+            targetValue = targetCtrl.value;
+        }
+
+        if (targetValue !== control.value) {
+            return { 'mismatch': { 'requiredValue': targetValue, 'actual': control.value } };
+        }
         return null;
     };
 }

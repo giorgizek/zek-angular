@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RangeValidator } from './directive';
+import { MatchValidator, RangeValidator } from './directive';
 
 @NgModule({
     imports: [
@@ -8,7 +8,11 @@ import { RangeValidator } from './directive';
     ],
     declarations: [
         RangeValidator,
+        MatchValidator,
     ],
-    exports: [RangeValidator]
+    exports: [
+        RangeValidator,
+        MatchValidator
+    ]
 })
 export class ValidatorsModule { }

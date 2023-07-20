@@ -1,17 +1,15 @@
-const RANGE_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => RangeValidator),
-    multi: true
-};
 
-
-import { Directive, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Directive, forwardRef, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from "@angular/forms";
-import { nullValidator, rangeValidator } from "./validator";
+import { matchValidator, nullValidator, rangeValidator } from "./validator";
 
 function toFloat(value: string | number): number {
     return typeof value === 'number' ? value : parseFloat(value);
 }
+
+
+
+
 
 
 @Directive()
@@ -91,6 +89,13 @@ abstract class AbstractValidatorDirective implements Validator, OnChanges {
 
 
 
+
+export const RANGE_VALIDATOR: any = {
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => RangeValidator),
+    multi: true
+};
+
 @Directive({
     selector: 'input[type=number][range][formControlName],input[type=number][range][formControl],input[type=number][range][ngModel]',
     providers: [RANGE_VALIDATOR],
@@ -105,4 +110,39 @@ export class RangeValidator extends AbstractValidatorDirective {
     override normalizeInput = (input: string | number): number => toFloat(input);
     /** @internal */
     override createValidator = (range: [number]): ValidatorFn => rangeValidator(range);
+}
+
+
+
+
+
+
+
+
+
+
+/**
+ * @description
+ * Provider which adds `MatchValidator` to the `NG_VALIDATORS` multi-provider list.
+ */
+export const MATCH_VALIDATOR: any = {
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => MatchValidator),
+    multi: true
+};
+
+@Directive({
+    selector: '[match][formControlName],match][formControl],[match][ngModel]',
+    providers: [MATCH_VALIDATOR],
+    host: { '[attr.match]': '_enabled ? match : null' }
+})
+export class MatchValidator extends AbstractValidatorDirective {
+    @Input() match!: string;
+
+    /** @internal */
+    override inputName = 'match';
+    /** @internal */
+    override normalizeInput = (input: string): string => input;
+    /** @internal */
+    override createValidator = (input: string): ValidatorFn => matchValidator(input);
 }
