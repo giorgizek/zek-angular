@@ -9,6 +9,7 @@ export * from './datepicker';
 export * from './edit-toolbar';
 export * from './file';
 export * from './file-viewer';
+export * from './google-login-button';
 export * from './grid-toolbar';
 export * from './list-toolbar';
 export * from './loading';

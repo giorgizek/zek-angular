@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 //import { deleteNullProperties } from '../utils';
 //import { HttpErrorHandler, HandleError } from './http-error-handler.service';
-
+import { HttpParameterCodec } from '@angular/common/http';
+import { API_BASE_URL } from '../tokens';
 
 export interface WebApiConfig {
     baseUrl: string;
@@ -146,8 +147,7 @@ export class WebApiClient {
 }
 
 
-import { HttpParameterCodec } from '@angular/common/http';
-import { API_BASE_URL } from '../tokens';
+
 export class CustomHttpParamEncoder implements HttpParameterCodec {
     encodeKey(key: string): string {
         return encodeURIComponent(key);
