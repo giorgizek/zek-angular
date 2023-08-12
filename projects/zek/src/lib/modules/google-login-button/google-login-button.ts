@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Inject, Input, Output } from "@angular/core";
 import { loader } from './loader';
 import { GOOGLE_CLIENT_ID } from "../../tokens";
-import { CoreComponent, BooleanInput, StringInput } from "../../components";
+import { CoreComponent, BooleanInput, StringInput, NumberInput } from "../../components";
 import { Convert } from "../../utils";
 
 declare let google: any;
@@ -27,7 +27,13 @@ export class ZekGoogleLoginButton extends CoreComponent {
         this._prompt = Convert.toBooleanProperty(v);
     }
 
-
+    private _width: NumberInput;
+    @Input() get width() {
+        return this._width;
+    }
+    set width(v: NumberInput) {
+        this._width = v;
+    }
 
 
 
@@ -93,10 +99,15 @@ export class ZekGoogleLoginButton extends CoreComponent {
         this.autoPrompt();
     }
     renderButton() {
+        let options: any = { theme: "outline", size: "large" };
+        if (this._width)
+            options.width = this._width;
+
+            
         this.google.accounts.id.renderButton(
             document.getElementById(this._buttonContainer),
             // this._elementRef.nativeElement.parentElement,
-            { theme: "outline", size: "large" }  // customization attributes
+            options  // customization attributes
         );
     }
     autoPrompt() {
