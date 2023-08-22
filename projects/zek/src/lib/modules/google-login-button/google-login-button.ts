@@ -10,6 +10,8 @@ declare let google: any;
 export interface GoogleLoginConfig {
     client_id: string;
 }
+export type GoogleLoginButtonTextInput =
+    'signin_with' | 'signup_with' | 'continue_with' | 'signin' | null | undefined;
 
 
 @Directive({
@@ -19,6 +21,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
     constructor(@Inject(GOOGLE_CLIENT_ID) private readonly client_id: string) {
         super();
     }
+
     private _prompt: boolean = true;
     @Input() get prompt() {
         return this._prompt;
@@ -26,6 +29,24 @@ export class ZekGoogleLoginButton extends CoreComponent {
     set prompt(v: BooleanInput) {
         this._prompt = Convert.toBooleanProperty(v);
     }
+
+    private _autoSelect: boolean = false;
+    @Input() get autoSelect() {
+        return this._autoSelect;
+    }
+    set autoSelect(v: BooleanInput) {
+        this._autoSelect = Convert.toBooleanProperty(v);
+    }
+
+
+      private _cancelOnTapOutside: boolean = true;
+    @Input() get cancelOnTapOutside() {
+        return this._cancelOnTapOutside;
+    }
+    set cancelOnTapOutside(v: BooleanInput) {
+        this._cancelOnTapOutside = Convert.toBooleanProperty(v);
+    }
+
 
     private _width: NumberInput;
     @Input() get width() {
@@ -35,6 +56,14 @@ export class ZekGoogleLoginButton extends CoreComponent {
         this._width = v;
     }
 
+
+    private _text: GoogleLoginButtonTextInput;
+    @Input() get text() {
+        return this._text;
+    }
+    set text(v: GoogleLoginButtonTextInput) {
+        this._text = v;
+    }
 
 
 
@@ -92,7 +121,9 @@ export class ZekGoogleLoginButton extends CoreComponent {
             client_id: this.client_id,
             callback: (response: any) => {
                 this.handleCredentialResponse(response);
-            }
+            },
+            auto_select: this._autoSelect,
+            cancel_on_tap_outside: this._cancelOnTapOutside,
         });
 
         this.renderButton();
@@ -102,8 +133,9 @@ export class ZekGoogleLoginButton extends CoreComponent {
         let options: any = { theme: "outline", size: "large" };
         if (this._width)
             options.width = this._width;
+        if (this._text)
+            options.text = this._text
 
-            
         this.google.accounts.id.renderButton(
             document.getElementById(this._buttonContainer),
             // this._elementRef.nativeElement.parentElement,
