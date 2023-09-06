@@ -49,9 +49,10 @@ export class BaseComponent<TModel = any> extends CoreComponent {
     protected navigateReturnUrl() {
         const returnUrl = this.getQueryParam('returnUrl') || this.getParam('returnUrl');
         if (returnUrl) {
-            let urlTree = this.router.parseUrl(returnUrl);
-            const urlWithoutParams = urlTree.root.children[PRIMARY_OUTLET].segments.map(it => it.path).join('/')
-            this.router.navigate([urlWithoutParams, urlTree.root.children[PRIMARY_OUTLET].segments[urlTree.root.children[PRIMARY_OUTLET].segments.length - 1].parameters]);
+            this.router.navigateByUrl(returnUrl);
+            // let urlTree = this.router.parseUrl(returnUrl);
+            // const urlWithoutParams = urlTree.root.children[PRIMARY_OUTLET].segments.map(it => it.path).join('/')
+            // this.router.navigate([urlWithoutParams, urlTree.root.children[PRIMARY_OUTLET].segments[urlTree.root.children[PRIMARY_OUTLET].segments.length - 1].parameters]);
             return;
         }
 
