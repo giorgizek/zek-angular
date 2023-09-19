@@ -4,11 +4,11 @@ import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Con
 @Component({
     standalone: true,
     selector: 'zek-card',
-    templateUrl: './card.component.html',
+    templateUrl: './card.html',
     styles: [':host { display: block; }'],
     imports: [CommonModule]
 })
-export class CardComponent implements AfterViewInit {
+export class ZekCard implements AfterViewInit {
     /**
      *
      */
