@@ -5,6 +5,7 @@ import { BootstrapHelper, Convert } from '../../../utils';
 
 import { AlertService, Toast } from '../../../services/alert.service';
 import { NumberInput } from '../../../components';
+import { CommonModule } from '@angular/common';
 
 function clamp(v: number, min = 100, max = 10000) {
     return Math.max(min, Math.min(max, v));
@@ -14,7 +15,8 @@ function clamp(v: number, min = 100, max = 10000) {
     standalone: true,
     selector: 'zek-toast',
     styleUrls: ['./toast.css'],
-    templateUrl: './toast.html'
+    templateUrl: './toast.html',
+    imports: [CommonModule]
 })
 export class ZekToast implements OnInit, OnDestroy {
     @Input()
