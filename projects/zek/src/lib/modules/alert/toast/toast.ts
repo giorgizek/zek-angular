@@ -7,7 +7,7 @@ import { AlertService, Toast } from '../../../services/alert.service';
 import { NumberInput } from '../../../components';
 import { CommonModule } from '@angular/common';
 
-function clamp(v: number, min = 100, max = 10000) {
+function clamp(v: number, min = 10, max = 3600000) {
     return Math.max(min, Math.min(max, v));
 }
 
