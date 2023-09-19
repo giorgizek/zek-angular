@@ -13,14 +13,15 @@ let uniqueId = 0;
  */
 const ZEK_RADIO_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => RadioComponent),
+    useExisting: forwardRef(() => ZekRadio),
     multi: true,
 };
 
 
 @Component({
+    standalone: true,
     selector: 'zek-radio',
-    templateUrl: './radio.component.html',
+    templateUrl: './radio.html',
     host: {
         '[attr.id]': 'id',
         '[attr.tabindex]': 'null',
@@ -37,7 +38,7 @@ const ZEK_RADIO_CONTROL_VALUE_ACCESSOR: any = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ZEK_RADIO_CONTROL_VALUE_ACCESSOR],
 })
-export class RadioComponent extends CoreUiComponent
+export class ZekRadio extends CoreUiComponent
     implements OnInit {
     constructor(
         private _changeDetector: ChangeDetectorRef,

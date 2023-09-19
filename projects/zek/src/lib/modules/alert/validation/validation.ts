@@ -2,11 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlertService, Alert } from '../../../services/alert.service';
 import { BootstrapHelper } from '../../../utils';
+import { CommonModule } from '@angular/common';
 
 @Component({
+    standalone: true,
     selector: 'zek-validation',
     templateUrl: './validation.html',
-    styles: [':host { display: block; }']
+    styles: [':host { display: block; }'],
+    imports: [CommonModule]
 })
 export class ZekValidation implements OnInit, OnDestroy {
     alerts: Alert[] = [];

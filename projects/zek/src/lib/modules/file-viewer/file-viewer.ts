@@ -1,12 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { ZekModal } from '../modal';
+import { ZekModal, ZekModalModule } from '../modal';
 import { CoreComponent } from '../../components';
 import { FileHelper } from '../../utils';
+import { CommonModule } from '@angular/common';
+import { ZekSafePipe } from '../safe';
 
 @Component({
+    standalone: true,
     selector: 'zek-file-viewer',
     templateUrl: './file-viewer.html',
+    imports: [CommonModule, ZekModalModule, ZekSafePipe],
     providers: []
 })
 export class ZekFileViewer<TModal extends ZekModal = ZekModal> extends CoreComponent {

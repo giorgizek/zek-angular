@@ -3,11 +3,14 @@ import { BooleanInput, CoreComponent } from '../../../components';
 import { AlertType } from '../../../models';
 import { Convert } from '../../../utils';
 import { BootstrapHelper } from '../../../utils/bootstrap.helper';
+import { CommonModule } from '@angular/common';
 
 @Component({
+    standalone: true,
     selector: 'zek-alert',
     templateUrl: './alert.html',
-    styles: [':host { display: block; }']
+    styles: [':host { display: block; }'],
+    imports: [CommonModule]
 })
 export class ZekAlert extends CoreComponent {
     private _type: AlertType | null | undefined = 'info';

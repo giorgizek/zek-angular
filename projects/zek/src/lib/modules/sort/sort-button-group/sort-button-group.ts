@@ -1,10 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KeyPair } from '../../../models/key-pair.model';
 import { RandomHelper } from '../../../utils';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
+    standalone: true,
     selector: 'zek-sort-button-group',
-    templateUrl: './sort-button-group.html'
+    templateUrl: './sort-button-group.html',
+    imports: [CommonModule, TranslateModule],
 })
 export class ZekSortButtonGroup {
     elementName: string = '';

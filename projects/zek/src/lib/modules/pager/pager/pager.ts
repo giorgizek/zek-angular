@@ -2,11 +2,15 @@
 import { BooleanInput } from '../../../components';
 import { Pager } from '../../../models';
 import { Convert } from '../../../utils';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
+    standalone: true,
     selector: 'zek-pager',
-    templateUrl: './pager.component.html',
-    styles: [':host { display: block; }']
+    templateUrl: './pager.html',
+    styles: [':host { display: block; }'],
+    imports: [CommonModule, TranslateModule],
 })
 export class ZekPager {
     @Input() pager = new Pager();

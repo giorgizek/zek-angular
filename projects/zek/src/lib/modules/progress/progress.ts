@@ -9,6 +9,7 @@ function clamp(v: number, min = 0, max = 100) {
 type Background = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'body' | 'white' | 'transparent';
 
 @Component({
+    standalone: true,
     selector: 'zek-progress',
     templateUrl: './progress.html',
     styles: [':host { display: block; }']

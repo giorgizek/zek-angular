@@ -1,2 +1,1 @@
-export * from './list-toolbar.module';
-export * from './list-toolbar.component';
+export * from './list-toolbar';

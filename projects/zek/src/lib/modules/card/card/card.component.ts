@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, ContentChild, AfterContentInit, Input } from '@angular/core';
 
 @Component({
+    standalone: true,
     selector: 'zek-card',
     templateUrl: './card.component.html',
-    styles: [':host { display: block; }']
+    styles: [':host { display: block; }'],
+    imports: [CommonModule]
 })
 export class CardComponent implements AfterViewInit {
     /**

@@ -1,12 +1,16 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { BooleanInput } from '../../../components';
 import { Convert } from '../../../utils';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
+    standalone: true,
     selector: 'zek-grid-toolbar',
-    templateUrl: './grid-toolbar.component.html'
+    templateUrl: './grid-toolbar.html',
+    imports: [CommonModule, TranslateModule]
 })
-export class GridToolbarComponent {
+export class ZekGridToolbar {
     // constructor(private readonly router: Router) {
     //     //private readonly viewContainerRef: ViewContainerRef,
     // }

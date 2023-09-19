@@ -1,10 +1,14 @@
 import { Component, Input } from "@angular/core";
+import { ZekSafePipe } from "../../safe";
+import { CommonModule } from "@angular/common";
 
 @Component({
+    standalone: true,
     selector: 'zek-wizard',
-    templateUrl: './wizard.component.html'
+    templateUrl: './wizard.html',
+    imports: [CommonModule, ZekSafePipe]
 })
-export class WizardComponent {
+export class ZekWizard {
 
     progress = 0;
     stepsArray: { step: number, progress: number }[] = [

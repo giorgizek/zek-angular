@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BooleanInput } from '../../components';
 import { Convert } from '../../utils';
+import { FormsModule } from '@angular/forms';
+import { ZekFieldValidator } from '../validator';
 
 @Component({
+    standalone: true,
     selector: 'zek-password',
-    templateUrl: './password.html'
+    templateUrl: './password.html',
+    imports: [FormsModule, ZekFieldValidator]
 })
 export class ZekPassword {
     @Input() name = 'Password';

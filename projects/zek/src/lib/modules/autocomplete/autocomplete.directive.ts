@@ -3,14 +3,15 @@ import { Directive } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Directive({
+    standalone: true,
     selector: 'form'
 })
-export class AutoCompleteDirective implements AfterViewInit {
+export class ZekAutoComplete implements AfterViewInit {
     constructor(private readonly el: ElementRef, private readonly router: Router) {
 
     }
     ngAfterViewInit() {
-        if (this.router.url === '/login') { 
+        if (this.router.url === '/login') {
             return;
         }
 

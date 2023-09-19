@@ -2,6 +2,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 import { DateHelper } from '../../utils';
 
 @Pipe({
+    standalone: true,
     name: 'dateAgo',
     pure: true
 })

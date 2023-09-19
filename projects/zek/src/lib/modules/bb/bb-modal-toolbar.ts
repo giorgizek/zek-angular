@@ -6,7 +6,7 @@ import { Convert } from '../../utils';
     selector: 'zek-bb-modal-toolbar',
     templateUrl: './bb-modal-toolbar.html',
 })
-export class ButtonBrowseModalToolbarComponent {
+export class ZekButtonBrowseModalToolbar {
 
     @Output() onSearch = new EventEmitter();
     search() {

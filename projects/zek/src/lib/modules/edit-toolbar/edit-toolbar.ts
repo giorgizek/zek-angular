@@ -2,12 +2,16 @@
 import { BooleanInput } from '../../components';
 import { PrintType } from '../../models/print.model';
 import { Convert } from '../../utils';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
+    standalone: true,
     selector: 'zek-edit-toolbar',
-    templateUrl: './edit-toolbar.component.html'
+    templateUrl: './edit-toolbar.html',
+    imports: [CommonModule, TranslateModule]
 })
-export class EditToolbarComponent {
+export class ZekEditToolbar {
 
     printType = PrintType;
 

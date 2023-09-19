@@ -9,8 +9,11 @@
  *   {{ 1024 |  fileSize}}
  *   formats to: 1 KB
 */
-@Pipe({ name: 'fileSize' })
-export class FileSizePipe implements PipeTransform {
+@Pipe({
+    standalone: true,
+    name: 'fileSize'
+})
+export class ZekFileSizePipe implements PipeTransform {
 
     private units = [
         'bytes',

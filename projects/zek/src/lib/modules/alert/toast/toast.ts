@@ -4,7 +4,6 @@ import { BootstrapHelper, Convert } from '../../../utils';
 //declare let bootstrap: any;
 
 import { AlertService, Toast } from '../../../services/alert.service';
-import { AlertType } from '../../../models';
 import { NumberInput } from '../../../components';
 
 function clamp(v: number, min = 100, max = 10000) {
@@ -12,6 +11,7 @@ function clamp(v: number, min = 100, max = 10000) {
 }
 
 @Component({
+    standalone: true,
     selector: 'zek-toast',
     styleUrls: ['./toast.css'],
     templateUrl: './toast.html'

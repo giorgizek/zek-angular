@@ -14,7 +14,7 @@ let uniqueId = 0;
  */
 const ZEK_BB_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ButtonBrowseComponent),
+    useExisting: forwardRef(() => ZekButtonBrowse),
     multi: true,
 };
 
@@ -23,7 +23,7 @@ const ZEK_BB_CONTROL_VALUE_ACCESSOR: any = {
     templateUrl: './bb.component.html',
     providers: [ZEK_BB_CONTROL_VALUE_ACCESSOR],
 })
-export class ButtonBrowseComponent extends CoreUiComponent {
+export class ZekButtonBrowse extends CoreUiComponent {
     override destroy() {
         this._modal?.dispose();
         this._modal = null;

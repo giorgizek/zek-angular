@@ -3,12 +3,12 @@ import { RandomHelper, StringHelper } from '../../utils';
 
 @Component({
     selector: 'zek-select2,[zek-select2]',
-    templateUrl: './select2.component.html',
-    styleUrls: ['./select2.component.css']
+    templateUrl: './select2.html',
+    styleUrls: ['./select2.css']
 
 })
 
-export class Select2Component implements OnDestroy {
+export class ZekSelect2 implements OnDestroy {
     filter?: string | null;
     text?: string | null;
 

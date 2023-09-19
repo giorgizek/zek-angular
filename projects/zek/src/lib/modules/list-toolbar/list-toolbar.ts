@@ -4,12 +4,16 @@ import { BooleanInput } from '../../components';
 
 import { PrintType } from '../../models/print.model';
 import { Convert, UrlHelper } from '../../utils';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
+    standalone: true,
     selector: 'zek-list-toolbar',
-    templateUrl: './list-toolbar.component.html'
+    templateUrl: './list-toolbar.html',
+    imports: [CommonModule, TranslateModule],
 })
-export class ListToolbarComponent {
+export class ZekListToolbar {
     constructor(private readonly router: Router) {
     }
 
