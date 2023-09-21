@@ -19,5 +19,6 @@ export * from './storage-helper';
 export * from './string-helper';
 export * from './thenBy';
 export * from './time-helper';
+export * from './tmp-helper';
 export * from './url-helper';
 export * from './validation-helper';
