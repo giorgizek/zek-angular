@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { BaseComponent } from './base.component';
-import { IObjectConstructor, PrintType } from '../models';
+import { ApproveModel, IObjectConstructor, PrintType } from '../models';
 import { ZekModal } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,7 +25,7 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
     @ViewChild('f', { static: false }) form?: NgForm;
 
 
-    approveModel: { ids?: number[], comment?: string | null } = {};
+    approveModel: ApproveModel = {};
     @ViewChild('approveModal', { static: false }) protected readonly approveModal?: ZekModal;
     @ViewChild('disapproveModal', { static: false }) protected readonly disapproveModal?: ZekModal;
     // @ViewChild('submitModal', { static: false }) protected readonly submitModal?: ModalComponent;
@@ -91,7 +91,7 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
             }
         }
     }
-    protected internalApprove(approveModel?: any): Promise<boolean> {
+    protected internalApprove(model?: any): Promise<boolean> {
         throw 'Not implemented internalApprove';
     }
 

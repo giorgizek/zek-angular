@@ -2,9 +2,9 @@
 import { ViewChild, Directive, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { CrudService, IService } from '../services';
+import { IService } from '../services';
 import { BaseComponent } from './base.component';
-import { FilterBase, PagedList, Pager, PrintType, approveModel } from '../models';
+import { ApproveModel, FilterBase, PagedList, Pager, PrintType } from '../models';
 import { ZekModal } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
 import { FilterHelper, PagerHelper, StorageHelper, StringHelper, UrlHelper } from '../utils';
@@ -25,7 +25,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
 
     @ViewChild('filterModal', { static: false }) protected readonly filterModal?: ZekModal | null;
 
-    approveModel: approveModel = {};
+    approveModel: ApproveModel = {};
     @ViewChild('approveModal', { static: false }) protected readonly approveModal?: ZekModal | null;
     protected approvedMesage = 'Alert.Approved';
 
