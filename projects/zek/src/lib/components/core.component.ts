@@ -7,8 +7,6 @@ import { Convert } from '../utils';
 export class CoreComponent implements OnInit, OnDestroy {
     loading = false;
 
-
-
     ngOnInit() {
         this.load();
     }
@@ -24,16 +22,19 @@ export class CoreComponent implements OnInit, OnDestroy {
             await this.init();
             await this.bindModel();
             await this.bindDictionary();
-            await this.onBound();
+            await this.onBindingCompleted();
         }
         finally {
             this.loading = false;
         }
+
+        await this.onLoadCompleted();
     }
     init() { }
     bindModel() { }
     bindDictionary() { }
-    onBound() { }
+    onBindingCompleted() { }
+    onLoadCompleted() { }
 
     async destroy() {
     }
