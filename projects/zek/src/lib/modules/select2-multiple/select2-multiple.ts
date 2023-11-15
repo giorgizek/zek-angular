@@ -1,11 +1,15 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { RandomHelper, StringHelper } from '../../utils';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 //declare let bootstrap: any;
 
 
 @Component({
+    standalone: true,
     selector: 'zek-select2-multiple,[zek-select2-multiple]',
-    templateUrl: './select2-multiple.html'
+    templateUrl: './select2-multiple.html',
+    imports: [CommonModule, FormsModule]
 })
 
 export class ZekSelect2Multiple {
