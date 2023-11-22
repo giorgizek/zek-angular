@@ -1,11 +1,11 @@
-import { Directive, EventEmitter, Inject, Input, Output } from "@angular/core";
+import { Component, Directive, EventEmitter, Inject, Input, Output } from "@angular/core";
 import { loader } from './loader';
 import { GOOGLE_CLIENT_ID } from "../../tokens";
-import { CoreComponent, BooleanInput, StringInput, NumberInput } from "../../components";
+import { CoreComponent, BooleanInput, NumberInput } from "../../components";
 import { Convert } from "../../utils";
 
 declare let google: any;
-
+let uniqueId = 0;
 
 export interface GoogleLoginConfig {
     client_id: string;
@@ -16,11 +16,17 @@ export type GoogleLoginButtonTextInput =
 
 @Directive({
     selector: 'zek-google-login',
+    host: {
+        '[attr.id]': 'id',
+    }
 })
 export class ZekGoogleLoginButton extends CoreComponent {
     constructor(@Inject(GOOGLE_CLIENT_ID) private readonly client_id: string) {
         super();
     }
+
+    private _uniqueId: string = `zek-google-button-container-${++uniqueId}`;
+    @Input() id: string = this._uniqueId;
 
     private _prompt: boolean = true;
     @Input() get prompt() {
@@ -39,7 +45,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
     }
 
 
-      private _cancelOnTapOutside: boolean = true;
+    private _cancelOnTapOutside: boolean = true;
     @Input() get cancelOnTapOutside() {
         return this._cancelOnTapOutside;
     }
@@ -69,16 +75,6 @@ export class ZekGoogleLoginButton extends CoreComponent {
 
     @Output() onLoginResponse = new EventEmitter();
     @Output() onLogin = new EventEmitter();
-
-    private _buttonContainer = 'google-login-container';
-    @Input() get buttonContainer() {
-        return this._buttonContainer;
-    }
-    set buttonContainer(v: StringInput) {
-        if (!v)
-            throw new Error('buttonContainer is required');
-        this._buttonContainer = v;
-    }
 
     // private _type: 'standard' | 'icon';
     // public get type(): '' {
@@ -126,8 +122,10 @@ export class ZekGoogleLoginButton extends CoreComponent {
             cancel_on_tap_outside: this._cancelOnTapOutside,
         });
 
-        this.renderButton();
-        this.autoPrompt();
+        setTimeout(() => {
+            this.renderButton();
+            this.autoPrompt();
+        },);
     }
     renderButton() {
         let options: any = { theme: "outline", size: "large" };
@@ -137,7 +135,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
             options.text = this._text
 
         this.google.accounts.id.renderButton(
-            document.getElementById(this._buttonContainer),
+            document.getElementById(this.id),
             // this._elementRef.nativeElement.parentElement,
             options  // customization attributes
         );
