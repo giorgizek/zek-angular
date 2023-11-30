@@ -13,6 +13,25 @@ import { CommonModule } from '@angular/common';
 })
 export class ZekEditToolbar {
 
+    private _showSave = true;
+    @Input()
+    get showSave() {
+        return this._showSave;
+    }
+    set showSave(v: BooleanInput) {
+        this._showSave = Convert.toBooleanProperty(v);
+    }
+
+    private _showCancel = true;
+    @Input()
+    get showCancel() {
+        return this._showCancel;
+    }
+    set showCancel(v: BooleanInput) {
+        this._showCancel = Convert.toBooleanProperty(v);
+    }
+
+
     printType = PrintType;
 
     private _showExport = false;
@@ -34,9 +53,9 @@ export class ZekEditToolbar {
         this._showPrint = Convert.toBooleanProperty(v);
     }
 
-    private _readOnly: boolean = false;
+    private _readOnly = false;
     @Input()
-    get readOnly(): boolean {
+    get readOnly() {
         return this._readOnly;
     }
     set readOnly(v: BooleanInput) {
