@@ -77,6 +77,13 @@ export class DateHelper {
         date.setFullYear(v.getFullYear() + years);
         return date;
     }
+    static addMonths(v: Date, months: number) {
+        if (!months) return v;
+
+        let date = v;
+        date.setMonth(date.getMonth() + months);
+        return date;
+    };
     static addDays(v: Date, days: number) {
         if (!days) return v;
 
