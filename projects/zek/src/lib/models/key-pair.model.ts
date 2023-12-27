@@ -14,10 +14,10 @@ export class KeyPairEx<TKey = any, TValue = any> extends KeyPair<TKey, TValue> {
 }
 
 export class KeyPairChecked<TKey = any, TValue = any> extends KeyPair<TKey, TValue> {
-    checked?: boolean;
-    
+    checked?: boolean | null;
+
 }
 
 export class KeyPairRequired<TKey = any, TValue = any> extends KeyPair<TKey, TValue> {
-    required?: boolean;
+    required?: boolean | null;
 }

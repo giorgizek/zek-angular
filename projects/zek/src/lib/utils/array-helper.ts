@@ -16,6 +16,10 @@ export class ArrayHelper {
         return false;
     };
 
+
+    static isArray(arg: any) {
+        return Array.isArray(arg) && arg.length > 0;
+    }
     // static distinct(value: any[]) {
     //     var arr: any[] = [];
     //     for (var i = 0; i < value.length; i++) {
