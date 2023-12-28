@@ -143,7 +143,7 @@ export class DateHelper {
 
         return Math.floor((timeDiff / 86400000) / 365.25);//86400000 = (1000 * 60 * 60 * 24) = 1000 millisecond * 60second  * 60minute * 24hour
     };
-    static subtractMonths(starDate: Date, endDate: Date) {
+    static subtractMonths(endDate: Date, starDate: Date) {
         let start = starDate <= endDate ? starDate : endDate;
         let end = starDate <= endDate ? endDate : starDate;
         let plus = starDate <= endDate ? 1 : -1;
