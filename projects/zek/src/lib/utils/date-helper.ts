@@ -143,7 +143,18 @@ export class DateHelper {
 
         return Math.floor((timeDiff / 86400000) / 365.25);//86400000 = (1000 * 60 * 60 * 24) = 1000 millisecond * 60second  * 60minute * 24hour
     };
-    static subtractDays(value: Date, date?: Date | null) {
+    static subtractMonths(starDate: Date, endDate: Date) {
+        let start = starDate <= endDate ? starDate : endDate;
+        let end = starDate <= endDate ? endDate : starDate;
+        let plus = starDate <= endDate ? 1 : -1;
+
+        let months = (end.getFullYear() - start.getFullYear()) * 12;
+        months -= start.getMonth();
+        months += end.getMonth();
+        return months * plus;
+    };
+
+    static subtractDays(value: Date, date: Date) {
         if (!date)
             return null;
 
