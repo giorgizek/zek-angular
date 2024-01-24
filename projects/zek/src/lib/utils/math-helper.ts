@@ -7,4 +7,8 @@ export class MathHelper {
     static clamp(v: number, min: number, max: number) {
         return Math.max(min, Math.min(max, v));
     }
+
+    static sum(...values: number[]) {
+        return  values.reduce((acc, cur) => acc + cur, 0);;
+    }
 }

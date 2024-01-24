@@ -7,7 +7,6 @@ import { RandomHelper, StringHelper } from '../../utils';
     styleUrls: ['./select2.css']
 
 })
-
 export class ZekSelect2 implements OnDestroy {
     filter?: string | null;
     text?: string | null;

@@ -5,9 +5,7 @@ import { BootstrapHelper, ComponentType, Convert, handler, RandomHelper } from '
 import { ValidEventArgs } from '../../../models/valid-event-args.model';
 
 declare let bootstrap: any;
-let nextUniqueId = 0;
-
-
+// let nextUniqueId = 0;
 
 @Component({
     selector: 'zek-modal',
