@@ -1,6 +1,7 @@
 ﻿import { Component, Input } from '@angular/core';
 import { BooleanInput, NumberInput } from '../../components';
 import { Convert } from '../../utils';
+import { CommonModule } from '@angular/common';
 
 function clamp(v: number, min = 0, max = 100) {
     return Math.max(min, Math.min(max, v));
@@ -12,7 +13,10 @@ type Background = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | '
     standalone: true,
     selector: 'zek-progress',
     templateUrl: './progress.html',
-    styles: [':host { display: block; }']
+    styles: [':host { display: block; }'],
+    imports: [
+        CommonModule
+    ]
 })
 export class ZekProgress {
     @Input()
