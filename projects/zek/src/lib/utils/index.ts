@@ -5,6 +5,7 @@ export * from './bootstrap.helper';
 export * from './convert';
 export * from './css-helper';
 export * from './date-helper';
+export * from './error-helper';
 export * from './file.helper';
 export * from './filter-helper';
 export * from './handler';
