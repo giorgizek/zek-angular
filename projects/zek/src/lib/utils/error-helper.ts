@@ -18,7 +18,7 @@ export class ErrorHelper {
                 ? error.errors
                 : error;
 
-            const result: KeyPair[] = [];
+            const result: KeyPair<string | null | undefined, string | null | undefined>[] = [];
             const properties = Object.keys(errors);
 
             for (let property of properties) {
