@@ -1,4 +1,5 @@
 <div class="btn-toolbar" role="toolbar" aria-label="Action toolbar">
+    <ng-content select="[left]"></ng-content>
     <div *ngIf="showSave" class="btn-group me-2" role="group" aria-label="Save group">
         <button type="submit" class="btn btn-primary" [disabled]="readOnly"><i class="fa-solid fa-floppy-disk"></i> {{ 'Action.Save' | translate }}</button>
     </div>
