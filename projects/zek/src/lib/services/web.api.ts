@@ -18,7 +18,7 @@ export interface WebApiConfig {
 export class WebApiClient {
     constructor(
         protected readonly http: HttpClient,
-        protected readonly authService: AuthService,
+        protected readonly auth: AuthService,
         @Inject(API_BASE_URL) private readonly baseUrl: string) {
     }
 
@@ -123,7 +123,7 @@ export class WebApiClient {
     protected getHeaders(): HttpHeaders {
         let httpHeaders = new HttpHeaders();
         httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-        const tmp = this.authService.user;
+        const tmp = this.auth.user;
         const token = tmp ? tmp.token : undefined;
         if (token)
             httpHeaders = httpHeaders.set('Authorization', token);
