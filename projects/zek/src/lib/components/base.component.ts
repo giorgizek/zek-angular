@@ -5,8 +5,8 @@ import { AppBaseModule } from '../zek.module';
 import { PrintType } from '../models/print.model';
 import { WebApiClient } from '../services';
 import { CoreComponent } from './core.component';
-import { BooleanInput, StringInput } from './types';
-import { Convert, UrlHelper } from '../utils';
+import { BooleanInput } from './types';
+import { Convert, FileHelper, UrlHelper } from '../utils';
 
 @Directive()
 export class BaseComponent<TModel = any> extends CoreComponent {
@@ -65,20 +65,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
     }
 
     downloadFile(blob: Blob | null, fileName: string, type?: string | null) {
-        if (!blob) return;
-
-        const nav = (window.navigator as any);
-        if (nav && nav.msSaveOrOpenBlob) {
-            nav.msSaveOrOpenBlob(blob, fileName);
-        } else {
-            let a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = fileName;
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+        FileHelper.download(blob, fileName);
     }
     print(id?: number | null, printType?: PrintType) {
         const split = this.url.split('/');

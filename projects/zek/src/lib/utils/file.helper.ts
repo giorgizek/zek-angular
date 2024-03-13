@@ -26,4 +26,22 @@ export class FileHelper {
 
         return '';
     }
+
+
+    static download(blob: Blob | null, fileName: string) {
+        if (!blob) return;
+
+        const nav = (window.navigator as any);
+        if (nav && nav.msSaveOrOpenBlob) {
+            nav.msSaveOrOpenBlob(blob, fileName);
+        } else {
+            let a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    }
 }
