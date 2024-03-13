@@ -45,7 +45,9 @@ export class WebApiClient {
     getBlob(url: string, params?: any): Observable<Blob> {
         return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'blob', params: this.toHttpParams(params) });
     }
-
+    postBlob(url: string, body: any): Observable<Blob> {
+        return this.http.post(this.baseUrl + url, body, { headers: this.getHeaders(), responseType: 'blob' });
+    }
 
 
     protected toHttpParams(obj: any) {
