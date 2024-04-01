@@ -1,6 +1,5 @@
-import { Input, Directive, Type } from '@angular/core';
-import { ActivatedRoute, Router, PRIMARY_OUTLET } from '@angular/router';
-import { AppBaseModule } from '../zek.module';
+import { Input, Directive, Type, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { PrintType } from '../models/print.model';
 import { WebApiClient } from '../services';
@@ -73,7 +72,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
             return;
         }
         const template = split[1];
-        let api = AppBaseModule.injector.get<WebApiClient>(WebApiClient as Type<WebApiClient>);
+        let api = inject(WebApiClient);
 
         let actionName: string;
 
