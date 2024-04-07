@@ -36,16 +36,36 @@ export class ObjectHelper {
         return true;
     }
 
+
+    /**
+     * @deprecated The method should not be used. please use deleteNullFields
+     */
     static deleteNullKeys(val: any) {
+        this.deleteNullFields(val);
+    };
+
+    static deleteNullFields<T extends {}>(val: T) {
         if (!val) return;
         for (let key in val) {
             let tmp = val[key];
             if (tmp === undefined || tmp === null) {
                 delete val[key];
-                Object.keys
             }
         }
+        return val
     };
+
+    static assignFields<T extends {}, U extends {}>(target: T, source: U): T {
+        let t: any = target;
+        let s: any = source;
+        for (const key of Object.keys(target)) {
+            let v = s[key];
+            if (typeof v !== 'undefined') {
+                t[key] = v;
+            }
+        }
+        return target;
+    }
 
 
 
