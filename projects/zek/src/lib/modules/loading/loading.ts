@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ZekLoadingService } from './loading-interceptor';
 
 @Component({
-    selector: 'app-loading',
+    selector: 'zek-loading',
     styleUrls: ['./loading.css'],
     template: `
 <div *ngIf="show" id="loading" class="progress">
