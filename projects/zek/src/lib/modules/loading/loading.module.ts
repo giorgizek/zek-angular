@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoadingInterceptor, LoadingInterceptorProvider } from './loading-interceptor';
-import { ZekLoading } from './loading.component';
+import { ZekLoadingInterceptor, ZekLoadingInterceptorProvider } from './loading-interceptor';
+import { ZekLoading } from './loading';
 
 @NgModule({
     imports: [
@@ -12,11 +12,11 @@ import { ZekLoading } from './loading.component';
         ZekLoading
     ],
     providers: [
-        LoadingInterceptorProvider,
-        LoadingInterceptor,
+        ZekLoadingInterceptor,
+        ZekLoadingInterceptorProvider,
     ],
     exports: [
-        ZekLoading
+        ZekLoading,
     ]
 })
 export class ZekLoadingModule {

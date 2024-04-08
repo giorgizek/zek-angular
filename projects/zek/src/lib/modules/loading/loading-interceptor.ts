@@ -1,86 +1,61 @@
-import { Injectable, ExistingProvider } from '@angular/core';
+import { ExistingProvider, Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { RandomHelper } from 'zek';
 
 
-@Injectable()
-export class LoadingInterceptor implements HttpInterceptor {
-    private pendingRequests = 0;
-    private pendingRequestsStatus = new ReplaySubject<boolean>(1);
-    filteredUrlPatterns: RegExp[] = [];
-    filteredMethods: string[] = [];
-    filteredHeaders: string[] = [];
-    forceByPass: boolean = false;
+@Injectable({providedIn:'root'})
+export class ZekLoadingService {
+    private _pendingRequests = 0;
+    private _loadingSubject$?: BehaviorSubject<boolean>
+    private _onLoadingObservable?: Observable<boolean>;
 
-    private shouldBypassUrl(url: string): boolean {
-        return this.filteredUrlPatterns.some(e => {
-            return e.test(url);
-        });
+    start() {
+        this._pendingRequests++;
+        this._loadingSubject$?.next(true);
+    }
+    end() {
+        this._pendingRequests--;
+        if (this._pendingRequests < 0)
+            this._pendingRequests = 0;
+
+        if (0 === this._pendingRequests) {
+            this._loadingSubject$?.next(false);
+        }
     }
 
-    private shouldBypassMethod(req: HttpRequest<any>): boolean {
-        return this.filteredMethods.some(e => {
-            return e.toUpperCase() === req.method.toUpperCase();
-        });
-    }
-
-    private shouldBypassHeader(req: HttpRequest<any>): boolean {
-        return this.filteredHeaders.some(e => {
-            return req.headers.has(e);
-        });
-    }
-
-    private shouldBypass(req: HttpRequest<any>): boolean {
-        return this.forceByPass
-            || this.shouldBypassUrl(req.urlWithParams)
-            || this.shouldBypassMethod(req)
-            || this.shouldBypassHeader(req);
-    }
-
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const shouldBypass = this.shouldBypass(request);
-
-        if (!shouldBypass) {
-            this.pendingRequests++;
-
-            if (1 === this.pendingRequests) {
-                this.pendingRequestsStatus.next(true);
-            }
+    get onLoading() {
+        if (!this._loadingSubject$) {
+            this._loadingSubject$ = new BehaviorSubject<boolean>(false);
+            this._onLoadingObservable = this._loadingSubject$.asObservable();
         }
 
-        return next.handle(request).pipe(
-            // map(event => {
-            //     return event;
-            // }),
-            // catchError(error => {
-            //     return throwError(error);
-            // }),
-            finalize(() => {
-                if (!shouldBypass) {
-                    this.pendingRequests--;
+        if (!this._onLoadingObservable)
+            throw new Error("_onExecuteObservable is undefined");
 
-                    if (0 === this.pendingRequests) {
-                        this.pendingRequestsStatus.next(false);
-                    }
-                }
-            })
-        );
-    }
-
-    getStatus() {
-        return this.pendingRequestsStatus.asObservable();
+        return this._onLoadingObservable;
     }
 }
 
-// export const LoadingInterceptorProvider = {
-//     provide: HTTP_INTERCEPTORS,
-//     useClass: LoadingInterceptor,
-//     multi: true,
-// };
+@Injectable()
+export class ZekLoadingInterceptor implements HttpInterceptor {
+    constructor(private readonly _loading: ZekLoadingService) {
+    }
 
-export const LoadingInterceptorProvider: ExistingProvider[] = [{
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this._loading.start();
+
+        return next.handle(request).pipe(
+            finalize(() => {
+                this._loading.end();
+            })
+        );
+    }
+}
+
+export const ZekLoadingInterceptorProvider = [{
     provide: HTTP_INTERCEPTORS,
-    useExisting: LoadingInterceptor,
+    useClass: ZekLoadingInterceptor,
     multi: true
 }];
