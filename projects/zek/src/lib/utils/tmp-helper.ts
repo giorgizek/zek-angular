@@ -1,16 +1,19 @@
 export class TmpHelper {
     private static _obj: any = {};
 
-    static get(key: string): any {
+    static get(key: string, remove = true): any {
         if (!key) return;
-        return this._obj[key];
+        let v = this._obj[key];
+        if (remove)
+            this.remove(key);
+        return v;
     }
-
+  
     static set(key: string, value: any) {
         if (!key) return;
         this._obj[key] = value;
     }
-
+  
     static clear() {
         this._obj = {};
     }
