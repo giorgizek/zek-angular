@@ -29,6 +29,7 @@ export * from './select2-multiple';
 export * from './sort';
 export * from './time';
 export * from './tooltip';
+export * from './utc-to-local';
 export * from './validator';
 export * from './validators';
 export * from './wizard';

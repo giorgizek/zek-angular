@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'time'
 })
 export class TimePipe implements PipeTransform {
-    constructor(private readonly datePipe: DatePipe) {
+    constructor(private readonly _datePipe: DatePipe) {
     }
 
     transform(value: Date | string | number | null | undefined, format?: string): string | null {
@@ -26,7 +26,7 @@ export class TimePipe implements PipeTransform {
             return null;
         }
 
-        const formattedTime = this.datePipe.transform(dateTimeString, format);
+        const formattedTime = this._datePipe.transform(dateTimeString, format);
         return formattedTime;
     }
 
