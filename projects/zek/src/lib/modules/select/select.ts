@@ -1,8 +1,9 @@
 import { Component, ElementRef, forwardRef, Input, Renderer2 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BooleanInput, CoreUiComponent } from '../../components';
 import { ArrayHelper, Convert } from '../../utils';
 import { KeyPairOption } from './model';
+import { CommonModule } from '@angular/common';
 
 
 let uniqueId = 0;
@@ -15,9 +16,14 @@ const ZEK_SELECT_MULTIPLE_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Component({
+    standalone: true,
     selector: 'zek-select,[zek-select]',
     templateUrl: './select.html',
     providers: [ZEK_SELECT_MULTIPLE_CONTROL_VALUE_ACCESSOR],
+    imports: [
+        CommonModule,
+        FormsModule
+    ],
 })
 
 export class ZekSelectMultiple extends CoreUiComponent {

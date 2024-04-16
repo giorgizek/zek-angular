@@ -5,7 +5,7 @@ import { BootstrapHelper, ComponentType, Convert, handler, RandomHelper } from '
 import { ValidEventArgs } from '../../../models/valid-event-args.model';
 
 declare let bootstrap: any;
-// let nextUniqueId = 0;
+let uniqueId = 0;
 
 @Component({
     selector: 'zek-modal',
@@ -50,7 +50,13 @@ export class ZekModal extends CoreComponent {
         }, 1);
     }
 
-
+    private _uniqueId: string = `zek-modal-${++uniqueId}`;
+    /** The unique ID for the radio button. */
+    @Input() id: string = this._uniqueId;
+    modalId = `${this.id}-modal`;
+    lableId = `${this.id}-lable`;
+    cancelButtonId = `${this.id}-cancel-button`;
+    okButtonId = `${this.id}-ok-button`;
 
     shownHandler?: number | null;
     hiddenHandler?: number | null;
@@ -189,7 +195,7 @@ export class ZekModal extends CoreComponent {
     // }
 
     protected getModalElement() {
-        return document.getElementById('modal-' + this.elementId);
+        return document.getElementById(this.modalId);
     }
     protected getModal() {
         let modalEl = this.getModalElement();
@@ -199,7 +205,7 @@ export class ZekModal extends CoreComponent {
 
 
 
-    cssButton(): string {
+    cssButton() {
         return BootstrapHelper.cssButton(this.componentType);
     }
 
@@ -236,7 +242,7 @@ export class ZekModal extends CoreComponent {
             this._modal.hide();
         }
         else {
-            let btn = document.getElementById('modal-cancel-button-' + this.elementId);
+            let btn = document.getElementById(this.cancelButtonId);
             if (btn) {
                 btn.click();
             }

@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { RandomHelper, StringHelper } from '../../utils';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+    standalone: true,
     selector: 'zek-select2,[zek-select2]',
     templateUrl: './select2.html',
-    styleUrls: ['./select2.css']
+    styleUrls: ['./select2.css'],
+    imports: [CommonModule, FormsModule]
 
 })
 export class ZekSelect2 implements OnDestroy {
