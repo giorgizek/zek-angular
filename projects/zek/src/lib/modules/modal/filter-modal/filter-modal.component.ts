@@ -11,8 +11,4 @@ export class ZekFilterModal extends ZekModal {
     reset() {
         this.onReset.emit();
     }
-
-    protected override getModalElement(){
-        return document.getElementById('filter-modal');
-    }
 }
