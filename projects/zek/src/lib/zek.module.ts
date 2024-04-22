@@ -1,4 +1,4 @@
-import { Injector, ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { WebApiClient, WebApiConfig } from './services';
 import { API_BASE_URL } from './tokens';
 

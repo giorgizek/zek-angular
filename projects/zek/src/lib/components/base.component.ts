@@ -9,13 +9,9 @@ import { Convert, FileHelper, UrlHelper } from '../utils';
 
 @Directive()
 export class BaseComponent<TModel = any> extends CoreComponent {
-    constructor(
-        protected readonly route: ActivatedRoute,
-        protected readonly router: Router
-    ) {
-        super();
-    }
-
+    private readonly _api = inject(WebApiClient);
+    protected readonly route = inject(ActivatedRoute);
+    protected readonly router = inject(Router);
 
     private _readOnly = false;
     @Input()
@@ -72,7 +68,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
             return;
         }
         const template = split[1];
-        let api = inject(WebApiClient);
+        // let api = inject(WebApiClient);
 
         let actionName: string;
 
@@ -85,7 +81,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
                 actionName = 'ShowIdLink'
                 break;
         }
-        api.getString(`api/Reports/${actionName}`, { template, id }).subscribe(url => {
+        this._api.getString(`api/Reports/${actionName}`, { template, id }).subscribe(url => {
             if (url) {
                 window.open(url, '_blank');
             }

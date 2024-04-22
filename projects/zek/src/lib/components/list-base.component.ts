@@ -1,5 +1,5 @@
 ﻿import { Router, ActivatedRoute } from '@angular/router';
-import { ViewChild, Directive, Input } from '@angular/core';
+import { ViewChild, Directive, Input, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { IService } from '../services';
@@ -32,14 +32,18 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     @ViewChild('disapproveModal', { static: false }) protected readonly disapproveModal?: ZekModal | null;
     protected disapprovedMesage = 'Alert.Disapproved';
 
-    constructor(
-        protected readonly service: TService,
-        readonly translate: TranslateService,
-        readonly alert: AlertService,
-        route: ActivatedRoute,
-        router: Router) {
-        super(route, router);
+    constructor(protected readonly service: TService) {
+        super();
     }
+
+
+    readonly translate = inject(TranslateService);
+    readonly alert = inject(AlertService);
+
+
+
+    
+
 
     override init() {
         super.init();

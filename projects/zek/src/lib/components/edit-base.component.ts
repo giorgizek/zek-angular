@@ -1,5 +1,4 @@
-import { ViewChild, Directive } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ViewChild, Directive, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { BaseComponent } from './base.component';
@@ -9,19 +8,11 @@ import { AlertService } from '../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IService } from '../services';
 import { firstValueFrom } from 'rxjs';
-// import { IObjectConstructor } from '../models/ctor';
-// import { IService } from '../services/base.service';
-// import { AlertService } from '../modules/alert/shared/alert.service';
-// import { Area } from '../models/area.model';
-// import { PrintType } from '../models/print.model';
-// import { TranslateService } from '@ngx-translate/core';
-// import { ModalComponent } from '../modules/modal/modal.component';
 
 @Directive()
 export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
     id?: number | null;
     id2?: number | null;
-    //   area = Area;
     @ViewChild('f', { static: false }) form?: NgForm;
 
 
@@ -120,15 +111,13 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
 
 @Directive()
 export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
-
-    constructor(
-        readonly service: IService,
-        readonly translate: TranslateService,
-        readonly alert: AlertService,
-        route: ActivatedRoute,
-        router: Router) {
-        super(route, router);
+    constructor(readonly service: IService) {
+        super();
     }
+
+    readonly translate = inject(TranslateService);
+    readonly alert = inject(AlertService);
+
 
     protected override async internalSave(navigateToReturnUrl?: boolean | null): Promise<boolean> {
         this.alert.clear();
@@ -235,18 +224,11 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
 
 @Directive()
 export class EditComponent<TModel> extends EditBaseComponent<TModel> {
-
-    constructor(
-        private readonly ctorModel: IObjectConstructor<TModel>,
-        service: IService,
-        translate: TranslateService,
-        alert: AlertService,
-        route: ActivatedRoute,
-        router: Router) {
-        super(service, translate, alert, route, router);
+    constructor(private readonly _ctorModel: IObjectConstructor<TModel>, service: IService) {
+        super(service);
     }
 
     protected override initCreate() {
-        this.model = new this.ctorModel();
+        this.model = new this._ctorModel();
     }
 }
