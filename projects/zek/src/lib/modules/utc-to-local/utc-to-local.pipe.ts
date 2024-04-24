@@ -11,13 +11,10 @@ export class UtcToLocalPipe implements PipeTransform {
     constructor(private readonly _datePipe: DatePipe) {
     }
 
-    transform(value: Date | string | number | null | undefined, format?: string): string | Date | null {
+    transform(value: Date | string | number | null | undefined, format?: string): string | null {
         if (typeof value === 'undefined' || value === null || value === '' || value !== value) return null;
 
-        let date = DateHelper.utcToLocal(DateHelper.toDate(value))
+        const date = DateHelper.utcToLocal(DateHelper.toDate(value))
         return this._datePipe.transform(date, format);
     }
-
-
-
 }
