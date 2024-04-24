@@ -33,6 +33,7 @@ export class ZekSelect2Multiple {
     filteredData: Array<any> = [];
 
     @Input() textField: any;
+    @Input() selectedField: any;
     @Input() valueField: any;
     @Input() placeholder: string = ''
 
@@ -84,7 +85,7 @@ export class ZekSelect2Multiple {
     private filterData() {
         if (this.filter && this.filter !== '') {
             let searchString = this.filter;
-            if (this.textField === undefined || this.textField === null) {
+            if (typeof this.textField === 'undefined' || this.textField === null) {
                 this.filteredData = this.data.filter(item => item.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
             } else {
                 this.filteredData = this.data.filter(item => item[this.textField].toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
@@ -105,10 +106,12 @@ export class ZekSelect2Multiple {
     }
 
     private setText() {
-        if (this.textField === undefined || this.textField === null) {
+        let fieldName = this.selectedField || this.textField;
+
+        if (StringHelper.isNullOrEmpty((fieldName))) {
             this.text = this._selectedItems.join(', ');
         } else {
-            this.text = this._selectedItems.map(x => x[this.textField]).join(', ');
+            this.text = this._selectedItems.map(x => x[fieldName]).join(', ');
         }
     }
 
