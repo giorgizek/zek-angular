@@ -17,7 +17,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     saveFilter = true;
     sortFields: any;
     protected internalFilter: any = new FilterBase();
-    isFiltered: boolean = false;
+    isFiltered = false;
     selectedIds: any[] = [];
     pager = new Pager();
     sumModel: any;
