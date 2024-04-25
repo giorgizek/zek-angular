@@ -45,6 +45,37 @@ export class StringHelper {
 
         return (start > 0 || end < val.length) ? val.substring(start, end) : val;
     }
+    static trimStart(val: string | null, ch: string) {
+        if (!val || !ch)
+            return val;
+
+        var start = 0,
+            end = val.length;
+
+        while (start < end && val[start] === ch)
+            ++start;
+
+        return (start > 0) ? val.substring(start, end) : val;
+    }
+    static trimEnd(val: string | null, ch: string) {
+        if (!val || !ch)
+            return val;
+
+        var start = 0,
+            end = val.length;
+
+        while (end > start && val[end - 1] === ch)
+            --end;
+
+        return (end < val.length) ? val.substring(start, end) : val;
+    }
+
+    /**
+     * 
+     * @param val source string
+     * @param chars trim any character
+     * @returns 
+     */
     static trimAny(val: string | null, chars: string) {
         if (!val || !chars)
             return val;
