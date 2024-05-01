@@ -62,6 +62,9 @@ export class DateHelper {
     static utcToLocal(utc: Date) {
         return new Date(utc.getTime() + this._utcDiff);
     }
+    static localToUtc(utc: Date) {
+        return new Date(utc.getTime() - this._utcDiff);
+    }
 
     static addTime(value: Date, time: string | undefined | null) {
         let tmp = TimeHelper.parseTime(time);
