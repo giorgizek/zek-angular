@@ -50,6 +50,7 @@ export class HttpErrorHandler {
      * This error handler lets the app continue to run as if no error occurred.
      * @param serviceName = name of the data service that attempted the operation
      * @param operation - name of the operation that failed
+     * @param result - optional value to return as the observable result
      * @param show - optional value to show error
      */
     handleErrorResult<T>(serviceName = '', operation = 'operation', result = {} as T, show?: boolean) {
