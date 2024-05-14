@@ -25,7 +25,7 @@ export class ZekAlert extends CoreComponent {
         }
     }
 
-    _showClose: boolean = true;
+    _showClose = true;
     @Input()
     get showClose(): boolean {
         return this._showClose;

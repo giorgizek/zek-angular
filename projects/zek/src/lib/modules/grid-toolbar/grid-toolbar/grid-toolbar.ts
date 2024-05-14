@@ -21,7 +21,7 @@ export class ZekGridToolbar {
 
     @Input() model: any;
 
-    private _showEdit: boolean = true;
+    private _showEdit = true;
     @Input()
     get showEdit(): boolean {
         return this._showEdit;
@@ -30,7 +30,7 @@ export class ZekGridToolbar {
         this._showEdit = Convert.toBooleanProperty(v);
     }
 
-    private _editEnabled: boolean = true;
+    private _editEnabled = true;
     @Input()
     get editEnabled(): boolean {
         return this._editEnabled;
@@ -39,7 +39,7 @@ export class ZekGridToolbar {
         this._editEnabled = Convert.toBooleanProperty(v);
     }
 
-    private _showDelete: boolean = true;
+    private _showDelete = true;
     @Input()
     get showDelete(): boolean {
         return this._showDelete;
@@ -48,7 +48,7 @@ export class ZekGridToolbar {
         this._showDelete = Convert.toBooleanProperty(v);
     }
 
-    private _deleteEnabled: boolean = true;
+    private _deleteEnabled = true;
     @Input()
     get deleteEnabled(): boolean {
         return this._deleteEnabled;
@@ -57,7 +57,7 @@ export class ZekGridToolbar {
         this._deleteEnabled = Convert.toBooleanProperty(v);
     }
 
-    private _showRestore: boolean = false;
+    private _showRestore = false;
     @Input()
     get showRestore(): boolean {
         return this._showRestore;
@@ -66,7 +66,7 @@ export class ZekGridToolbar {
         this._showRestore = Convert.toBooleanProperty(v);
     }
 
-    private _restoreEnabled: boolean = true;
+    private _restoreEnabled = true;
     @Input()
     get restoreEnabled(): boolean {
         return this._restoreEnabled;
@@ -77,7 +77,7 @@ export class ZekGridToolbar {
 
 
     @Input() approveText = 'Action.Approve';
-    private _showApprove: boolean = false;
+    private _showApprove = false;
     @Input()
     get showApprove(): boolean {
         return this._showApprove;
@@ -86,7 +86,7 @@ export class ZekGridToolbar {
         this._showApprove = Convert.toBooleanProperty(v);
     }
 
-    private _approveEnabled: boolean = false;
+    private _approveEnabled = false;
     @Input()
     get approveEnabled(): boolean {
         return this._approveEnabled;
@@ -96,7 +96,7 @@ export class ZekGridToolbar {
     }
 
     @Input() disapproveText = 'Action.Disapprove';
-    private _showDisapprove: boolean = false;
+    private _showDisapprove = false;
     @Input()
     get showDisapprove(): boolean {
         return this._showDisapprove;
@@ -106,7 +106,7 @@ export class ZekGridToolbar {
     }
 
 
-    private _disapproveEnabled: boolean = false;
+    private _disapproveEnabled = false;
     @Input()
     get disapproveEnabled(): boolean {
         return this._disapproveEnabled;

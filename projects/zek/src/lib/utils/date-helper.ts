@@ -40,6 +40,9 @@ export class DateHelper {
 
         return date;
     }
+    static today(){
+        return this.dateOnly(new Date());
+    }
 
     static toISODateString(value: Date | string) {
         let date = this.parseDate(value);

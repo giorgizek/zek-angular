@@ -28,7 +28,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
     private _uniqueId: string = `zek-google-button-container-${++uniqueId}`;
     @Input() id: string = this._uniqueId;
 
-    private _prompt: boolean = true;
+    private _prompt = true;
     @Input() get prompt() {
         return this._prompt;
     }
@@ -36,7 +36,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
         this._prompt = Convert.toBooleanProperty(v);
     }
 
-    private _autoSelect: boolean = false;
+    private _autoSelect = false;
     @Input() get autoSelect() {
         return this._autoSelect;
     }
@@ -45,7 +45,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
     }
 
 
-    private _cancelOnTapOutside: boolean = true;
+    private _cancelOnTapOutside = true;
     @Input() get cancelOnTapOutside() {
         return this._cancelOnTapOutside;
     }

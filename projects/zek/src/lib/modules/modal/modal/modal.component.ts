@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BooleanInput, CoreComponent } from '../../../components';
 import { BootstrapHelper, ComponentType, Convert, handler, RandomHelper } from '../../../utils';
 import { ValidEventArgs } from '../../../models/valid-event-args.model';
+import { ModalSize } from '../../../models';
 
 declare let bootstrap: any;
 let uniqueId = 0;
@@ -65,7 +66,7 @@ export class ZekModal extends CoreComponent {
     readonly elementId: string;
 
 
-    private _showOk: boolean = true;
+    private _showOk = true;
     @Input()
     get showOk(): boolean {
         return this._showOk;
@@ -74,7 +75,7 @@ export class ZekModal extends CoreComponent {
         this._showOk = Convert.toBooleanProperty(v);
     }
 
-    private _disabledOk: boolean = false;
+    private _disabledOk = false;
     @Input()
     get disabledOk(): boolean {
         return this._disabledOk;
@@ -83,7 +84,7 @@ export class ZekModal extends CoreComponent {
         this._disabledOk = Convert.toBooleanProperty(v);
     }
 
-    private _showCancel: boolean = true;
+    private _showCancel = true;
     @Input()
     get showCancel(): boolean {
         return this._showCancel;
@@ -93,7 +94,7 @@ export class ZekModal extends CoreComponent {
     }
 
 
-    private _autoHide: boolean = true;
+    private _autoHide = true;
     @Input()
     get autoHide(): boolean {
         return this._autoHide;
@@ -120,28 +121,40 @@ export class ZekModal extends CoreComponent {
     @Input() componentType = ComponentType.Primary;
 
 
-
-
-    private _large: boolean = false;
+    
+    private _size : ModalSize = '';
+    @Input()
+    get size() {
+        return this._size;
+    }
+    set size(v : ModalSize) {
+        this._size = v;
+    }
+    
+    /**
+     * @deprecated Please use size property
+     */
     @Input()
     get large(): boolean {
-        return this._large;
+        return this._size === 'lg';
     }
     set large(v: BooleanInput) {
-        this._large = Convert.toBooleanProperty(v);
+        this._size = Convert.toBooleanProperty(v) ? 'lg' : '';
     }
 
-    private _xl: boolean = false;
+    /**
+     * @deprecated Please use size property
+     */
     @Input()
     get xl(): boolean {
-        return this._xl;
+        return this._size === 'xl';
     }
     set xl(v: BooleanInput) {
-        this._xl = Convert.toBooleanProperty(v);
+        this._size = Convert.toBooleanProperty(v) ? 'xl' : '';
     }
 
 
-    private _scrollable: boolean = false;
+    private _scrollable = false;
     @Input()
     get scrollable(): boolean {
         return this._scrollable;
@@ -150,7 +163,7 @@ export class ZekModal extends CoreComponent {
         this._scrollable = Convert.toBooleanProperty(v);
     }
 
-    private _fullscreen: boolean = false;
+    private _fullscreen = false;
     @Input()
     get fullscreen(): boolean {
         return this._fullscreen;
@@ -159,7 +172,7 @@ export class ZekModal extends CoreComponent {
         this._fullscreen = Convert.toBooleanProperty(v);
     }
 
-    private _showHeader: boolean = true;
+    private _showHeader = true;
     @Input()
     get showHeader(): boolean {
         return this._showHeader;
@@ -168,7 +181,7 @@ export class ZekModal extends CoreComponent {
         this._showHeader = Convert.toBooleanProperty(v);
     }
 
-    private _showFooter: boolean = true;
+    private _showFooter = true;
     @Input()
     get showFooter(): boolean {
         return this._showFooter;

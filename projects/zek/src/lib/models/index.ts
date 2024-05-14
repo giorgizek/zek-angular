@@ -10,6 +10,7 @@ export * from './gender.model';
 export * from './key-pair.model';
 export * from './list-base.model';
 export * from './login.model';
+export * from './modal-size';
 export * from './month.model';
 export * from './nav.model';
 export * from './pager.model';

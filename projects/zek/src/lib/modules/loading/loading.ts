@@ -12,7 +12,7 @@ import { ZekLoadingService } from './loading-interceptor';
 `
 })
 export class ZekLoading implements OnInit, OnDestroy {
-    show: boolean = false;
+    show = false;
     private subscription?: Subscription;
     constructor(private readonly _loading: ZekLoadingService) {
     }

@@ -7,7 +7,7 @@ import { DateHelper } from "../../utils";
 export class TimerService {
     @Input() seconds: number = 0;
 
-    // running: boolean = false;
+    // running = false;
     
     private _count : number = 0;
     public get count() : number {

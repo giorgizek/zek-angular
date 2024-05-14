@@ -16,7 +16,7 @@ export class ZekPageTitle {
     @Input() title?: string;
 
 
-    private _isEditPage: boolean = false;
+    private _isEditPage = false;
     @Input()
     get isEditPage(): boolean {
         return this._isEditPage;

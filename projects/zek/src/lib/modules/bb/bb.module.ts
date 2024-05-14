@@ -21,4 +21,4 @@ import { ZekButtonBrowseModalToolbar } from './bb-modal-toolbar';
         ZekButtonBrowseModalToolbar
     ]
 })
-export class ButtonBrowseModule { }
+export class ZekButtonBrowseModule { }

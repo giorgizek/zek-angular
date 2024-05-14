@@ -4,13 +4,13 @@ import { PagedList } from "../../models";
 import { Convert } from "../../utils";
 
 @Directive()
-export class ButtonBrowseModalBaseComponent extends CoreComponent {
+export class ZekButtonBrowseModalBase extends CoreComponent {
     @Input() type?: string | null;
     @Input() filter: any = {};
     @Input() data?: PagedList | null;
 
     private _multiSelect = false;
-    @Input()  get multiSelect() {
+    @Input()  get multiSelect() : boolean {
         return this._multiSelect;
     }
     set multiSelect(v: BooleanInput) {

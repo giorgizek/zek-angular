@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ZekPager {
     @Input() pager = new Pager();
 
-    private _showPageSize: boolean = true;
+    private _showPageSize = true;
     @Input()
     get showPageSize(): boolean {
         return this._showPageSize;

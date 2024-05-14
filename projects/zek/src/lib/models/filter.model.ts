@@ -7,5 +7,5 @@
     pageSize: number = 10;
 
     sort: string | null = null;
-    asc: boolean = false;
+    asc = false;
 }

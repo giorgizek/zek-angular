@@ -73,7 +73,7 @@ export class ZekListToolbar {
     }
 
 
-    private _showExport: boolean = false;
+    private _showExport = false;
     @Input()
     get showExport(): boolean {
         return this._showExport;

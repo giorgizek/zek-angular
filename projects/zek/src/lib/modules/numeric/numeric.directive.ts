@@ -17,7 +17,7 @@ export class NumericDirective {
         this._digits = tmp;
     }
 
-    private _negative: boolean = false;
+    private _negative = false;
     get negative(): boolean {
         return this._negative;
     }

@@ -41,7 +41,7 @@ export class ZekSortButtonGroup {
     }
 
 
-    private _asc: boolean = false;
+    private _asc = false;
     get asc() {
         return this._asc;
     }

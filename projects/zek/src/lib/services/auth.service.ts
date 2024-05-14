@@ -6,8 +6,8 @@ import { BitwiseHelper } from '../utils/bitwise-helper';
 
 @Injectable()
 export class AuthService {
-    private _isInitialized: boolean = false;
-    private _oldValue: boolean = false;
+    private _isInitialized = false;
+    private _oldValue = false;
     private _user: LoginUser | null = null;
 
     get user(): LoginUser | null {

@@ -1,3 +1,3 @@
 export class ValidEventArgs {
-    valid: boolean = true;
+    valid = true;
 }

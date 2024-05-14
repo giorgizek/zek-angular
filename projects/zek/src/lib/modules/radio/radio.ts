@@ -67,7 +67,7 @@ export class ZekRadio extends CoreUiComponent
 
 
 
-    private _inline: boolean = false;
+    private _inline = false;
     get inline() {
         return this._inline;
     }
@@ -90,7 +90,7 @@ export class ZekRadio extends CoreUiComponent
     private modelValue: any;
 
 
-    private _checked: boolean = false;
+    private _checked = false;
     @Input()
     get checked(): boolean {
         return this._checked;

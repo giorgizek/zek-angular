@@ -43,7 +43,7 @@ type ActionBacklogEntry = [string, Subject<string>];
 
 @Injectable()
 export class ReCaptchaService {
-    private readonly isBrowser: boolean = true;
+    private readonly isBrowser = true;
     private readonly siteKey: string;
     private readonly zone: NgZone;
 

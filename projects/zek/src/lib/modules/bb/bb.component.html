@@ -11,9 +11,13 @@
     </ul>
 </div>
 <div *ngIf="!hide || disabled || readOnly" class="modal fade" [id]="modalId" tabindex="-1" aria-labelledby="bb-modal-label" aria-hidden="true">
-    <div class="modal-dialog {{_sizeCss}}">
+    <div class="modal-dialog" [ngClass]="{
+        'modal-sm': size === 'sm',
+        'modal-lg': size === 'lg', 
+        'modal-xl': size === 'xl'
+    }" [class.modal-dialog-scrollable]="scrollable" [class.modal-fullscreen]="fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" *ngIf="showHeader">
                 <h5 class="modal-title" id="{{modalId}}-label">{{'Action.Choose' | translate }}</h5>
                 <button type="button" (click)="close()" class="btn-close" data-bs-dismiss2="modal" aria-label="Close"></button>
             </div>

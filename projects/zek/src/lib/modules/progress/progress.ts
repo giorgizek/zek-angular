@@ -39,7 +39,7 @@ export class ZekProgress {
     set showValue(v: BooleanInput) {
         this._showValue = Convert.toBooleanProperty(v);
     }
-    private _showValue: boolean = false;
+    private _showValue = false;
 
     @Input()
     get showTitle(): boolean {
@@ -48,7 +48,7 @@ export class ZekProgress {
     set showTitle(v: BooleanInput) {
         this._showTitle = Convert.toBooleanProperty(v);
     }
-    private _showTitle: boolean = true;
+    private _showTitle = true;
 
     get _title() {
         return this._showTitle ? `${this._value} %` : null;
@@ -62,7 +62,7 @@ export class ZekProgress {
     set striped(v: BooleanInput) {
         this._striped = Convert.toBooleanProperty(v);
     }
-    private _striped: boolean = false;
+    private _striped = false;
 
 
     @Input()
@@ -72,7 +72,7 @@ export class ZekProgress {
     set animated(v: BooleanInput) {
         this._animated = Convert.toBooleanProperty(v);
     }
-    private _animated: boolean = false;
+    private _animated = false;
 
     @Input()
     get label() {

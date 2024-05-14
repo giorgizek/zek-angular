@@ -54,8 +54,8 @@ export class CoreUiComponent extends CoreComponent
     onNameChanged() { }
 
 
-    private _isInitialized: boolean = false;
-    get isInitialized(): boolean {
+    private _isInitialized = false;
+    get isInitialized() {
         return this._isInitialized;
     }
 
@@ -99,7 +99,7 @@ export class CoreUiComponent extends CoreComponent
         }
     }
 
-    private _readonly: boolean = false;
+    private _readonly = false;
     /** Whether the component is disabled */
     get readonly(): boolean {
         return this._readonly;
@@ -115,7 +115,7 @@ export class CoreUiComponent extends CoreComponent
     onReadOnlyChanged() { }
 
 
-    private _disabled: boolean = false;
+    private _disabled = false;
     /** Whether the component is disabled */
     get disabled(): boolean {
         return this._disabled;
@@ -131,7 +131,7 @@ export class CoreUiComponent extends CoreComponent
     onDisabledChanged() { }
 
 
-    private _required: boolean = false;
+    private _required = false;
     /** Whether the component is required */
     get required(): boolean {
         return this._required;

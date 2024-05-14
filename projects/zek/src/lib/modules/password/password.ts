@@ -13,7 +13,7 @@ import { ZekFieldValidator } from '../validator';
 export class ZekPassword {
     @Input() name = 'Password';
 
-    private _required: boolean = false;
+    private _required = false;
     @Input()
     get required(): boolean {
         return this._required;

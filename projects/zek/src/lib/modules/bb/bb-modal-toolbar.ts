@@ -19,7 +19,8 @@ export class ZekButtonBrowseModalToolbar {
     }
 
     private _multiSelect = false;
-    @Input()  get multiSelect() {
+    @Input()
+    get multiSelect(): boolean {
         return this._multiSelect;
     }
     set multiSelect(v: BooleanInput) {

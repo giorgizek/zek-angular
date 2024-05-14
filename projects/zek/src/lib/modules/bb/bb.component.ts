@@ -1,8 +1,8 @@
-﻿import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnDestroy, forwardRef } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BooleanInput } from '../../components';
 import { CoreUiComponent } from '../../components/core-ui.component';
-import { KeyPair, PagedList } from '../../models';
+import { KeyPair, ModalSize, PagedList } from '../../models';
 import { Convert } from '../../utils';
 declare let bootstrap: any;
 let uniqueId = 0;
@@ -64,12 +64,12 @@ export class ZekButtonBrowse extends CoreUiComponent {
         }
     }
     onTextChanged() {
-        this.onKeyPairChange.emit({ key: this._value, value: this._text } as KeyPair)
+        this.onKeyPairChange.emit(new KeyPair({ key: this._value, value: this._text }))
     }
 
 
 
-    private _readOnly: boolean = false;
+    private _readOnly = false;
     @Input()
     get readOnly(): boolean {
         return this._readOnly;
@@ -80,7 +80,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
 
 
 
-    private _hide: boolean = false;
+    private _hide = false;
     @Input()
     get hide(): boolean {
         return this._hide;
@@ -89,7 +89,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
         this._hide = Convert.toBooleanProperty(v);
     }
 
-    private _showInput: boolean = true;
+    private _showInput = true;
     @Input()
     get showInput(): boolean {
         return this._showInput;
@@ -100,7 +100,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
 
     private _multiSelect = false;
     @Input()
-    get multiSelect() {
+    get multiSelect(): boolean {
         return this._multiSelect;
     }
     set multiSelect(v: BooleanInput) {
@@ -126,20 +126,40 @@ export class ZekButtonBrowse extends CoreUiComponent {
     }
 
 
-    size?: '' | 'sm' | 'lg' | 'xl' | 'xxl' | null = 'lg';
-    get _sizeCss() {
-        switch (this.size) {
-            case 'sm':
-                return 'modal-sm';
-            case 'lg':
-                return 'modal-lg';
-            case 'xl':
-                return 'modal-xl';
-            case 'xxl':
-                return 'modal-xxl';
-            default:
-                return '';
-        }
+    private _size: ModalSize = '';
+    @Input()
+    get size() {
+        return this._size;
+    }
+    set size(v: ModalSize) {
+        this._size = v;
+    }
+
+    private _scrollable = false;
+    @Input()
+    get scrollable(): boolean {
+        return this._scrollable;
+    }
+    set scrollable(v: BooleanInput) {
+        this._scrollable = Convert.toBooleanProperty(v);
+    }
+
+    private _fullscreen = false;
+    @Input()
+    get fullscreen(): boolean {
+        return this._fullscreen;
+    }
+    set fullscreen(v: BooleanInput) {
+        this._fullscreen = Convert.toBooleanProperty(v);
+    }
+
+    private _showHeader = true;
+    @Input()
+    get showHeader(): boolean {
+        return this._showHeader;
+    }
+    set showHeader(v: BooleanInput) {
+        this._showHeader = Convert.toBooleanProperty(v);
     }
 
 

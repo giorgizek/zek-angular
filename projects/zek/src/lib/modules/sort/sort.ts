@@ -105,7 +105,7 @@ export class ZekSort implements AfterViewInit {
     }
 
 
-    private _asc: boolean = false;
+    private _asc = false;
     get asc() {
         return this._asc;
     }
