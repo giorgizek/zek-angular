@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BooleanInput } from '../../components';
 import { CoreUiComponent } from '../../components/core-ui.component';
 import { KeyPair, ModalSize, PagedList } from '../../models';
-import { Convert } from '../../utils';
+import { Convert, ObjectHelper } from '../../utils';
 declare let bootstrap: any;
 let uniqueId = 0;
 
@@ -191,7 +191,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
 
     delete() {
         if (!this.readOnly) {//!this.disabled && 
-            this.setNgModel(undefined);
+            this.setNgModel(null);
         }
     }
 
@@ -205,8 +205,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
 
 
     override onValueChanged() {
-        if (typeof this._value !== 'undefined' && this._value !== null &&
-            typeof this._type !== 'undefined' && this._type !== null) {
+        if (ObjectHelper.isDefined(this._value) && ObjectHelper.isDefined(this._type)) {
             this.bindText();
         } else {
             this.text = null;
