@@ -55,8 +55,8 @@ export class PagerHelper {
             isLastPage,
             firstItemOnPage,
             lastItemOnPage,
-            //startPage: startPage,
-            //endPage: endPage,
+            startPage: startPage,
+            endPage: endPage,
             pages
         } as Pager;
     }

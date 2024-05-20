@@ -1,6 +1,6 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BooleanInput } from '../../../components';
-import { Pager } from '../../../models';
+import { PagedList, Pager } from '../../../models';
 import { Convert } from '../../../utils';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     imports: [CommonModule, TranslateModule],
 })
 export class ZekPager {
-    @Input() pager = new Pager();
+    @Input() pager : Pager = new Pager();
 
     private _showPageSize = true;
     @Input()
