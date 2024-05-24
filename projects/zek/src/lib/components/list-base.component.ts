@@ -251,10 +251,10 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
 
     getSelectedIds() {
         return this.selectedIds;
-        // if (!this.pagedList || !this.pagedList.data) return [];
+        // if (!this.pagedList || !this.pagedList.items) return [];
 
         // let ids = [];
-        // for (const item of this.pagedList.data) {
+        // for (const item of this.pagedList.items) {
         //     if (!item.selected || !item.id) continue;
 
         //     ids.push(item.id);
@@ -283,7 +283,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
 
 
     override print(printType?: PrintType) {
-        if (!this.model || !this.model.data) return;
+        if (!this.model || !this.model.items) return;
 
         let ids = this.getSelectedIds();
         for (const id of ids) {

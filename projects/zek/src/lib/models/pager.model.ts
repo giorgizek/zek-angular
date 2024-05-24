@@ -14,7 +14,7 @@
 
 
 export class PagedList<T = any> {
-    data: T[] = [];
+    items: T[] = [];
 
     pager: Pager = new Pager();
 
