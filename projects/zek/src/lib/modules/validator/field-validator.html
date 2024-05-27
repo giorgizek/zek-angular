@@ -4,6 +4,8 @@
             <ng-container *ngIf="field.errors.required">{{ 'Validation.Required' | translate }}</ng-container>
             <ng-container *ngIf="field.errors.minlength">{{ 'Validation.MinLengthFormat' | translate:{ value: field.errors.minlength.requiredLength } }}</ng-container>
             <ng-container *ngIf="field.errors.maxlength">{{ 'Validation.MaxLengthFormat' | translate:{ value: field.errors.maxlength.requiredLength } }}</ng-container>
+            <ng-container *ngIf="field.errors.min">{{ 'Validation.Min' | translate:{ value: field.errors.min.min } }}</ng-container>
+            <ng-container *ngIf="field.errors.max">{{ 'Validation.Max' | translate:{ value: field.errors.min.max } }}</ng-container>
             <ng-container *ngIf="field.errors.email">{{ 'Validation.Pattern' | translate }}</ng-container>
             <ng-container *ngIf="field.errors.pattern">{{ 'Validation.Pattern' | translate }}</ng-container><!-- {{ field.errors.pattern.requiredPattern }} -->
             <ng-container *ngIf="field.errors.mismatch">{{ 'Validation.Mismatch' | translate }}</ng-container>

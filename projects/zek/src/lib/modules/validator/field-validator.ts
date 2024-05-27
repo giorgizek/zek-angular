@@ -11,10 +11,4 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ZekFieldValidator {
     @Input() field: any;
-    // @Input() field?: NgModel;
-
-    constructor() {
-        if (this.field)
-            console.log(this.field.errors);
-    }
 }
