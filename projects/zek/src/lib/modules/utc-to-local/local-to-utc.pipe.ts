@@ -1,13 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { DateHelper } from '../../utils';
 import { DatePipe } from '@angular/common';
 
 @Pipe({
-    standalone: true,
     name: 'localToUtc',
     pure: true
 })
-export class LocalToUtcPipe implements PipeTransform {
+export class ZekLocalToUtcPipe implements PipeTransform {
     constructor(private readonly _datePipe: DatePipe) {
     }
 
@@ -18,3 +17,9 @@ export class LocalToUtcPipe implements PipeTransform {
         return this._datePipe.transform(date, format);
     }
 }
+@NgModule({
+    declarations: [ZekLocalToUtcPipe],
+    exports: [ZekLocalToUtcPipe],
+    providers: [DatePipe]
+})
+export class ZekLocalToUtcModule { }
