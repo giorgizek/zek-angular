@@ -16,7 +16,6 @@ export class StorageHelper {
 
     static get(key: string) {
         let str = localStorage.getItem(key);
-    
         if (!str) { return null; }
     
         // assume it is an object that has been stringified
