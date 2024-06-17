@@ -27,12 +27,13 @@ export class UrlHelper {
         return url;
     }
 
-    static combine(...parts: string[]) {
+    static combine(...parts: any[]) {
         let result = '';
         for (const part of parts) {
-            if (!part) continue;
-
-            result = this.combineEnsureSingleSeparator(result, part, '/');
+            if (typeof part === 'undefined' && part === null)
+                continue;
+            const str = `${part}`;
+            result = this.combineEnsureSingleSeparator(result, str, '/');
         }
         return result;
     }

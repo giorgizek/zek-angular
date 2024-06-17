@@ -3,18 +3,20 @@
     <div *ngIf="showSave" class="btn-group me-2" role="group" aria-label="Save group">
         <button type="submit" class="btn btn-primary" [disabled]="readOnly"><i class="fa-solid fa-floppy-disk"></i> {{ 'Action.Save' | translate }}</button>
     </div>
-    <div  *ngIf="showCancel" class="btn-group me-2" role="group" aria-label="Cancel group">
+    <div *ngIf="showCancel" class="btn-group me-2" role="group" aria-label="Cancel group">
         <button type="button" class="btn btn-secondary" (click)="cancel()"><i class="fa-solid fa-ban"></i> {{ 'Action.Close' | translate }}</button>
     </div>
     <div *ngIf="showPrint" class="btn-group me-2" role="group" aria-label="Print group">
         <button type="button" class="btn btn-secondary" (click)="print(printType.Pdf)"><i class="fa-solid fa-print"></i> {{ 'Action.Print' | translate }}</button>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- dropdown-toggle-split -->
+                <span class="visually-hidden">Toggle Dropend</span>
             </button>
             <ul class="dropdown-menu">
                 <li><button type="button" class="dropdown-item" (click)="print(printType.Show)"><i class="fa-solid fa-print"></i> {{ 'Action.Print' | translate }}</button></li>
                 <li><button type="button" class="dropdown-item" (click)="print(printType.Pdf)"><i class="fa-solid fa-file-pdf"></i> {{ 'Action.Print' | translate }} PDF</button></li>
+                <ng-content select="[print]"></ng-content>
             </ul>
         </div>
     </div>
@@ -23,6 +25,7 @@
             <button id="btnGroupExport" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-download"></i> {{ 'Action.Export' | translate }}</button>
             <ul class="dropdown-menu" aria-labelledby="btnGroupExport">
                 <li><a class="dropdown-item" href="javascript:void(0)" (click)="exportExcel()"><i class="fa-solid fa-file-excel"></i> Excel</a></li>
+                <ng-content select="[export]"></ng-content>
             </ul>
         </div>
     </div>
