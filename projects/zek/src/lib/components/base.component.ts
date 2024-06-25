@@ -15,7 +15,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
 
     private _readOnly = false;
     @Input()
-    get readOnly() {
+    get readOnly(): boolean {
         return this._readOnly;
     }
     set readOnly(v: BooleanInput) {
@@ -30,8 +30,6 @@ export class BaseComponent<TModel = any> extends CoreComponent {
     }
 
     @Input() model?: TModel | null;
-
-
 
     protected getParam(name: string) {
         return this.route.snapshot.paramMap.get(name);
