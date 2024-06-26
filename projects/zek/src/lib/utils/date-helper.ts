@@ -56,7 +56,6 @@ export class DateHelper {
         let day = date.getDate();
 
         let str = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-        //str = year.toString() + "-" + (month + 1).toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
         return str;
     }
 
