@@ -55,7 +55,7 @@ export class ZekEditToolbar {
 
     private _readOnly = false;
     @Input()
-    get readOnly() {
+    get readOnly() : boolean {
         return this._readOnly;
     }
     set readOnly(v: BooleanInput) {

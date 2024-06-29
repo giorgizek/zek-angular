@@ -1,4 +1,4 @@
-﻿import { Component, Output, EventEmitter, Input } from '@angular/core';
+﻿import { Component, Output, EventEmitter, Input, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BooleanInput, CoreComponent } from '../../../components';
 import { BootstrapHelper, ComponentType, Convert, handler, RandomHelper } from '../../../utils';
@@ -13,7 +13,9 @@ let uniqueId = 0;
     templateUrl: './modal.component.html'
 })
 export class ZekModal extends CoreComponent {
-    constructor(private readonly translate: TranslateService) {
+    protected readonly translate = inject(TranslateService);
+
+    constructor() {
         super();
         this.elementId = RandomHelper.randomHex();
     }
@@ -121,16 +123,16 @@ export class ZekModal extends CoreComponent {
     @Input() componentType = ComponentType.Primary;
 
 
-    
-    private _size : ModalSize = '';
+
+    private _size: ModalSize = '';
     @Input()
     get size() {
         return this._size;
     }
-    set size(v : ModalSize) {
+    set size(v: ModalSize) {
         this._size = v;
     }
-    
+
     /**
      * @deprecated Please use size property
      */
@@ -279,70 +281,88 @@ export class ZekModal extends CoreComponent {
     }
 }
 
+/**
+ * @deprecated Please use ZekModal
+ */
 @Component({
     selector: 'zek-delete-modal',
     templateUrl: './modal.component.html'
 })
 export class ZekDeleteModal extends ZekModal {
-    constructor(translate: TranslateService) {
-        super(translate);
+    constructor() {
+        super();
         this.icon = 'fa-solid fa-trash';
-        translate.get('Action.Delete').subscribe((res: string) => this.title = res);
-        translate.get('Alert.DeleteQuestion').subscribe((res: string) => this.text = res);
+        this.translate.get('Action.Delete').subscribe((res: string) => this.title = res);
+        this.translate.get('Alert.DeleteQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Delete;
     }
 }
 
+/**
+ * @deprecated Please use ZekModal
+ */
 @Component({
     selector: 'zek-approve-modal',
     templateUrl: './modal.component.html'
 })
 export class ZekApproveModal extends ZekModal {
-    constructor(translate: TranslateService) {
-        super(translate);
+    constructor() {
+        super();
         this.icon = 'fa-solid fa-thumbs-up';
-        translate.get('Action.Approve').subscribe((res: string) => this.title = res);
-        translate.get('Alert.ApproveQuestion').subscribe((res: string) => this.text = res);
+        this.translate.get('Action.Approve').subscribe((res: string) => this.title = res);
+        this.translate.get('Alert.ApproveQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
     }
 }
+
+/**
+ * @deprecated Please use ZekModal
+ */
 @Component({
     selector: 'zek-submit-modal',
     templateUrl: './modal.component.html'
 })
 export class ZekSubmitModal extends ZekModal {
-    constructor(translate: TranslateService) {
-        super(translate);
+    constructor() {
+        super();
         this.icon = 'fa-solid fa-thumbs-up';
-        translate.get('Action.Submit').subscribe((res: string) => this.title = res);
-        translate.get('Alert.SubmitQuestion').subscribe((res: string) => this.text = res);
+        this.translate.get('Action.Submit').subscribe((res: string) => this.title = res);
+        this.translate.get('Alert.SubmitQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
     }
 }
+
+/**
+ * @deprecated Please use ZekModal
+ */
 @Component({
     selector: 'zek-disapprove-modal',
     templateUrl: './modal.component.html'
 })
 export class ZekDisapproveModal extends ZekModal {
-    constructor(translate: TranslateService) {
-        super(translate);
+    constructor() {
+        super();
         this.icon = 'fa-solid fa-thumbs-down';
-        translate.get('Action.Disapprove').subscribe((res: string) => this.title = res);
-        translate.get('Alert.DisapproveQuestion').subscribe((res: string) => this.text = res);
+        this.translate.get('Action.Disapprove').subscribe((res: string) => this.title = res);
+        this.translate.get('Alert.DisapproveQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Delete;
     }
 }
 
+
+/**
+ * @deprecated Please use ZekModal
+ */
 @Component({
     selector: 'zek-restore-modal',
     templateUrl: './modal.component.html'
 })
 export class ZekRestoreModal extends ZekModal {
-    constructor(translate: TranslateService) {
-        super(translate);
+    constructor() {
+        super();
         this.icon = 'fa-solid fa-rotate-right';
-        translate.get('Action.Restore').subscribe((res: string) => this.title = res);
-        translate.get('Action.RestoreQuestion').subscribe((res: string) => this.text = res);
+        this.translate.get('Action.Restore').subscribe((res: string) => this.title = res);
+        this.translate.get('Action.RestoreQuestion').subscribe((res: string) => this.text = res);
         this.componentType = ComponentType.Success;
     }
 }
