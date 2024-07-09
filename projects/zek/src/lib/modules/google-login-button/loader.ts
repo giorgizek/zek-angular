@@ -1,6 +1,6 @@
 import { HtmlHelper } from "../../utils";
 
-declare var google: any;
+declare let google: any;
 
 
 declare global {

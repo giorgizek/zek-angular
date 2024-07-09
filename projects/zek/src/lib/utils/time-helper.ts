@@ -22,31 +22,31 @@ export class TimeHelper {
 
 
     static toDate(time: string | undefined | null): Date {
-        let date = new Date(0);
+        const date = new Date(0);
 
-        let tmp = this.parseTime(time);
+        const tmp = this.parseTime(time);
         if (!tmp) return date;
 
-        let timeDate = new Date('1970-01-01T' + time + 'Z');
+        const timeDate = new Date('1970-01-01T' + time + 'Z');
         date.setTime(date.getTime() + timeDate.getTime());
         return date;
-    };
+    }
 
 
     static intersects(start1: string, end1: string, start2: string, end2: string): boolean {
-        let startDate1 = this.toDate(start1);
-        let endDate1 = this.toDate(end1);
-        let startDate2 = this.toDate(start2);
-        let endDate2 = this.toDate(end2);
+        const startDate1 = this.toDate(start1);
+        const endDate1 = this.toDate(end1);
+        const startDate2 = this.toDate(start2);
+        const endDate2 = this.toDate(end2);
 
         return OverlapHelper.intersects(startDate1, endDate1, startDate2, endDate2);
     }
 
     static overlaps(start1: string, end1: string, start2: string, end2: string): boolean {
-        let startDate1 = this.toDate(start1);
-        let endDate1 = this.toDate(end1);
-        let startDate2 = this.toDate(start2);
-        let endDate2 = this.toDate(end2);
+        const startDate1 = this.toDate(start1);
+        const endDate1 = this.toDate(end1);
+        const startDate2 = this.toDate(start2);
+        const endDate2 = this.toDate(end2);
 
         return OverlapHelper.overlaps(startDate1, endDate1, startDate2, endDate2);
     }

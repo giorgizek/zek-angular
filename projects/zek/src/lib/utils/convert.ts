@@ -22,7 +22,7 @@ export class Convert {
 
     static parseNumber(value: any) {
         if (typeof value === 'undefined' || value == null || (typeof value === 'string' && value.length === 0)) return null;
-        let n = Number(value);
+        const n = Number(value);
         return !isNaN(n) ? n : null;
     }
     static toNumber(value: any, defaultValue = 0) {

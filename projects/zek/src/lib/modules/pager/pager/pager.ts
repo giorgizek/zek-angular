@@ -1,6 +1,6 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BooleanInput } from '../../../components';
-import { PagedList, Pager } from '../../../models';
+import { Pager } from '../../../models';
 import { Convert } from '../../../utils';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';

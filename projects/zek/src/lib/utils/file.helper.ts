@@ -11,9 +11,9 @@ export class FileHelper {
         const altDirectorySeparatorChar = '/';
         const volumeSeparatorChar = ':';
 
-        let length = path.length;
+        const length = path.length;
         for (let i = length; --i >= 0;) {
-            let ch = path[i];
+            const ch = path[i];
             if (ch === '.') {
                 if (i !== length - 1)
                     return path.substring(i, length);
@@ -35,7 +35,7 @@ export class FileHelper {
         if (nav && nav.msSaveOrOpenBlob) {
             nav.msSaveOrOpenBlob(blob, fileName);
         } else {
-            let a = document.createElement('a');
+            const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = fileName;
             a.target = '_blank';

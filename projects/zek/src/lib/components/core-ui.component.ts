@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectorRef, Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from "@angular/core";
+import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
 import { Convert } from "../utils";
 import { CancelArgs } from "./args";
@@ -66,7 +66,7 @@ export class CoreUiComponent extends CoreComponent
     @Input()
     set value(newValue: any) {
         if (this._value !== newValue) {
-            let cancelEventArgs: CancelArgs = {
+            const cancelEventArgs: CancelArgs = {
                 oldValue: this._value,
                 newValue: newValue
             };
@@ -106,7 +106,7 @@ export class CoreUiComponent extends CoreComponent
     }
     @Input()
     set readonly(value: BooleanInput) {
-        let v = Convert.toBooleanProperty(value);
+        const v = Convert.toBooleanProperty(value);
         if (this._readonly !== v) {
             this._readonly = v;
             this.onReadOnlyChanged();
@@ -122,7 +122,7 @@ export class CoreUiComponent extends CoreComponent
     }
     @Input()
     set disabled(value: BooleanInput) {
-        let v = Convert.toBooleanProperty(value);
+        const v = Convert.toBooleanProperty(value);
         if (this._disabled !== v) {
             this._disabled = v;
             this.onDisabledChanged();
@@ -138,7 +138,7 @@ export class CoreUiComponent extends CoreComponent
     }
     @Input()
     set required(value: BooleanInput) {
-        let v = Convert.toBooleanProperty(value);
+        const v = Convert.toBooleanProperty(value);
         if (this._required !== v) {
             this._required = v;
             this.onRequiredChanged();

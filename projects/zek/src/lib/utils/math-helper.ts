@@ -1,7 +1,7 @@
 export class MathHelper {
     static round(value: number, decimals: number = 0): number {
         return Math.round(Number(value) * Math.pow(10, decimals)) / (Math.pow(10, decimals));
-    };
+    }
 
 
     static clamp(v: number, min: number, max: number) {
@@ -9,6 +9,6 @@ export class MathHelper {
     }
 
     static sum(...values: number[]) {
-        return  values.reduce((acc, cur) => acc + cur, 0);;
+        return  values.reduce((acc, cur) => acc + cur, 0);
     }
 }

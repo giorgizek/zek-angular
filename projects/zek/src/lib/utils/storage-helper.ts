@@ -15,12 +15,12 @@ export class StorageHelper {
 
 
     static get(key: string) {
-        let str = localStorage.getItem(key);
+        const str = localStorage.getItem(key);
         if (!str) { return null; }
     
         // assume it is an object that has been stringified
         if (str[0] === '{') {
-            let v = JSON.parse(str);
+            const v = JSON.parse(str);
             return v;
         }
     

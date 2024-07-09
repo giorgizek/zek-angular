@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, ContentChild, AfterContentInit, Input } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
 
 @Component({
     standalone: true,

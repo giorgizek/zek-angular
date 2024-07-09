@@ -3,7 +3,7 @@ export class TmpHelper {
 
     static get(key: string, remove = true): any {
         if (!key) return;
-        let v = this._obj[key];
+        const v = this._obj[key];
         if (remove)
             this.remove(key);
         return v;

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnDestroy, forwardRef, HostListener, OnChanges, SimpleChanges, Inject } from '@angular/core'
+import { Directive, ElementRef, OnDestroy, forwardRef, Inject } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DATE_FORMAT, LANGUAGE } from '../../tokens';
 import { DateHelper } from '../../utils';
@@ -71,11 +71,11 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
         });
 
         setTimeout(() => {
-            let min = this.el.nativeElement.getAttribute('min');
-            let max = this.el.nativeElement.getAttribute('max');
+            const min = this.el.nativeElement.getAttribute('min');
+            const max = this.el.nativeElement.getAttribute('max');
 
-            let minDate = min ? DateHelper.toDate(min) : null;
-            let maxDate = max ? DateHelper.toDate(max) : null;
+            const minDate = min ? DateHelper.toDate(min) : null;
+            const maxDate = max ? DateHelper.toDate(max) : null;
             this.datepicker.setOptions({
                 minDate: minDate,//String|Date|Number
                 maxDate: maxDate,//String|Date|Number
@@ -170,7 +170,7 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
 
     //write from model to el.nativeElement
     writeValue(value: any) {
-        let date = DateHelper.parseDate(value);
+        const date = DateHelper.parseDate(value);
         this.oldValue = date;
 
         if (date) {

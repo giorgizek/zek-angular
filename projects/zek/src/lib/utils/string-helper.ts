@@ -34,7 +34,7 @@ export class StringHelper {
         if (!val || !ch)
             return val;
 
-        var start = 0,
+        let start = 0,
             end = val.length;
 
         while (start < end && val[start] === ch)
@@ -49,8 +49,8 @@ export class StringHelper {
         if (!val || !ch)
             return val;
 
-        var start = 0,
-            end = val.length;
+        let start = 0
+        const end = val.length;
 
         while (start < end && val[start] === ch)
             ++start;
@@ -61,7 +61,7 @@ export class StringHelper {
         if (!val || !ch)
             return val;
 
-        var start = 0,
+        let start = 0,
             end = val.length;
 
         while (end > start && val[end - 1] === ch)
@@ -80,7 +80,7 @@ export class StringHelper {
         if (!val || !chars)
             return val;
 
-        var start = 0,
+        let start = 0,
             end = val.length;
 
         while (start < end && chars.indexOf(val[start]) >= 0)

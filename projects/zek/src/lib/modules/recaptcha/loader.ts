@@ -22,8 +22,8 @@ function loadScript(
     };
 
     const baseUrl = url || "https://www.google.com/recaptcha/api.js";
-    let params = urlParams || '';
-    let src = `${baseUrl}?render=${siteKey}&onload=recaptchaloaded${params}`;
+    const params = urlParams || '';
+    const src = `${baseUrl}?render=${siteKey}&onload=recaptchaloaded${params}`;
 
     HtmlHelper.loadScript(src, nonce, true, true);
 }

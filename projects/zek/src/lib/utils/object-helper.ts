@@ -24,8 +24,8 @@ export class ObjectHelper {
             return true;
         // if (typeof obj === 'undefined' || obj === null)
         //     return true;
-        for (let prop in obj) {
-            let v = obj[prop];
+        for (const prop in obj) {
+            const v = obj[prop];
             if (!this.isEmptyValue(v))
                 return false;
             // if (typeof (obj[prop]) !== undefined && obj[prop] !== null && obj[prop] !== '') {
@@ -42,7 +42,7 @@ export class ObjectHelper {
      */
     static deleteNullKeys(val: any) {
         this.deleteNullFields(val);
-    };
+    }
 
     static deleteNullFields<T extends {}>(val: T) {
         if (!val) return;
@@ -53,7 +53,7 @@ export class ObjectHelper {
             }
         }
         return val
-    };
+    }
 
     static assignFields<T extends {}, U extends {}>(target: T, source: U): T {
         let t: any = target;

@@ -146,12 +146,12 @@ export class ZekSelectMultiple extends CoreUiComponent {
                 let notUnique: any[] = [];
                 if (this.valueField) {
                     for (const currentValue of value) {
-                        let items = ArrayHelper.filterByKey(currentValue, this.valueField, this._data);
+                        const items = ArrayHelper.filterByKey(currentValue, this.valueField, this._data);
                         notUnique = notUnique.concat(items);
                     }
                 } else {
                     for (const currentValue of value) {
-                        let items = this._data.filter(x => x === currentValue);
+                        const items = this._data.filter(x => x === currentValue);
                         notUnique = notUnique.concat(items);
                     }
                 }
@@ -183,7 +183,7 @@ export class ZekSelectMultiple extends CoreUiComponent {
                 v.checked = true;
 
                 if (this.multiple) {
-                    let tmp = [];
+                    const tmp = [];
                     for (const item of this.normalized) {
                         if (item.checked) {
                             tmp.push(item.key);
@@ -212,7 +212,7 @@ export class ZekSelectMultiple extends CoreUiComponent {
 
 
     private _initText() {
-        let field = this.checkedTextField || this.textField || '';
+        const field = this.checkedTextField || this.textField || '';
         if (field) {
             this._text = this._selected.filter(x => x !== undefined && x !== null).map(x => x[field]).join(', ');
         } else {

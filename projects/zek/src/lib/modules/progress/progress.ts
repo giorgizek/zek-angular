@@ -24,7 +24,7 @@ export class ZekProgress {
         return this._value;
     }
     set value(v: NumberInput) {
-        let tmp = clamp(Convert.toNumber(v) || 0);
+        const tmp = clamp(Convert.toNumber(v) || 0);
         if (this._value !== tmp) {
             this._value = tmp;
         }
@@ -90,7 +90,7 @@ export class ZekProgress {
         return this._height;
     }
     set height(v: NumberInput) {
-        let tmp = Convert.toNumber(v) || 0;
+        const tmp = Convert.toNumber(v) || 0;
         this._height = tmp > 0 ? tmp : null;
     }
     private _height: number | null = null;

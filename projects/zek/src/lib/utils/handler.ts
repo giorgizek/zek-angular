@@ -1,7 +1,7 @@
 
-export var handler = (function () {
-    var i = 1;
-    var listeners: any = {};
+export const handler = (function () {
+    let i = 1;
+    const listeners: any = {};
 
     return {
         addListener: function (element: HTMLElement | Window, event: string, handler: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) {
@@ -16,7 +16,7 @@ export var handler = (function () {
         },
         removeListener: function (id: number) {
             if (id in listeners) {
-                var h = listeners[id];
+                const h = listeners[id];
                 
                 h.element.removeEventListener(h.event, h.handler, h.options);
                 delete listeners[id];

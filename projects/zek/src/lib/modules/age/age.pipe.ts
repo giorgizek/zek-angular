@@ -11,7 +11,7 @@ export class AgePipe implements PipeTransform {
         
         const date = DateHelper.toDate(value);
 
-        let timeDiff = (now ? DateHelper.toDate(now).getTime() : Date.now()) - date.getTime();
+        const timeDiff = (now ? DateHelper.toDate(now).getTime() : Date.now()) - date.getTime();
         return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
     }
 }

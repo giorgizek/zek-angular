@@ -4,11 +4,11 @@ export class DateHelper {
 
     static minDate() {
         return new Date(0);
-    };
+    }
 
     static equals(value1?: Date | null, value2?: Date | null) {
-        let val1 = (value1 === undefined || value1 === null) ? null : value1;
-        let val2 = (value2 === undefined || value2 === null) ? null : value2;
+        const val1 = (value1 === undefined || value1 === null) ? null : value1;
+        const val2 = (value2 === undefined || value2 === null) ? null : value2;
 
 
         if (val1 === val2) {
@@ -23,8 +23,8 @@ export class DateHelper {
     }
 
     static getDates(start: Date, end: Date) {
-        var dates = new Array<Date>();
-        var date = new Date(start.valueOf());
+        const dates = new Array<Date>();
+        let date = new Date(start.valueOf());
         while (date <= end) {
             dates.push(new Date(date));
             date = this.addDays(date, 1);
@@ -33,10 +33,10 @@ export class DateHelper {
     }
 
     static dateOnly(value: Date) {
-        let year = value.getFullYear();
-        let month = value.getMonth();
-        let day = value.getDate();
-        let date = new Date(Date.UTC(year, month, day));
+        const year = value.getFullYear();
+        const month = value.getMonth();
+        const day = value.getDate();
+        const date = new Date(Date.UTC(year, month, day));
 
         return date;
     }
@@ -45,17 +45,17 @@ export class DateHelper {
     }
 
     static toISODateString(value: Date | string) {
-        let date = this.parseDate(value);
+        const date = this.parseDate(value);
 
         if (!date)
             return null;
 
-        let year = date.getFullYear();
+        const year = date.getFullYear();
         // Add +1 to month since 0 is January
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
 
-        let str = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        const str = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
         return str;
     }
 
@@ -69,39 +69,39 @@ export class DateHelper {
     }
 
     static addTime(value: Date, time: string | undefined | null) {
-        let tmp = TimeHelper.parseTime(time);
+        const tmp = TimeHelper.parseTime(time);
         if (!tmp) return value;
 
-        let timeDate = new Date('1970-01-01T' + time + 'Z');
-        let date = value;
+        const timeDate = new Date('1970-01-01T' + time + 'Z');
+        const date = value;
         date.setTime(date.getTime() + timeDate.getTime());
         return date;
-    };
+    }
     static addYears(v: Date, years: number): Date {
         if (!years) return v;
 
-        let date = v;
+        const date = v;
         date.setFullYear(v.getFullYear() + years);
         return date;
     }
     static addMonths(v: Date, months: number) {
         if (!months) return v;
 
-        let date = v;
+        const date = v;
         date.setMonth(date.getMonth() + months);
         return date;
-    };
+    }
     static addDays(v: Date, days: number) {
         if (!days) return v;
 
-        let date = v;
+        const date = v;
         date.setDate(date.getDate() + days);
         return date;
-    };
+    }
     static addHours(v: Date, hours: number) {
         if (!hours) return v;
 
-        let date = new Date(v);
+        const date = new Date(v);
         //todo need to check if this line needs --> date = new Date(date.getTime());
         date.setHours(date.getHours() + hours);
         return date;
@@ -109,7 +109,7 @@ export class DateHelper {
     static addMinutes(v: Date, minutes: number) {
         if (!minutes) return v;
 
-        let date = new Date(v);
+        const date = new Date(v);
         //todo need to check if this line needs --> date = new Date(date.getTime());
         date.setMinutes(date.getMinutes() + minutes);
         return date;
@@ -117,27 +117,27 @@ export class DateHelper {
     static addSeconds(v: Date, seconds: number) {
         if (!seconds) return v;
 
-        let date = v;
+        const date = v;
         date.setSeconds(date.getSeconds() + seconds);
 
         return date;
-    };
+    }
     static isToday(date: Date) {
-        let today = new Date();
+        const today = new Date();
         return this.isSameDate(date, today);
-    };
+    }
     static clone(date: Date) {
         return new Date(+date);
-    };
+    }
     static isAnotherMonth(a: Date, b: Date) {
         return b && a.getMonth() !== b.getMonth();
-    };
+    }
     static isWeekend(v: Date,): boolean {
         return v.getDay() === 0 || v.getDay() === 6;
-    };
+    }
     static isSameDate(a: Date, b: Date) {
         return b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-    };
+    }
 
 
     static getAge(value?: Date | string | null, now?: Date | null) {
@@ -145,47 +145,47 @@ export class DateHelper {
 
         const date = this.toDate(value);
 
-        let nowTime = now ? now.getTime() : Date.now();
-        let timeDiff = nowTime - date.getTime();
+        const nowTime = now ? now.getTime() : Date.now();
+        const timeDiff = nowTime - date.getTime();
 
         return Math.floor((timeDiff / 86400000) / 365.25);//86400000 = (1000 * 60 * 60 * 24) = 1000 millisecond * 60second  * 60minute * 24hour
-    };
+    }
     static subtractMonths(endDate: Date, starDate: Date) {
-        let start = starDate <= endDate ? starDate : endDate;
-        let end = starDate <= endDate ? endDate : starDate;
-        let plus = starDate <= endDate ? 1 : -1;
+        const start = starDate <= endDate ? starDate : endDate;
+        const end = starDate <= endDate ? endDate : starDate;
+        const plus = starDate <= endDate ? 1 : -1;
 
         let months = (end.getFullYear() - start.getFullYear()) * 12;
         months -= start.getMonth();
         months += end.getMonth();
         return months * plus;
-    };
+    }
 
     static subtractDays(value: Date, date: Date) {
         if (!date)
             return null;
 
         date = this.toDate(date);
-        let timeDiff = date.getTime() - value.getTime();
+        const timeDiff = date.getTime() - value.getTime();
         return Math.floor(timeDiff / 86400000);//86400000 = (1000 * 60 * 60 * 24) = 1000 millisecond * 60second  * 60minute * 24hour
-    };
+    }
     static subtractHours(value: Date, date?: Date | null) {
         if (!date)
             return null;
 
         date = this.toDate(date);
-        let timeDiff = date.getTime() - value.getTime();
+        const timeDiff = date.getTime() - value.getTime();
         return Math.floor((timeDiff % 86400000) / 3600000);
-    };
+    }
     static subtractMinutes(value: Date, date?: Date | null) {
         if (!date)
             return null;
 
         date = this.toDate(date);
-        let timeDiff = date.getTime() - value.getTime();
+        const timeDiff = date.getTime() - value.getTime();
         //
         return Math.floor(((timeDiff % 86400000) % 3600000) / 60000);
-    };
+    }
 
 
 

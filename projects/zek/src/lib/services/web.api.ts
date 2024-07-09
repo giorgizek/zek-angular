@@ -61,7 +61,7 @@ export class WebApiClient {
             if (field === undefined || field === null || (typeof field === 'string' && field.length === 0))
                 continue;
 
-            let value = field;
+            const value = field;
             // if (typeof field === 'string' && field.length > 0) {
             //     value = field.replace(/\+/gi, '%2B');
             // }

@@ -21,10 +21,10 @@ export class ErrorHelper {
             const result: KeyPair<string | null | undefined, string | null | undefined>[] = [];
             const properties = Object.keys(errors);
 
-            for (let property of properties) {
+            for (const property of properties) {
                 const messages = errors[property];
                 if (messages instanceof Array) {
-                    for (let message of messages) {
+                    for (const message of messages) {
                         result.push({ key: property, value: message });
                     }
                 }

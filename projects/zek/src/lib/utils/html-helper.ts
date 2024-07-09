@@ -14,7 +14,7 @@ export class HtmlHelper {
 
 
     static addInput(type: string, name: string, id: string = name, force = false) {
-        let node = document.createElement('input');
+        const node = document.createElement('input');
         node.type = type;
         node.name = name;
         node.id = id;
@@ -45,13 +45,13 @@ export class HtmlHelper {
         //2022-02-24 document.getElementsByTagName('head')[0].appendChild(script);
     }
     static loadScripts(...scripts: string[]) {
-        var promises: any[] = [];
+        const promises: any[] = [];
         scripts.forEach((script) => promises.push(this.internalLoadScript(script)));
         return Promise.all(promises);
     }
     private static internalLoadScript(src: string) {
         return new Promise((resolve, reject) => {
-            let script = document.createElement('script') as any;
+            const script = document.createElement('script') as any;
             script.src = src;
             script.type = 'text/javascript';
             if (script.readyState) {  //IE

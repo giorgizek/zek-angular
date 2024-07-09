@@ -6,7 +6,7 @@ import { DateHelper } from '../../utils';
     name: 'dateAgo',
     pure: true
 })
-export class DateAgoPipe implements PipeTransform {
+export class ZekDateAgoPipe implements PipeTransform {
 
     transform(value: any, args?: any): string | Date | null {
         if (value === undefined || value === null || value === '' || value !== value) return null;

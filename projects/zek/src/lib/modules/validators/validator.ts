@@ -98,8 +98,8 @@ export function rangeValidator(range: Array<number>): ValidatorFn {
             return null;  // don't validate empty values to allow optional controls
         }
         const value = parseFloat(control.value);
-        let max = range[0];
-        let min = range[1];
+        const max = range[0];
+        const min = range[1];
         if (!isNaN(value) && (value < min || value > max)) {
             return { 'range': { 'min': min, 'max': max, 'actual': control.value } };
         }
@@ -118,7 +118,7 @@ export function matchValidator(input: string): ValidatorFn {
         const targetCtrl = control.get(input);
         let targetValue: any;
         if (!targetCtrl) {
-            let el = document.getElementById(input) as any;
+            const el = document.getElementById(input) as any;
             if (el) {
                 targetValue = el.value;
             } else {

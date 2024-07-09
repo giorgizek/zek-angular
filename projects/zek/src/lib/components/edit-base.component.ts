@@ -76,7 +76,7 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
     async approve() {
         if (this.id) {
             this.approveModel.ids = [this.id];
-            let approved = await this.internalApprove(this.approveModel);
+            const approved = await this.internalApprove(this.approveModel);
             if (approved) {
                 this.load();
             }
@@ -98,7 +98,7 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
     async disapprove() {
         if (this.id) {
             this.approveModel.ids = [this.id];
-            let disapproved = await this.internalDisapprove(this.approveModel);
+            const disapproved = await this.internalDisapprove(this.approveModel);
             if (disapproved) {
                 this.load();
             }
@@ -121,7 +121,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
 
     protected override async internalSave(navigateToReturnUrl?: boolean | null): Promise<boolean> {
         this.alert.clear();
-        let data = await firstValueFrom(this.service.save(this.model));
+        const data = await firstValueFrom(this.service.save(this.model));
         let success = false;
         if (typeof data === 'number' && data > 0) {
             success = true;
@@ -131,7 +131,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
         }
 
         if (success) {
-            let message = await firstValueFrom(this.translate.get('Alert.SaveSuccess'));
+            const message = await firstValueFrom(this.translate.get('Alert.SaveSuccess'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');
 
             if (navigateToReturnUrl === true) {
@@ -145,46 +145,46 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
             //   this.router.navigate([this.router.url.substring(0, this.router.url.length - 6), id]);
             // }
         } else {
-            let message = await firstValueFrom(this.translate.get('Alert.SaveError'));
+            const message = await firstValueFrom(this.translate.get('Alert.SaveError'));
             this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }
 
     protected override async internalApprove(model?: any): Promise<boolean> {
-        let data = await firstValueFrom(this.service.approve(model));
+        const data = await firstValueFrom(this.service.approve(model));
         if (data && data.length > 0) {
-            let message = await firstValueFrom(this.translate.get('Alert.Approved'));
+            const message = await firstValueFrom(this.translate.get('Alert.Approved'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');
             return true;
         } else {
-            let message = await firstValueFrom(this.translate.get('Alert.ApproveError'));
+            const message = await firstValueFrom(this.translate.get('Alert.ApproveError'));
             this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }
 
     protected override async internalDisapprove(model?: any): Promise<boolean> {
-        let data = await firstValueFrom(this.service.disapprove(model));
+        const data = await firstValueFrom(this.service.disapprove(model));
         if (data && data.length > 0) {
-            let message = await firstValueFrom(this.translate.get('Alert.Disapproved'));
+            const message = await firstValueFrom(this.translate.get('Alert.Disapproved'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');
             return true;
         } else {
-            let message = await firstValueFrom(this.translate.get('Alert.DisapproveError'));
+            const message = await firstValueFrom(this.translate.get('Alert.DisapproveError'));
             this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
     }
 
     protected async internalSubmit(model?: any): Promise<boolean> {
-        let data = await firstValueFrom(this.service.approve(model));
+        const data = await firstValueFrom(this.service.approve(model));
         if (data && data.length > 0) {
-            let message = await firstValueFrom(this.translate.get('Alert.Submitted'));
+            const message = await firstValueFrom(this.translate.get('Alert.Submitted'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');
             return true;
         } else {
-            let message = await firstValueFrom(this.translate.get('Alert.SubmitError'));
+            const message = await firstValueFrom(this.translate.get('Alert.SubmitError'));
             this.alert.error(message, null, 'fa-solid fa-floppy-disk');
             return false;
         }
@@ -208,9 +208,9 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
     }
 
     async restore() {
-        let data = await firstValueFrom(this.service.restore(this.id))
+        const data = await firstValueFrom(this.service.restore(this.id))
         if (data?.success) {
-            let message = await firstValueFrom(this.translate.get('Alert.Restored'));
+            const message = await firstValueFrom(this.translate.get('Alert.Restored'));
             this.alert.success(message);
             this.load();
         }

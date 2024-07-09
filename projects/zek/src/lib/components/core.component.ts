@@ -1,7 +1,4 @@
 import { OnInit, Directive, OnDestroy } from '@angular/core';
-import { Convert } from '../utils';
-
-
 
 @Directive()
 export class CoreComponent implements OnInit, OnDestroy {

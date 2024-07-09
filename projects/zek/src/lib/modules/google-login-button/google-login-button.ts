@@ -128,7 +128,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
         },);
     }
     renderButton() {
-        let options: any = { theme: "outline", size: "large" };
+        const options: any = { theme: "outline", size: "large" };
         if (this._width)
             options.width = this._width;
         if (this._text)

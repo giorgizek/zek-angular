@@ -1,5 +1,4 @@
 import { AlertType } from '../models/alert-type';
-import { StringHelper } from './string-helper';
 
 export enum ComponentType {
     Primary = 1,

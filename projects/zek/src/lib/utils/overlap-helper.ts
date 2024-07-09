@@ -39,8 +39,8 @@ export class OverlapHelper {
             }
             return end2 == end1 ? PeriodRelation.EnclosingEndTouching : PeriodRelation.Enclosing;
         }
-        let periodContainsMyStart = this.hasInside(start2, end2, start1);
-        let periodContainsMyEnd = this.hasInside(start2, end2, end1);
+        const periodContainsMyStart = this.hasInside(start2, end2, start1);
+        const periodContainsMyEnd = this.hasInside(start2, end2, end1);
         if (periodContainsMyStart && periodContainsMyEnd) {
             if (start2 == start1) {
                 return PeriodRelation.InsideStartTouching;
@@ -70,7 +70,7 @@ export class OverlapHelper {
     }
 
     static overlaps(start1: Date, end1: Date, start2: Date, end2: Date): boolean {
-        var relation = this.getRelation(start1, end1, start2, end2);
+        const relation = this.getRelation(start1, end1, start2, end2);
         return relation != PeriodRelation.After &&
             relation != PeriodRelation.StartTouching &&
             relation != PeriodRelation.EndTouching &&

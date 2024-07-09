@@ -12,7 +12,7 @@ export class AuthService {
 
     get user(): LoginUser | null {
         if (!this._isInitialized) {
-            let user = StorageHelper.get('login');
+            const user = StorageHelper.get('login');
             if (user) {
                 user.id = ObjectHelper.isDefined(user.id) ? Convert.parseNumber(user.id) : user.id;
                 user.expired = ObjectHelper.isDefined(user.expired) ? DateHelper.parseDate(user.expired) : user.expired;
@@ -34,7 +34,7 @@ export class AuthService {
     private _starRefreshTokenTimer() {
         this._stopRefreshTokenTimer();
 
-        let user = this._user;
+        const user = this._user;
         if (user && user.refreshTokenTime) {
             let timeout = user.refreshTokenTime.getTime() - Date.now();// - (60 * 1000);
 
@@ -65,7 +65,7 @@ export class AuthService {
 
 
     isAuthenticated(): boolean {
-        let expired = this.getExpired() || new Date(0);// if getExpired is null return min JS date
+        const expired = this.getExpired() || new Date(0);// if getExpired is null return min JS date
 
         const newValue = new Date() < expired;
         if (this._oldValue !== newValue) {
@@ -144,7 +144,7 @@ export class AuthService {
 
 
     protected getExpired(): Date | null | undefined {
-        let user = this.user;
+        const user = this.user;
         if (user) {
             return user.expired;
         }
@@ -153,7 +153,7 @@ export class AuthService {
     }
 
     protected getRefreshTokenExpired(): Date | null | undefined {
-        let user = this.user;
+        const user = this.user;
         if (user) {
             return user.refreshTokenTime;
         }
@@ -215,9 +215,9 @@ export class AuthService {
         if (value) {
             for (let i = 0; i < permissions.length; i++) {
                 const p = permissions[i];
-                let found = userPermissions[p];
+                const found = userPermissions[p];
                 if (found) {
-                    let hasPermission = BitwiseHelper.hasFlag(found, value);
+                    const hasPermission = BitwiseHelper.hasFlag(found, value);
                     if (hasPermission)
                         return true;
                 }
@@ -225,7 +225,7 @@ export class AuthService {
         } else {
             for (let i = 0; i < permissions.length; i++) {
                 const p = permissions[i];
-                let found = userPermissions[p];
+                const found = userPermissions[p];
                 if (found)
                     return true;
             }
@@ -242,7 +242,7 @@ export class AuthService {
 
         const permission = data.permission;
 
-        let hasPermission = this.hasPermission(permission);
+        const hasPermission = this.hasPermission(permission);
 
         // return isInRole && hasPermission;
         return hasPermission;

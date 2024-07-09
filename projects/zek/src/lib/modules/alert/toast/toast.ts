@@ -24,7 +24,7 @@ export class ZekToast implements OnInit, OnDestroy {
         return this._delay;
     }
     set delay(v: NumberInput) {
-        let tmp = clamp(Convert.toNumber(v) || 0);
+        const tmp = clamp(Convert.toNumber(v) || 0);
         if (this._delay !== tmp) {
             this._delay = tmp;
         }
@@ -106,7 +106,7 @@ export class ZekToast implements OnInit, OnDestroy {
             toast.icon = BootstrapHelper.cssAlertIcon(toast.type);
         }
 
-        var v = toast as any;
+        let v = toast as any;
         switch (toast.type) {
             case 'primary':
                 v.css = 'bg-primary text-white';

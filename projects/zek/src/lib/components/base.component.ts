@@ -1,4 +1,4 @@
-import { Input, Directive, Type, inject } from '@angular/core';
+import { Input, Directive, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PrintType } from '../models/print.model';

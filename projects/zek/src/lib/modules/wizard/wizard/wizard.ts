@@ -42,7 +42,7 @@ export class ZekWizard {
         if (this._step !== v) {
             this._step = v;
 
-            let found = this.stepsArray.find(x => x.step === this._step);
+            const found = this.stepsArray.find(x => x.step === this._step);
             if (found) {
                 this.progress = found.progress;
             }

@@ -21,7 +21,7 @@ export class ZekFileViewer<TModal extends ZekModal = ZekModal> extends CoreCompo
 
     show(url: string, extension?: string | null) {
 
-        let ext = extension || FileHelper.getExtension(url);
+        const ext = extension || FileHelper.getExtension(url);
         switch (ext) {
             case '.docx':
             case '.doc':

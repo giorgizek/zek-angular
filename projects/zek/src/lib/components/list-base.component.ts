@@ -1,5 +1,4 @@
-﻿import { Router, ActivatedRoute } from '@angular/router';
-import { ViewChild, Directive, Input, inject } from '@angular/core';
+﻿import { ViewChild, Directive, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { IService } from '../services';
@@ -76,7 +75,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     protected initDefaultFilter() {
     }
     private initStoredFilter() {
-        let filterParam = this.getQueryParam('filter') || this.getParam('filter');
+        const filterParam = this.getQueryParam('filter') || this.getParam('filter');
 
         if (filterParam) {
             const tmp = StorageHelper.get('filter');
@@ -142,18 +141,18 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     }
     async delete(id: number) {
         this.alert.clear();
-        let data = await firstValueFrom(this.service.delete(id));
+        const data = await firstValueFrom(this.service.delete(id));
         if (data?.success) {
-            let message = await firstValueFrom(this.translate.get('Alert.Deleted'));
+            const message = await firstValueFrom(this.translate.get('Alert.Deleted'));
             this.alert.error(message, null, 'fa-solid fa-trash')
             this.refresh();
         }
     }
     async delete2(id: number, id2: number) {
         this.alert.clear();
-        let data = await firstValueFrom(this.service.delete2(id, id2))
+        const data = await firstValueFrom(this.service.delete2(id, id2))
         if (data?.success) {
-            let message = await firstValueFrom(this.translate.get('Alert.Deleted'));
+            const message = await firstValueFrom(this.translate.get('Alert.Deleted'));
             this.alert.error(message, null, 'fa-solid fa-trash')
             this.refresh();
         }
@@ -176,7 +175,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     }
     select(item: any) {
         item.selected = !item.selected;
-        let id = item.id;
+        const id = item.id;
         if (id) {
             if (item.selected) {
                 this.selectedIds.push(id);
@@ -191,12 +190,12 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     showApproveModal(id: number) {
         if (!id || !this.approveModal) return;
 
-        let tmp = { ids: [id] };
+        const tmp = { ids: [id] };
         this.approveModel = {};
         this.approveModal.show(tmp);
     }
     showApproveSelectedModal() {
-        let tmp = { ids: this.getSelectedIds() };
+        const tmp = { ids: this.getSelectedIds() };
         if (!tmp.ids || tmp.ids.length === 0 || !this.approveModal) return;
 
         this.approveModel = {};
@@ -206,11 +205,11 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         if (!m) return;
 
         this.alert.clear();
-        let data = await firstValueFrom(this.service.approve(m));
+        const data = await firstValueFrom(this.service.approve(m));
         if (!data || data.length === 0)
             return;
 
-        let message = await firstValueFrom(this.translate.get(this.approvedMesage));
+        const message = await firstValueFrom(this.translate.get(this.approvedMesage));
         this.alert.success(message, null, 'fa-solid fa-thumbs-up')
         this.refresh();
     }
@@ -219,12 +218,12 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     showDisapproveModal(id: number) {
         if (!id || !this.disapproveModal) return;
 
-        let tmp = { ids: [id] };
+        const tmp = { ids: [id] };
         this.approveModel = {};
         this.disapproveModal.show(tmp);
     }
     showDisapproveSelectedModal() {
-        let tmp = { ids: this.getSelectedIds() };
+        const tmp = { ids: this.getSelectedIds() };
         if (!tmp.ids || tmp.ids.length === 0 || !this.disapproveModal) return;
 
         this.approveModel = {};
@@ -240,11 +239,11 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         }
 
         this.alert.clear();
-        let data = await firstValueFrom(this.service.disapprove(m));
+        const data = await firstValueFrom(this.service.disapprove(m));
         if (!data || data.length === 0)
             return;
 
-        let message = await firstValueFrom(this.translate.get(this.disapprovedMesage));
+        const message = await firstValueFrom(this.translate.get(this.disapprovedMesage));
         this.alert.success(message, null, 'fa-solid fa-thumbs-down')
         this.refresh();
     }
@@ -265,12 +264,12 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     showSum() { }
     async sum() {
         this.sumModel = null;
-        let data = await firstValueFrom(this.service.sum(this.internalFilter));
+        const data = await firstValueFrom(this.service.sum(this.internalFilter));
         if (data) {
             this.sumModel = data;
             this.showSum();
         } else {
-            let message = await firstValueFrom(this.translate.get('Alert.SumError'));
+            const message = await firstValueFrom(this.translate.get('Alert.SumError'));
             this.alert.error(message);
         }
     }
@@ -285,7 +284,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     override print(printType?: PrintType) {
         if (!this.model || !this.model.items) return;
 
-        let ids = this.getSelectedIds();
+        const ids = this.getSelectedIds();
         for (const id of ids) {
             super.print(id, printType);
         }

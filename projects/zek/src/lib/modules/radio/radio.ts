@@ -73,7 +73,7 @@ export class ZekRadio extends CoreUiComponent
     }
     @Input()
     set inline(v: BooleanInput) {
-        let newValue = Convert.toBooleanProperty(v);
+        const newValue = Convert.toBooleanProperty(v);
         if (this._inline !== newValue) {
             this._inline = newValue;
             this.onInlineChanged();

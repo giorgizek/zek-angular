@@ -11,7 +11,7 @@ export class CssHelper {
         }
 
 
-        let arr = ArrayHelper.distinct(this.parseClassNames(clazz).concat(this.parseClassNames(addClasses)));
+        const arr = ArrayHelper.distinct(this.parseClassNames(clazz).concat(this.parseClassNames(addClasses)));
 
         return Array.isArray(clazz) ? arr as T : arr.join(' ') as T;
     }
@@ -26,12 +26,12 @@ export class CssHelper {
             return clazz;
         }
 
-        let arrClasses = this.parseClassNames(clazz);
-        let arrRemove = this.parseClassNames(removeClasses);
+        const arrClasses = this.parseClassNames(clazz);
+        const arrRemove = this.parseClassNames(removeClasses);
 
-        var arr: any[] = [];
+        const arr: any[] = [];
         for (var i = 0; i < arrClasses.length; i++) {
-            let val = arrClasses[i];
+            const val = arrClasses[i];
             if (!ArrayHelper.contains(arrRemove, val)) {
                 arr.push(val);
             }

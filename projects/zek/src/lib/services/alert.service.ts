@@ -42,12 +42,12 @@ export class AlertService {
         });
     }
 
-    add(alertType: AlertType, message: String, keepAfterRouteChange = false) {
-        let messages = [];
+    add(alertType: AlertType, message: string, keepAfterRouteChange = false) {
+        const messages = [];
         messages.push(message);
         this.addRange(alertType, messages, keepAfterRouteChange);
     }
-    addRange(alertType: AlertType, messages: String[], keepAfterRouteChange = false) {
+    addRange(alertType: AlertType, messages: string[], keepAfterRouteChange = false) {
         this.keepAfterRouteChange = keepAfterRouteChange;
         this.alertSubject.next(<Alert>{ type: alertType, messages: messages });
     }

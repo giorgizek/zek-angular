@@ -116,7 +116,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
     private _modal: any;
     get modal(): any {
         if (!this._modal) {
-            let modalEl = document.getElementById(this.modalId);
+            const modalEl = document.getElementById(this.modalId);
             this._modal = new bootstrap.Modal(modalEl, { backdrop: false });
         }
         return this._modal;

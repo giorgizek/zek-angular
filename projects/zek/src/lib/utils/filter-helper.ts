@@ -5,7 +5,7 @@ export class FilterHelper {
         if (typeof obj === 'undefined' || obj === null)
             return true;
 
-        let tmp = Object.assign({}, obj);
+        const tmp = Object.assign({}, obj);
         delete tmp.page;
         delete tmp.pageSize;
         delete tmp.sort;

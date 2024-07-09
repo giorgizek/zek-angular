@@ -96,7 +96,7 @@ export class ZekSelect2 implements OnDestroy {
 
     private filterData() {
         if (this.filter && this.filter !== '') {
-            let searchString = this.filter;
+            const searchString = this.filter;
             if (this.textField === undefined || this.textField === null) {
                 this.filteredData = this.data.filter(item => item.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
             } else {

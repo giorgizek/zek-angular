@@ -7,14 +7,14 @@ import { KeyPair, KeyPairEx, Tree } from "../models";
 export class ArrayHelper {
     static insert(value: any[], index: number, v: any) {
         value.splice(index, 0, v);
-    };
+    }
 
     static contains(value: any[], v: any) {
-        for (var i = 0; i < value.length; i++) {
+        for (let i = 0; i < value.length; i++) {
             if (value[i] === v) return true;
         }
         return false;
-    };
+    }
 
 
     static isArray(arg: any) {
@@ -32,10 +32,12 @@ export class ArrayHelper {
     // }
 
     static distinct(source: any[]) {
-        let length = source.length, result = [], seen = new Set();
+        const length = source.length;
+        const result = []
+        const seen = new Set();
 
         for (let index = 0; index < length; index++) {
-            let value = source[index];
+            const value = source[index];
             if (seen.has(value)) continue;
 
             seen.add(value);
@@ -116,12 +118,12 @@ export class ArrayHelper {
     private static enumToKeyPairBaseArray<T extends KeyPair<number, string>>(value: any): T[] {
         const keys = Object.keys(value);
         const slice = keys.length / 2;
-        let result: T[] = [];
+        const result: T[] = [];
         // for (let i = 0; i < slice; i++) {
         //     result.push({ key: +keys[i], value: keys[i + slice] } as T);
         // }
         for (let i = slice; i < keys.length; i++) {
-            let name = keys[i];
+            const name = keys[i];
             result.push({ key: + value[name], value: name } as T);
         }
         return result;

@@ -1,4 +1,4 @@
-export var firstBy = (function() {
+export const firstBy = (function() {
 
     function identity(v: any){return v;}
 
@@ -7,15 +7,15 @@ export var firstBy = (function() {
     function makeCompareFunction(f: any, opt: any){
         opt = typeof(opt)==="number" ? {direction:opt} : opt||{};
         if(typeof(f)!="function"){
-            var prop = f;
+            const prop = f;
             // make unary function
             f = function(v1: any){return !!v1[prop] ? v1[prop] : "";}
         }
         if(f.length === 1) {
             // f is a unary function mapping a single item to its sort score
-            var uf = f;
-            var preprocess = opt.ignoreCase?ignoreCase:identity;
-            var cmp = opt.cmp || function(v1: any,v2: any) {return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;}
+            const uf = f;
+            const preprocess = opt.ignoreCase?ignoreCase:identity;
+            const cmp = opt.cmp || function(v1: any,v2: any) {return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;}
             f = function(v1: any,v2: any) {return cmp(preprocess(uf(v1)), preprocess(uf(v2)));}
         }
         if(opt.direction === -1) return function(v1: any,v2: any){return -f(v1,v2)};
@@ -29,9 +29,9 @@ export var firstBy = (function() {
         /* should get value false for the first call. This can be done by calling the 
         exported function, or the firstBy property on it (for es6 module compatibility)
         */
-        var x = (typeof(this) == "function" && !this.firstBy) ? this : false;
-        var y = makeCompareFunction(func, opt);
-        var f = x ? function(a: any, b: any) {
+        const x = (typeof(this) == "function" && !this.firstBy) ? this : false;
+        const y = makeCompareFunction(func, opt);
+        const f = x ? function(a: any, b: any) {
                         return x(a,b) || y(a,b);
                     }
                   : y;

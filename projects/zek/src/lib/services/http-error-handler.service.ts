@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from './alert.service';
-import { AlertType } from '../models';
 import { ObjectHelper } from '../utils/object-helper';
 
 /** Type of the handleError function returned by HttpErrorHandler.createHandleError */
@@ -104,10 +103,10 @@ export class HttpErrorHandler {
                     const errorMessages: string[] = [];
                     const properties = Object.getOwnPropertyNames(errors);
 
-                    for (let property of properties) {
+                    for (const property of properties) {
                         const messages = errors[property];
                         if (messages instanceof Array) {
-                            for (let message of messages) {
+                            for (const message of messages) {
                                 const messageKey = `Validation.${message}`;
                                 let translatedMessage = this.translate.instant(messageKey);
                                 // if translation not found then use message

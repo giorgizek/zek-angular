@@ -13,7 +13,7 @@ export class NumericDirective {
     }
     @Input()
     set digits(v: NumberInput) {
-        let tmp = MathHelper.clamp(Convert.toNumber(v) || 0, 0, 29);
+        const tmp = MathHelper.clamp(Convert.toNumber(v) || 0, 0, 29);
         this._digits = tmp;
     }
 
@@ -29,7 +29,7 @@ export class NumericDirective {
         if (this._digits <= 0) {
             return String(value).match(new RegExp(/^-?\d+$/));
         } else {
-            var regExpString =
+            const regExpString =
                 "^-?\\s*((\\d+(\\.\\d{0," +
                 this._digits +
                 "})?)|((\\d*(\\.\\d{1," +
@@ -43,7 +43,7 @@ export class NumericDirective {
         if (this._digits <= 0) {
             return String(value).match(new RegExp(/^\d+$/));
         } else {
-            var regExpString =
+            const regExpString =
                 "^\\s*((\\d+(\\.\\d{0," +
                 this._digits +
                 "})?)|((\\d*(\\.\\d{1," +
@@ -55,8 +55,8 @@ export class NumericDirective {
 
     private run(oldValue: any) {
         setTimeout(() => {
-            let currentValue: string = this.el.nativeElement.value;
-            let allowNegative = this._negative;
+            const currentValue: string = this.el.nativeElement.value;
+            const allowNegative = this._negative;
 
             if (allowNegative) {
                 if (

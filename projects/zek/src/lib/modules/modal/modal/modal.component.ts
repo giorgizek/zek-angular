@@ -40,7 +40,7 @@ export class ZekModal extends CoreComponent {
         }
 
         setTimeout(() => {
-            let modalEl = this.getModalElement();
+            const modalEl = this.getModalElement();
             if (modalEl) {
                 this.shownHandler = handler.addListener(modalEl, 'shown.bs.modal', () => {
                     this.onShown.emit();
@@ -213,7 +213,7 @@ export class ZekModal extends CoreComponent {
         return document.getElementById(this.modalId);
     }
     protected getModal() {
-        let modalEl = this.getModalElement();
+        const modalEl = this.getModalElement();
         return new bootstrap.Modal(modalEl, { backdrop: 'static' });
     }
 
@@ -257,7 +257,7 @@ export class ZekModal extends CoreComponent {
             this._modal.hide();
         }
         else {
-            let btn = document.getElementById(this.cancelButtonId);
+            const btn = document.getElementById(this.cancelButtonId);
             if (btn) {
                 btn.click();
             }
@@ -265,7 +265,7 @@ export class ZekModal extends CoreComponent {
     }
 
     ok() {
-        let event = new ValidEventArgs();
+        const event = new ValidEventArgs();
         this.onValidating.emit(event);
         if (!event.valid) return;
 
