@@ -1,4 +1,4 @@
-import { Input, Directive, inject } from '@angular/core';
+import { Input, Directive, inject, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PrintType } from '../models/print.model';
@@ -30,6 +30,7 @@ export class BaseComponent<TModel = any> extends CoreComponent {
     }
 
     @Input() model?: TModel | null;
+    @Output() modelChange = new EventEmitter<TModel | null | undefined>();
 
     protected getParam(name: string) {
         return this.route.snapshot.paramMap.get(name);
