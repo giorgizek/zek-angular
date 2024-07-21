@@ -122,16 +122,6 @@ export class AuthService {
 
 
     login(user: LoginToken | LoginUser | null) {
-        // if (user) {
-        //     // I think we don't need this
-        //     user.id = ObjectHelper.isDefined(user.id) ? Convert.parseNumber(user.id) : user.id;
-        //     user.expired = ObjectHelper.isDefined(user.expired) ?  DateHelper.parseDate(user.expired) : user.expired;
-        //     user.refreshTokenTime = ObjectHelper.isDefined(user.refreshTokenTime) ?  DateHelper.parseDate(user.refreshTokenTime) : user.refreshTokenTime;
-        //     if (Array.isArray(user.roles)) {
-        //         user.roles = user.roles.map(function (e) { return e.toUpperCase(); });
-        //     }
-        // }
-
         StorageHelper.set('login', user);
         this._user = null;
         this._isInitialized = false;//user get method will init user
