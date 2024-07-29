@@ -4,6 +4,7 @@ import { HttpErrorHandler } from "./http-error-handler.service";
 import { PagedList } from "../models";
 import { BaseService } from "./base.service";
 import { WebApiClient } from "./web.api";
+import { UrlHelper } from "../utils";
 
 export interface IService {
     getAll(filter: any): Observable<PagedList>;
@@ -28,10 +29,11 @@ export class CrudService extends BaseService implements IService {
         super(controller, api, httpErrorHandler);
     }
 
-    get(id: number) {
-        return this.api.get(`api/${this.controller}/${id}`).pipe(catchError(this.handleError(this.get.name, null)));
+    get(id: any) {
+        const url = UrlHelper.combine(`api/${this.controller}`, id);
+        return this.api.get(url).pipe(catchError(this.handleError(this.get.name, null)));
     }
-    get2(id: number, id2: number) {
+    get2(id: any, id2: any) {
         return this.api.get(`api/${this.controller}/${id}/${id2}`).pipe(catchError(this.handleError(this.get2.name, null)));
     }
 

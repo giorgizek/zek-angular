@@ -39,7 +39,7 @@ export class AuthService {
             let timeout = user.refreshTokenTime.getTime() - Date.now();// - (60 * 1000);
 
             if (timeout < 0) {
-                this._emitRefreshToken();
+                this.emitOnRefreshToken();
             }
 
             const minRefreshTime = 60_000//1 min;
@@ -48,7 +48,7 @@ export class AuthService {
             }
 
             this._timerId = setInterval(() => {
-                this._emitRefreshToken();
+                this.emitOnRefreshToken();
             }, timeout);
         }
     }
@@ -57,7 +57,7 @@ export class AuthService {
             clearInterval(this._timerId);
         }
     }
-    private _emitRefreshToken() {
+    emitOnRefreshToken() {
         if (this._onRefreshTokenSubject) {
             this._onRefreshTokenSubject.next();
         }
@@ -72,9 +72,6 @@ export class AuthService {
             this._oldValue = newValue;
 
             this.emitOnSignedIn();
-            // if (this._onSignedInSubject) {
-            //     this._onSignedInSubject.next(newValue);
-            // }
 
             //if user is signed in and expired we need to logout (remove from localStorage)
             if (!newValue) {

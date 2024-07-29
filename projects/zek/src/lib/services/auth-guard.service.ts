@@ -1,18 +1,17 @@
-import { inject, Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateFn } from '@angular/router';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateFn } from '@angular/router';
 
 import { AuthService } from './auth.service';
 
 
 export const zekAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    const authService = inject(AuthService);
+    const auth = inject(AuthService);
     const router = inject(Router);
 
-    if (!authService.isAuthenticated()) {
+    if (!auth.isAuthenticated()) {
         router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
 
-    return authService.hasDataPermission(route.data);
+    return auth.hasDataPermission(route.data);
 }

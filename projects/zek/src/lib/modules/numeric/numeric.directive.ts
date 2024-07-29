@@ -6,7 +6,7 @@ import { Convert, MathHelper } from "../../utils";
     standalone: true,
     selector: "[numeric]",
 })
-export class NumericDirective {
+export class ZekNumericDirective {
     private _digits = 0;
     get digits() {
         return this._digits;
