@@ -77,9 +77,9 @@ export class AlertService {
         this.show(message, title, 'info', icon);
     }
     private show(message: string, title?: string | null, alertType?: AlertType | null, icon?: string | null) {
-        if (!icon) {
-            icon = BootstrapHelper.cssAlertIcon(alertType)
-        }
+        // if (!icon) {
+        //     icon = BootstrapHelper.cssAlertIcon(alertType)
+        // }
 
         this.toastSubject.next(<Toast>{ message, title, type: alertType, icon });//, id: `${this.id++}`
     }

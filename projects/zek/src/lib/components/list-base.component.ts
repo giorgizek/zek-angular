@@ -41,7 +41,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
 
 
 
-    
+
 
 
     override init() {
@@ -57,7 +57,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     }
     override async bindModel(): Promise<void> {
         this.selectedIds = [];
-        this.model = await firstValueFrom(this.service.getAll(this.internalFilter));
+        this.model = await firstValueFrom(this.apiGetAll(this.internalFilter));
         if (this.model) {
             let totalCount = this.model.totalItemCount;
             if (!totalCount && this.model.pager) {
@@ -69,6 +69,9 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         else
             this.pager = new Pager();
         //this.pagedList.pager = this.pager;
+    }
+    apiGetAll(filter: any) {
+        return this.service.getAll(filter);
     }
 
 
@@ -139,23 +142,30 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
             { queryParams: { returnUrl: url + '?filter=1' } }
         );
     }
-    async delete(id: number) {
+    async delete(id: any) {
         this.alert.clear();
-        const data = await firstValueFrom(this.service.delete(id));
+        const data = await firstValueFrom(this.apiDelete(id));
         if (data?.success) {
             const message = await firstValueFrom(this.translate.get('Alert.Deleted'));
             this.alert.error(message, null, 'fa-solid fa-trash')
             this.refresh();
         }
     }
-    async delete2(id: number, id2: number) {
+    apiDelete(id: any) {
+        return this.service.delete(id);
+    }
+
+    async delete2(id: any, id2: any) {
         this.alert.clear();
-        const data = await firstValueFrom(this.service.delete2(id, id2))
+        const data = await firstValueFrom(this.apiDelete2(id, id2))
         if (data?.success) {
             const message = await firstValueFrom(this.translate.get('Alert.Deleted'));
             this.alert.error(message, null, 'fa-solid fa-trash')
             this.refresh();
         }
+    }
+    apiDelete2(id: any, id2: any) {
+        return this.service.delete2(id, id2);
     }
 
     edit(id: number) {
@@ -201,17 +211,20 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         this.approveModel = {};
         this.approveModal.show(tmp);
     }
-    async approve(m: any) {
-        if (!m) return;
+    async approve(model: any) {
+        if (!model) return;
 
         this.alert.clear();
-        const data = await firstValueFrom(this.service.approve(m));
+        const data = await firstValueFrom(this.apiApprove(model));
         if (!data || data.length === 0)
             return;
 
         const message = await firstValueFrom(this.translate.get(this.approvedMesage));
         this.alert.success(message, null, 'fa-solid fa-thumbs-up')
         this.refresh();
+    }
+    apiApprove(model: any) {
+        return this.service.approve(model);
     }
 
 
@@ -229,23 +242,26 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         this.approveModel = {};
         this.disapproveModal.show(tmp);
     }
-    async disapprove(m: any) {
-        if (!m || !this.approveModel) return;
+    async disapprove(model: any) {
+        if (!model || !this.approveModel) return;
 
-        if (typeof m === 'object') {
-            m.status = this.approveModel.status;
-            m.comment = StringHelper.tryTrim(this.approveModel.comment);
-            if (!m.comment) delete m.comment;
+        if (typeof model === 'object') {
+            model.status = this.approveModel.status;
+            model.comment = StringHelper.tryTrim(this.approveModel.comment);
+            if (!model.comment) delete model.comment;
         }
 
         this.alert.clear();
-        const data = await firstValueFrom(this.service.disapprove(m));
+        const data = await firstValueFrom(this.apiDisapprove(model));
         if (!data || data.length === 0)
             return;
 
         const message = await firstValueFrom(this.translate.get(this.disapprovedMesage));
         this.alert.success(message, null, 'fa-solid fa-thumbs-down')
         this.refresh();
+    }
+    apiDisapprove(model: any) {
+        return this.service.disapprove(model);
     }
 
     getSelectedIds() {
@@ -264,7 +280,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     showSum() { }
     async sum() {
         this.sumModel = null;
-        const data = await firstValueFrom(this.service.sum(this.internalFilter));
+        const data = await firstValueFrom(this.apiSum(this.internalFilter));
         if (data) {
             this.sumModel = data;
             this.showSum();
@@ -272,6 +288,9 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
             const message = await firstValueFrom(this.translate.get('Alert.SumError'));
             this.alert.error(message);
         }
+    }
+    apiSum(filter: any) {
+        return this.service.sum(filter);
     }
 
     export(fileTypeId: number) {
