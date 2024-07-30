@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from "@angular/core";
+import { Directive, ElementRef, HostListener, input, Input } from "@angular/core";
 import { BooleanInput, NumberInput } from "../../components";
 import { Convert, MathHelper } from "../../utils";
 
@@ -8,20 +8,21 @@ import { Convert, MathHelper } from "../../utils";
 })
 export class ZekNumericDirective {
     private _digits = 0;
+    @Input()
     get digits() {
         return this._digits;
     }
-    @Input()
     set digits(v: NumberInput) {
         const tmp = MathHelper.clamp(Convert.toNumber(v) || 0, 0, 29);
         this._digits = tmp;
     }
 
     private _negative = false;
+    @Input()
     get negative(): boolean {
         return this._negative;
     }
-    @Input() set negative(v: BooleanInput) {
+    set negative(v: BooleanInput) {
         this._negative = Convert.toBooleanProperty(v);
     }
 
