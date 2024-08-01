@@ -1,6 +1,6 @@
-import { KeyPair } from './key-pair.model';
+import { KeyPairChecked } from './key-pair.model';
 
-export class Tree extends KeyPair<number, string> {
+export class Tree extends KeyPairChecked<number, string> {
     parentId?: number | null;
     children?: Tree[] | null;
     childrenCount?: number | null;

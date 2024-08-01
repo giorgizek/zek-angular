@@ -1,6 +1,6 @@
 {
   "name": "zek",
-  "version": "17.3.45",
+  "version": "17.3.46",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0"
@@ -14,6 +14,6 @@
         "email": "giorgizek@gmail.com"
     },
     "keywords": [
-        "zek, erp"
+        "zek, erp, utils, helpers"
     ]
 }
