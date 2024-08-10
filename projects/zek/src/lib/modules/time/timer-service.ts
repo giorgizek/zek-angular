@@ -5,17 +5,17 @@ import { DateHelper } from "../../utils";
 
 @Injectable()
 export class TimerService {
-    @Input() seconds: number = 0;
+    @Input() seconds = 0;
 
     // running = false;
     
-    private _count : number = 0;
-    public get count() : number {
+    private _count = 0;
+    public get count() {
         return this._count;
     }
     
-    private _left : number = 0;
-    public get left() : number {
+    private _left = 0;
+    public get left() {
         return this._left;
     }
 
@@ -28,8 +28,6 @@ export class TimerService {
     // tickerInterval: any;
     // expired: Observable<number> = new Observable<number>();
     // initialCountValue: number = 0;
-
-    constructor() { }
 
 
     startHour(hours: number, minutes: number, seconds: number) {

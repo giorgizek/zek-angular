@@ -3,6 +3,7 @@ export * from './alert';
 export * from './autocomplete';
 export * from './bb';
 export * from './card';
+export * from './countdown';
 export * from './callback';
 export * from './date-ago';
 export * from './datepicker';
