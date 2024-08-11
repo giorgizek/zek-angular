@@ -20,7 +20,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     selectedIds: any[] = [];
     pager = new Pager();
     sumModel: any;
-
+    tableId = 'table';
 
     @ViewChild('filterModal', { static: false }) protected readonly filterModal?: ZekModal | null;
 
@@ -55,7 +55,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         //this.selectedIds = [];
         //this.pagedList = new PagedList();
     }
-    override async bindModel(): Promise<void> {
+    override async bindModel() {
         this.selectedIds = [];
         this.model = await firstValueFrom(this.apiGetAll(this.internalFilter));
         if (this.model) {
@@ -64,7 +64,6 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
                 totalCount = this.model.pager ? (this.model.pager.totalItemCount || 0) : 0;
             }
             this.pager = PagerHelper.get(totalCount, this.internalFilter.page, this.internalFilter.pageSize);
-
         }
         else
             this.pager = new Pager();
@@ -72,6 +71,10 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     }
     apiGetAll(filter: any) {
         return this.service.getAll(filter);
+    }
+    scrollTop() {
+        const el = document.getElementById(this.tableId);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
 
 
@@ -92,11 +95,12 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
             localStorage.removeItem('filter');
         }
     }
-    changePage(page: number) {
+    async changePage(page: number) {
         this.internalFilter.page = page;
         this.filter.page = page;
-        this.refresh();
+        await this.bindModel();
         this.autoSaveFilter();
+        this.scrollTop();
     }
     changePageSize(pageSize: number) {
         this.internalFilter.pageSize = pageSize;
@@ -107,10 +111,14 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         this.filterModal?.show();
     }
     search() {
-        //this.filterModal?.hide();
         this.assignFilter();
-        this.changePage(1);
-        //this.internalAutoSaveFilter();
+
+        // this.changePage(1);
+        //can't use this because don't want to execute scrollTop
+        this.internalFilter.page = 1;
+        this.filter.page = 1;
+        this.bindModel();
+        this.autoSaveFilter();
     }
     protected assignFilter() {
         this.internalFilter = Object.assign({}, this.filter);
