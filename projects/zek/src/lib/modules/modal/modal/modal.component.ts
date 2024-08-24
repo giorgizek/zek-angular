@@ -15,10 +15,6 @@ let uniqueId = 0;
 export class ZekModal extends CoreComponent {
     protected readonly translate = inject(TranslateService);
 
-    constructor() {
-        super();
-        this.elementId = RandomHelper.randomHex();
-    }
     override async destroy() {
         await super.destroy();
         this._modal?.dispose();
@@ -65,7 +61,7 @@ export class ZekModal extends CoreComponent {
     hiddenHandler?: number | null;
 
     @Input() model: any;
-    readonly elementId: string;
+    readonly elementId = RandomHelper.randomHex();
 
 
     private _showOk = true;
