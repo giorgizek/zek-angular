@@ -1,0 +1,11 @@
+<div class="d-flex flex-wrap align-items-center gap-1 form-control">
+    <ng-container *ngIf="model">
+        <button *ngFor="let item of model" type="button" (click)="remove(item)" class="align-items-center gap-1 d-inline-flex py-0 border-0 btn btn-primary">{{item}}<span class="d-inline-flex" role="button" tabindex="-1"><i class="fa-solid fa-xmark"></i></span></button>
+    </ng-container>
+    <div class="input-wrapper"><span>i</span><input type="text"
+            [id]="inputId"
+            [name]="inputId"
+            [(ngModel)]="text"
+            [maxlength]="maxlength"
+            (keydown.enter)="onKeyEnter($event)"></div>
+</div>

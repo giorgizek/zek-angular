@@ -1,0 +1,26 @@
+.input-wrapper {
+    position: relative;
+    min-width: 4px;
+    flex-grow: 1;
+    white-space: nowrap;
+
+    > span {
+        visibility: hidden;
+    }
+
+    input[type="text"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        outline: 0;
+        border: 0;
+        width: 100%;
+        background-color: transparent;
+
+        &::placeholder {
+            color: rgba(33, 37, 41, 0.75);
+            opacity: 1;
+        }
+    }
+}

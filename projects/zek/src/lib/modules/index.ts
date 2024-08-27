@@ -28,6 +28,7 @@ export * from './select';
 export * from './select2';
 export * from './select2-multiple';
 export * from './sort';
+export * from './tag';
 export * from './time';
 export * from './tooltip';
 export * from './utc-to-local';
