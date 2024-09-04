@@ -99,32 +99,33 @@ export class WebApiClient {
     //}
 
     post<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.post<T>(this.baseUrl + url, body, { headers: this.getHeaders() });
+        return this.http.post<T>(this.baseUrl + url, body, { headers: this.getHeaders(body) });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     put<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.put<T>(this.baseUrl + url, body, { headers: this.getHeaders() });
+        return this.http.put<T>(this.baseUrl + url, body, { headers: this.getHeaders(body) });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     delete(url: string, body?: any | null): Observable<any> {
-        return this.http.request('delete', this.baseUrl + url, { body, headers: this.getHeaders() });
+        return this.http.request('delete', this.baseUrl + url, { body, headers: this.getHeaders(body) });
         //return this.http.delete(environment.url + url, { headers: this.getHeaders() });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     patch<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.patch<T>(this.baseUrl + url, body, { headers: this.getHeaders() });
+        return this.http.patch<T>(this.baseUrl + url, body, { headers: this.getHeaders(body) });
     }
 
 
-    protected getHeaders(): HttpHeaders {
+    protected getHeaders(body?: any | null): HttpHeaders {
         let httpHeaders = new HttpHeaders();
-        httpHeaders = httpHeaders.set('Content-Type', 'application/json');
+        if (!(body instanceof FormData))
+            httpHeaders = httpHeaders.set('Content-Type', 'application/json');
         const tmp = this.auth.user;
         const token = tmp ? tmp.token : undefined;
         if (token)
