@@ -33,7 +33,6 @@ export class CacheHelper {
     // Cache and return the Observable
     static getOrCreate(key: string, fallback: Observable<any>, minutes?: number): Observable<any> {
         const cached = this.get(key);
-        console.log(key, cached);
         if (cached) {
             return cached;
         } else {
