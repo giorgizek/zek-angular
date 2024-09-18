@@ -1,4 +1,4 @@
-﻿import { ViewChild, Directive, inject } from '@angular/core';
+﻿import { ViewChild, Directive, inject, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { IService } from '../services';
@@ -6,21 +6,32 @@ import { BaseComponent } from './base.component';
 import { ApproveModel, FilterBase, PagedList, Pager, PrintType } from '../models';
 import { ZekModal } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
-import { FilterHelper, PagerHelper, StorageHelper, StringHelper, UrlHelper } from '../utils';
+import { ArrayHelper, Convert, FilterHelper, PagerHelper, StorageHelper, StringHelper, UrlHelper } from '../utils';
 import { firstValueFrom } from 'rxjs';
+import { BooleanInput } from './types';
 // declare let bootstrap: any;
 
 @Directive()
-export class ListBaseComponent<TService extends IService = IService, TPagedListData = any> extends BaseComponent<PagedList<TPagedListData>> {
+export class ListBaseComponent<TService extends IService = IService, TPagedListItem = any> extends BaseComponent<PagedList<TPagedListItem>> {
     filter: any = new FilterBase();
     saveFilter = true;
     sortFields: any;
     protected internalFilter: any = new FilterBase();
     isFiltered = false;
     selectedIds: any[] = [];
+    selectedItems: any[] = [];
     pager = new Pager();
     sumModel: any;
     tableId = 'table';
+
+    private _initItems = true;
+    get initItems(): boolean {
+        return this._initItems;
+    }
+    @Input()
+    set initItems(v: BooleanInput) {
+        this._initItems = Convert.toBooleanProperty(v);
+    }
 
     @ViewChild('filterModal', { static: false }) protected readonly filterModal?: ZekModal | null;
 
@@ -51,12 +62,9 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         this.initDefaultFilter();
         this.initStoredFilter();
         this.assignFilter();
-
-        //this.selectedIds = [];
-        //this.pagedList = new PagedList();
     }
     override async bindModel() {
-        this.selectedIds = [];
+        // this.selectedIds = [];
         this.model = await firstValueFrom(this.apiGetAll(this.internalFilter));
         if (this.model) {
             let totalCount = this.model.totalItemCount;
@@ -64,9 +72,11 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
                 totalCount = this.model.pager ? (this.model.pager.totalItemCount || 0) : 0;
             }
             this.pager = PagerHelper.get(totalCount, this.internalFilter.page, this.internalFilter.pageSize);
+            this.onBindModelCompleted();
         }
-        else
+        else {
             this.pager = new Pager();
+        }
         //this.pagedList.pager = this.pager;
     }
     apiGetAll(filter: any) {
@@ -75,6 +85,16 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
     scrollTop() {
         const el = document.getElementById(this.tableId);
         el?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    }
+    override onBindModelCompleted() {
+        if (this.initItems) {
+            if (this.model && ArrayHelper.isArray(this.model.items) && ArrayHelper.isArray(this.selectedIds)) {
+                for (const item of this.model.items) {
+                    const tmp = item as any;
+                    tmp.selected = this.selectedIds.includes(tmp.id);
+                }
+            }
+        }
     }
 
 
@@ -196,12 +216,18 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListD
         const id = item.id;
         if (id) {
             if (item.selected) {
-                this.selectedIds.push(id);
+                if (!this.selectedIds.includes(id)) {
+                    this.selectedIds.push(id);
+                    this.selectedItems.push(item);
+                }
+
             } else {
                 this.selectedIds = this.selectedIds.filter(item => item !== id);
+                this.selectedItems = this.selectedItems.filter(item => item.id !== id);
             }
         }
     }
+
 
 
 

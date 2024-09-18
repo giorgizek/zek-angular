@@ -28,7 +28,10 @@ export class CoreComponent implements OnInit, OnDestroy {
         await this.onLoadCompleted();
     }
     init() { }
-    bindModel() { }
+    bindModel() {
+        this.onBindModelCompleted();
+    }
+    onBindModelCompleted() { }
     bindDictionary() { }
     onBindingCompleted() { }
     onLoadCompleted() { }
