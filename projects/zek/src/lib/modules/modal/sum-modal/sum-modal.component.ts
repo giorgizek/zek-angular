@@ -6,11 +6,8 @@ import { ZekModal } from '../modal/modal.component';
     templateUrl: './sum-modal.component.html'
 })
 export class ZekSumModal {
-
     @Input() model: any;
-
     @ViewChild('sumModal', { static: false }) private modal?: ZekModal;
-
 
     sum() {
         if (this.modal) {
