@@ -91,7 +91,6 @@ export class ZekModal extends CoreComponent {
         this._showCancel = Convert.toBooleanProperty(v);
     }
 
-
     private _autoHide = true;
     @Input()
     get autoHide(): boolean {
@@ -101,7 +100,6 @@ export class ZekModal extends CoreComponent {
         this._autoHide = Convert.toBooleanProperty(v);
     }
 
-
     @Input() title?: string | null;
 
     @Input() text?: string | null;
@@ -110,11 +108,12 @@ export class ZekModal extends CoreComponent {
 
     @Input() okButtonText?: string | null;
 
-    @Output() onShown = new EventEmitter<any>();
+    @Output() onShown = new EventEmitter<void>();
 
-    @Output() onHidden = new EventEmitter<any>();
+    @Output() onHidden = new EventEmitter<void>();
 
     @Output() onOk = new EventEmitter<any>();
+    @Output() onCancel = new EventEmitter<void>();
 
     @Input() componentType = ComponentType.Primary;
 
@@ -237,6 +236,11 @@ export class ZekModal extends CoreComponent {
         }
     }
 
+
+    cancel(){
+        this.onCancel.emit();
+        this.hide();
+    }
     hide() {
         // this.modal?.hide();
 
@@ -260,6 +264,8 @@ export class ZekModal extends CoreComponent {
         }
     }
 
+
+
     ok() {
         const event = new ValidEventArgs();
         this.onValidating.emit(event);
@@ -270,6 +276,7 @@ export class ZekModal extends CoreComponent {
 
         this.onOk.emit(this.model);
     }
+
 
     keyDown(e: Event) {
         e.preventDefault();

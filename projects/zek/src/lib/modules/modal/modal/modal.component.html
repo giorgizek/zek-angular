@@ -8,7 +8,7 @@
             <div class="modal-header" *ngIf="showHeader">
                 <ng-content select="header"></ng-content>
                 <h5 class="modal-title" id="{{lableId}}">{{title}}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" (click)="cancel()" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 {{text}}
@@ -16,12 +16,15 @@
             </div>
             <div class="modal-footer" *ngIf="showFooter">
                 <ng-content select="footer"></ng-content>
-                <button [class.visually-hidden]="!showOk" [disabled]="disabledOk" type="button" class="btn {{cssButton()}}" id="{{okButtonId}}" (click)="ok()">
+                <button [class.visually-hidden]="!showOk" [disabled]="disabledOk" type="button" class="btn {{cssButton()}}" id="{{okButtonId}}"
+                    (click)="ok()">
                     <i *ngIf="icon" class="{{ icon }}"></i> {{ okButtonText }}
                 </button>
-                <button [class.visually-hidden]="!showCancel" type="button" class="btn btn-secondary" id="{{cancelButtonId}}" data-bs-dismiss="modal">
+                <button [class.visually-hidden]="!showCancel" type="button" class="btn btn-secondary"
+                    (click)="cancel()">
                     <i class="fa-solid fa-ban"></i> {{ 'Action.Cancel' | translate }}
                 </button>
+                <button type="button" class="d-none" id="{{cancelButtonId}}" data-bs-dismiss="modal"></button>
             </div>
         </div>
     </div>
