@@ -39,6 +39,14 @@ export class BaseComponent<TModel = any> extends CoreComponent {
         return this.route.snapshot.queryParamMap.get(name);
     }
 
+    reload() {
+        this._redirectTo(this.router.url);
+    }
+    private _redirectTo(url: string) {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigateByUrl(url);
+        });
+    }
 
     protected navigateReturnUrl() {
         const returnUrl = this.getQueryParam('returnUrl') || this.getParam('returnUrl');

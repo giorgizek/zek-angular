@@ -1,0 +1,6 @@
+<input type="file" class="form-control"
+    name="{{inputId}}"
+    id="{{inputId}}"
+    [multiple]="multiple" [accept]="accept" [required]="required" [disabled]="readonly"
+    #fileInput
+    (change)="onFileInputChange($event)" />
