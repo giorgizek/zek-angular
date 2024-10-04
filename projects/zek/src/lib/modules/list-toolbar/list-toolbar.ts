@@ -83,20 +83,19 @@ export class ZekListToolbar {
     }
 
 
-    @Output() onRefresh = new EventEmitter();
-
-    @Output() onFilter = new EventEmitter();
+    @Output() onRefresh = new EventEmitter<void>();
+    @Output() onFilter = new EventEmitter<void>();
+    @Output() onCreate = new EventEmitter<void>();
+    @Output() onSum = new EventEmitter<void>();
+    @Output() onPrint = new EventEmitter<PrintType>();
+    @Output() onExport = new EventEmitter<number>();
 
     refresh() {
         this.onRefresh.emit();
     }
 
     create() {
-        const url = UrlHelper.getNoParam(this.router.url);
-        // this.router.navigate([url, 'create', { returnUrl: url + ';filter=1' }]);
-        this.router.navigate([url, 'create'],
-            { queryParams: { returnUrl: url + '?filter=1' } }
-        );
+        this.onCreate?.emit();
     }
 
 
@@ -104,21 +103,16 @@ export class ZekListToolbar {
         this.onFilter.emit();
     }
 
-    @Output()
-    onPrint = new EventEmitter<PrintType>();
+
     print(printType?: PrintType) {
         this.onPrint.emit(printType);
     }
 
-    @Output()
-    onSum = new EventEmitter();
+
     sum() {
         this.onSum.emit();
     }
 
-
-    @Output()
-    onExport = new EventEmitter<number>();
     exportExcel() {
         this.onExport.emit(1);
     }
