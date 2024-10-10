@@ -5,8 +5,16 @@ import { KeyPair, KeyPairEx, Tree } from "../models";
 
 
 export class ArrayHelper {
-    static insert(value: any[], index: number, v: any) {
-        value.splice(index, 0, v);
+    static insert(array: any[], index: number, item: any) {
+        array.splice(index, 0, item);
+    }
+
+    static move(array: any[], fromIndex: number, toIndex: number) {
+
+        const item = array[fromIndex];
+        array.splice(fromIndex, 1);//remove item frrom array
+        array.splice(toIndex, 0, item);//insert item into array
+        return array;
     }
 
     static contains(value: any[], v: any) {
@@ -17,8 +25,8 @@ export class ArrayHelper {
     }
 
 
-    static isArray(arg: any) {
-        return Array.isArray(arg) && arg.length > 0;
+    static isArray(value: any) {
+        return Array.isArray(value) && value.length > 0;
     }
     // static distinct(value: any[]) {
     //     var arr: any[] = [];
@@ -31,13 +39,13 @@ export class ArrayHelper {
     //     return arr;
     // }
 
-    static distinct(source: any[]) {
-        const length = source.length;
+    static distinct(array: any[]) {
+        const length = array.length;
         const result = []
         const seen = new Set();
 
         for (let index = 0; index < length; index++) {
-            const value = source[index];
+            const value = array[index];
             if (seen.has(value)) continue;
 
             seen.add(value);
@@ -54,10 +62,10 @@ export class ArrayHelper {
         return array.filter(x => x !== undefined && x !== null && x[key] === filterValue);
     }
 
-    static flattenArray(value: any[]): any[] {
+    static flattenArray(array: any[]): any[] {
         let result: any[] = [];
-        if (value) {
-            value.forEach(tree => {
+        if (array) {
+            array.forEach(tree => {
                 tree.indent = 0;
                 result.push(tree);
                 result = result.concat(this.getChildren(tree));
@@ -88,10 +96,10 @@ export class ArrayHelper {
 
 
 
-    static treeToKeyPairArray(value: Tree[]) {
+    static treeToKeyPairArray(array: Tree[]) {
         let result: KeyPair[] = [];
-        if (value) {
-            value.forEach(tree => {
+        if (array) {
+            array.forEach(tree => {
                 result.push({ key: tree.key, value: tree.value });
                 result = result.concat(this.getIndentChildren(tree));
             });
