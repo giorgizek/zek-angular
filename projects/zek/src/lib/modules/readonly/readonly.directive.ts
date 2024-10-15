@@ -6,12 +6,16 @@ import { Convert } from '../../utils';
     standalone: true,
     selector: '[readonly],[readOnly]',
     host: {
-        '[attr.readonly]': '_readonly ? "" : null'
+        '[attr.readonly]': '_readOnly ? "" : null'
     }
 })
 export class ZekReadOnlyDirective {
-    _readonly = false;
-    @Input() readonly(v: BooleanInput) {
-        this._readonly = Convert.toBooleanProperty(v);
+    private _readOnly = false;
+    @Input()
+    get readonly(): boolean {
+        return this._readOnly;
+    }
+    set readonly(v: BooleanInput) {
+        this._readOnly = Convert.toBooleanProperty(v);
     }
 }
