@@ -32,7 +32,7 @@ export class ZekEditToolbar {
     }
 
 
-    printType = PrintType;
+    PrintType = PrintType;
 
     private _showExport = false;
     @Input()

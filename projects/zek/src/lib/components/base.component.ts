@@ -9,7 +9,7 @@ import { Convert, FileHelper, UrlHelper } from '../utils';
 
 @Directive()
 export class BaseComponent<TModel = any> extends CoreComponent {
-    private readonly _api = inject(WebApiClient);
+    protected readonly api = inject(WebApiClient);
     protected readonly route = inject(ActivatedRoute);
     protected readonly router = inject(Router);
 
@@ -88,9 +88,17 @@ export class BaseComponent<TModel = any> extends CoreComponent {
                 actionName = 'ShowIdLink'
                 break;
         }
-        this._api.getString(`api/Reports/${actionName}`, { template, id }).subscribe(url => {
+        this.api.getString(`api/Reports/${actionName}`, { template, id }).subscribe(url => {
             if (url) {
                 window.open(url, '_blank');
+            }
+        });
+    }
+
+    protected internalPrint(name: any, id: any, printType: PrintType = PrintType.Show) {
+        this.api.get(`api/reports/presigned-url`, { name, id, type: printType }).subscribe(data => {
+            if (data?.success) {
+                window.open(data.value, '_blank');
             }
         });
     }
