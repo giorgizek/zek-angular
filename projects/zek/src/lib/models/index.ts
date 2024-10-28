@@ -1,4 +1,5 @@
 export * from './alert-type';
+export * from './api';
 export * from './approve.moodel';
 export * from './batch.model';
 export * from './captcha.model';
