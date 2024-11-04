@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BooleanInput, Convert, CoreUiComponent } from 'zek';
-// import { FileService } from '../../../services/file.service';
+import { FileService } from '../../services/file.service';
+import { CoreUiComponent } from '../../components/core-ui.component';
+import { BooleanInput } from '../../components/types';
+import { Convert } from '../../utils/convert';
 
 let uniqueId = 0;
 
@@ -12,7 +14,7 @@ let uniqueId = 0;
     selector: 'zek-file-input',
     templateUrl: 'file-input.html',
     styleUrl: 'file-input.scss',
-    // providers: [FileService],
+    providers: [FileService],
     host: {
         '[attr.id]': 'id',
     }
@@ -21,7 +23,7 @@ export class ZekFileInput extends CoreUiComponent {
     // @Input() model!: string[] | null;
     @Output() readonly onUpload = new EventEmitter<Array<any>>();
 
-    // private readonly fileService = inject(FileService);
+    private readonly fileService = inject(FileService);
 
     private _uniqueId: string = `zek-file-input-${++uniqueId}`;
     /** The unique ID for the tag. */
@@ -62,8 +64,6 @@ export class ZekFileInput extends CoreUiComponent {
         }
     }
 
-    @Output() readonly onFileChoose = new EventEmitter<Array<any>>();
-
     async onFileInputChange(event: any) {
         event.preventDefault();
         event.stopPropagation();
@@ -76,11 +76,10 @@ export class ZekFileInput extends CoreUiComponent {
             const file = files[i];
             formData.append('files', file, file.name);
         }
-        // this.fileService.save(formData).subscribe(data => {
-        //     if (data?.success) {
-        //         this.onUpload.emit(data.value);
-        //     }
-        // })
+        this.fileService.save(formData).subscribe(data => {
+            if (data?.success) {
+                this.onUpload.emit(data.value);
+            }
+        })
     }
-
 }

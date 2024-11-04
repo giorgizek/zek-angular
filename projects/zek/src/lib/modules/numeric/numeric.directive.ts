@@ -13,7 +13,7 @@ export class ZekNumericDirective {
         return this._digits;
     }
     set digits(v: NumberInput) {
-        const tmp = MathHelper.clamp(Convert.toNumber(v) || 0, 0, 29);
+        const tmp = MathHelper.clamp(Convert.toNumber(v) ?? 0, 0, 29);
         this._digits = tmp;
     }
 

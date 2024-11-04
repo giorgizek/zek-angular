@@ -2,10 +2,6 @@ import { TimeHelper } from "./time-helper";
 
 export class DateHelper {
 
-    static minDate() {
-        return new Date(0);
-    }
-
     static equals(value1?: Date | null, value2?: Date | null) {
         const val1 = (value1 === undefined || value1 === null) ? null : value1;
         const val2 = (value2 === undefined || value2 === null) ? null : value2;

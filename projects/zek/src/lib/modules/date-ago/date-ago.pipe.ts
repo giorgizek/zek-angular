@@ -9,7 +9,7 @@ import { DateHelper } from '../../utils';
 export class ZekDateAgoPipe implements PipeTransform {
 
     transform(value: any, args?: any): string | Date | null {
-        if (value === undefined || value === null || value === '' || value !== value) return null;
+        if (typeof value === 'undefined' || value === null || value === '' || value !== value) return null;
 
         const date = DateHelper.toDate(value);
         const seconds = Math.floor((+new Date() - +new Date(date)) / 1000);

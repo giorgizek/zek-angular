@@ -2,13 +2,14 @@ export * from './age';
 export * from './alert';
 export * from './autocomplete';
 export * from './bb';
+export * from './callback';
 export * from './card';
 export * from './countdown';
-export * from './callback';
 export * from './date-ago';
 export * from './datepicker';
 export * from './edit-toolbar';
 export * from './file';
+export * from './file-input';
 export * from './file-viewer';
 export * from './google-login-button';
 export * from './grid-toolbar';
@@ -35,5 +36,3 @@ export * from './utc-to-local';
 export * from './validator';
 export * from './validators';
 export * from './wizard';
-
-// export * from './'
