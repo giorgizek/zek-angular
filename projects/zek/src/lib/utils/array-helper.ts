@@ -9,6 +9,37 @@ export class ArrayHelper {
         array.splice(index, 0, item);
     }
 
+
+    /**
+     * Remove item from array
+     * @param array 
+     * @param item item to remove
+     */
+    static remove(array: any[], item: any) {
+        const index = array.indexOf(item);
+        if (index > -1) { // only splice array when item is found
+            array.splice(index, 1); // 2nd parameter means remove one item only
+        }
+    }
+
+
+    /**
+     * Remove all items from array
+     * @param array 
+     * @param item item to remove
+     */
+    static removeAll(array: any[], item: any) {
+        var i = 0;
+        while (i < array.length) {
+            if (array[i] === item) {
+                array.splice(i, 1);
+            } else {
+                ++i;
+            }
+        }
+    }
+
+
     static move(array: any[], fromIndex: number, toIndex: number) {
 
         const item = array[fromIndex];
