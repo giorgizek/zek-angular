@@ -65,7 +65,7 @@ export class DateHelper {
         const minute = date.getMinutes();
         const second = date.getSeconds();
 
-        const str = `${hour < 10 ? '0' : ''}${hour}-${minute < 10 ? '0' : ''}${minute}-${second < 10 ? '0' : ''}${second}`;
+        const str = `${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}`;
         return str;
     }
     
@@ -78,7 +78,7 @@ export class DateHelper {
         const hour = date.getHours();
         const minute = date.getMinutes();
 
-        const str = `${hour < 10 ? '0' : ''}${hour}-${minute < 10 ? '0' : ''}${minute}`;
+        const str = `${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute}`;
         return str;
     }
 
