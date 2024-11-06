@@ -68,6 +68,19 @@ export class DateHelper {
         const str = `${hour < 10 ? '0' : ''}${hour}-${minute < 10 ? '0' : ''}${minute}-${second < 10 ? '0' : ''}${second}`;
         return str;
     }
+    
+    static toTimeInput(value: Date | string) {
+        const date = DateHelper.parseDate(value);
+
+        if (!date)
+            return null;
+
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+
+        const str = `${hour < 10 ? '0' : ''}${hour}-${minute < 10 ? '0' : ''}${minute}`;
+        return str;
+    }
 
     //** Offes seconds ( offsetmin * 60sec * 1000ms) */
     private static readonly _utcDiff = -new Date().getTimezoneOffset() * 60000;
