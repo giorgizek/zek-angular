@@ -55,7 +55,7 @@ export class DateHelper {
         return str;
     }
 
-    toISOTimeString(value: Date | string) {
+    static toISOTimeString(value: Date | string) {
         const date = DateHelper.parseDate(value);
 
         if (!date)
