@@ -36,7 +36,7 @@ export class DateHelper {
 
         return date;
     }
-    static today(){
+    static today() {
         return this.dateOnly(new Date());
     }
 
@@ -52,6 +52,20 @@ export class DateHelper {
         const day = date.getDate();
 
         const str = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        return str;
+    }
+
+    toISOTimeString(value: Date | string) {
+        const date = DateHelper.parseDate(value);
+
+        if (!date)
+            return null;
+
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        const second = date.getSeconds();
+
+        const str = `${hour < 10 ? '0' : ''}${hour}-${minute < 10 ? '0' : ''}${minute}-${second < 10 ? '0' : ''}${second}`;
         return str;
     }
 

@@ -20,6 +20,8 @@ export class TimeHelper {
         return '';
     }
 
+    
+
 
     static toDate(time: string | undefined | null): Date {
         const date = new Date(0);
