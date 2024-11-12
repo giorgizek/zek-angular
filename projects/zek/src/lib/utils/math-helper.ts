@@ -8,7 +8,14 @@ export class MathHelper {
         return Math.max(min, Math.min(max, v));
     }
 
+    // static sum(...values: number[]) {
+    //     return values.reduce((acc, cur) => acc + cur, 0);
+    // }
     static sum(...values: number[]) {
-        return  values.reduce((acc, cur) => acc + cur, 0);
+        let sum = 0;
+        for (let i = 0; i < values.length; i++) {
+            sum += values[i];
+        }
+        return sum;
     }
 }
