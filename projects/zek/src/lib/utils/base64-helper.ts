@@ -1,5 +1,3 @@
-import { IFileString } from "../models";
-
 export class Base64Helper {
     static utf8ToBase64String(str: string) {
         return btoa(unescape(encodeURIComponent(str)));
@@ -17,41 +15,5 @@ export class Base64Helper {
         }
         const blob = new Blob([int8Array], { type: type });
         return blob;
-    }
-
-    static fileToDataUrl(file: File) {
-        return new Promise<IFileString>((resolve, reject) => {
-            if (!file) {
-                reject('file is null');
-            }
-
-            const reader = new FileReader();
-            reader.onloadend = () => {
-
-                resolve({
-                    fileName: file.name,
-                    content: reader.result,
-                } as IFileString);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-    static fileToBase64String(file: File) {
-        return new Promise<IFileString>((resolve, reject) => {
-            if (!file) {
-                reject('file is null');
-            }
-
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const dataUrl = reader.result as string;
-                const index = dataUrl.indexOf(',');
-                resolve({
-                    fileName: file.name,
-                    content: dataUrl.substring(index + 1),
-                } as IFileString);
-            };
-            reader.readAsDataURL(file);
-        });
     }
 }
