@@ -10,9 +10,12 @@ export class AuthService {
     private _oldValue = false;
     private _user: LoginUser | null = null;
 
-    get user(): LoginUser | null {
+    static key = 'user';
+    // access_token
+
+    get user() {
         if (!this._isInitialized) {
-            const user = StorageHelper.get('login');
+            const user = StorageHelper.get(AuthService.key);
             if (user) {
                 user.id = ObjectHelper.isDefined(user.id) ? Convert.parseNumber(user.id) : user.id;
                 user.expired = ObjectHelper.isDefined(user.expired) ? DateHelper.parseDate(user.expired) : user.expired;
@@ -64,7 +67,7 @@ export class AuthService {
     }
 
 
-    isAuthenticated(): boolean {
+    isAuthenticated() {
         const expired = this.getExpired() || new Date(0);// if getExpired is null return min JS date
 
         const newValue = new Date() < expired;
@@ -119,7 +122,7 @@ export class AuthService {
 
 
     login(user: LoginToken | LoginUser | null) {
-        StorageHelper.set('login', user);
+        StorageHelper.set(AuthService.key, user);
         this._user = null;
         this._isInitialized = false;//user get method will init user
         this.isAuthenticated();//this method need to execute subject.next();        
