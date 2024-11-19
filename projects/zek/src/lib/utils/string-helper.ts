@@ -92,7 +92,7 @@ export class StringHelper {
         return (start > 0 || end < val.length) ? val.substring(start, end) : val;
     }
 
-    split(original: string, ...separator: string[]) {
+    static split(original: string, ...separator: string[]) {
         if (!original) return [];
 
         if (separator.length === 0)
