@@ -92,14 +92,14 @@ export class StringHelper {
         return (start > 0 || end < val.length) ? val.substring(start, end) : val;
     }
 
-    static split(original: string, ...separator: string[]) {
-        if (!original) return [];
+    static split(val: string | null | undefined, ...separator: string[]) {
+        if (!val) return [];
 
         if (separator.length === 0)
             separator = [','];
 
         const regex = new RegExp(`(?:${separator.join('|')})`);
-        return original.split(regex)
+        return val.split(regex)
             .map(entry => entry.trim()) // Trim spaces
             .filter(entry => entry.length > 0); // Remove empty entries
     }
