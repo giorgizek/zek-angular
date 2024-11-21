@@ -5,8 +5,6 @@ import { CancelArgs } from "./args";
 import { CoreComponent } from "./core.component";
 import { BooleanInput } from "./types";
 
-let uniqueId = 0;
-
 @Directive()
 export class CoreUiComponent extends CoreComponent
     implements AfterContentInit, ControlValueAccessor {
@@ -39,19 +37,6 @@ export class CoreUiComponent extends CoreComponent
 
     @Output() readonly change: EventEmitter<any> = new EventEmitter<any>();
     @Output() readonly changing: EventEmitter<CancelArgs> = new EventEmitter<CancelArgs>();
-
-    private _name: string = `zek-${++uniqueId}`;
-    get name(): string {
-        return this._name;
-    }
-    @Input()
-    set name(value: string) {
-        if (this._name !== value) {
-            this._name = value;
-            this.onNameChanged();
-        }
-    }
-    onNameChanged() { }
 
 
     private _isInitialized = false;
