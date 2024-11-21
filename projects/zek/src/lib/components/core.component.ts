@@ -13,6 +13,9 @@ export class CoreComponent implements OnInit, OnDestroy {
         this.destroy();
     }
 
+
+    uniqueId = ++uniqueId;
+ 
     async load() {
         try {
             if (this.loading) return;
@@ -37,19 +40,6 @@ export class CoreComponent implements OnInit, OnDestroy {
     bindDictionary() { }
     onBindingCompleted() { }
     onLoadCompleted() { }
-
-    private _name: string = `zek-${++uniqueId}`;
-    get name(): string {
-        return this._name;
-    }
-    @Input()
-    set name(value: string) {
-        if (this._name !== value) {
-            this._name = value;
-            this.onNameChanged();
-        }
-    }
-    onNameChanged() { }
 
     async destroy() {
     }

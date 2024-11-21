@@ -38,6 +38,19 @@ export class CoreUiComponent extends CoreComponent
     @Output() readonly change: EventEmitter<any> = new EventEmitter<any>();
     @Output() readonly changing: EventEmitter<CancelArgs> = new EventEmitter<CancelArgs>();
 
+    private _name: string = `zek-${++this.uniqueId}`;
+    get name(): string {
+        return this._name;
+    }
+    @Input()
+    set name(value: string) {
+        if (this._name !== value) {
+            this._name = value;
+            this.onNameChanged();
+        }
+    }
+    onNameChanged() { }
+    
 
     private _isInitialized = false;
     get isInitialized() {
