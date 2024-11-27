@@ -5,7 +5,6 @@ import { CoreUiComponent } from '../../components/core-ui.component';
 import { KeyPair, ModalSize, PagedList } from '../../models';
 import { Convert, ObjectHelper } from '../../utils';
 declare let bootstrap: any;
-let uniqueId = 0;
 
 /**
  * Provider Expression that allows bb to register as a ControlValueAccessor. This
@@ -30,7 +29,7 @@ export class ZekButtonBrowse extends CoreUiComponent {
         return super.destroy();
     }
 
-    private _uniqueId: string = `zek-bb-${++uniqueId}`;
+    private _uniqueId: string = `zek-bb-${this.uniqueId}`;
     /** The unique ID for the bb. */
     @Input() id: string = this._uniqueId;
     get modalId(): string {

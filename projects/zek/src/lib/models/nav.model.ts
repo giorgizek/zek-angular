@@ -1,10 +1,5 @@
-export interface Nav {
+export interface INavItem {
     id?: string | null;
-    name?: string | null;
-    icon?: string | null;
-    children: NavItem[]
-}
-export interface NavItem {
     name?: string | null;
     top?: boolean | null;
     icon?: string | null;
@@ -13,5 +8,7 @@ export interface NavItem {
     data?: {
         roles?: [] | null,
         permission?: { key: number } | null
-    } | null
+    } | null;
+
+    children?: INavItem[] | null
 }

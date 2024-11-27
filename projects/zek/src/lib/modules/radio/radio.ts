@@ -4,8 +4,6 @@ import { BooleanInput } from '../../components';
 import { CoreUiComponent } from '../../components/core-ui.component';
 import { Convert } from '../../utils';
 
-let uniqueId = 0;
-
 /**
  * Provider Expression that allows zek-radio to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
@@ -48,7 +46,7 @@ export class ZekRadio extends CoreUiComponent
     }
 
 
-    private _uniqueId: string = `zek-radio-${++uniqueId}`;
+    private _uniqueId: string = `zek-radio-${this.uniqueId}`;
 
     /** The unique ID for the radio button. */
     @Input() id: string = this._uniqueId;

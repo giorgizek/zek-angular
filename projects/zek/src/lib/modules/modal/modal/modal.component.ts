@@ -1,12 +1,11 @@
 ﻿import { Component, Output, EventEmitter, Input, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BooleanInput, CoreComponent } from '../../../components';
-import { BootstrapHelper, ComponentType, Convert, handler, RandomHelper } from '../../../utils';
+import { BootstrapHelper, ComponentType, Convert, handler, ObjectHelper, RandomHelper } from '../../../utils';
 import { ValidEventArgs } from '../../../models/valid-event-args.model';
 import { ModalSize } from '../../../models';
 
 declare let bootstrap: any;
-let uniqueId = 0;
 
 @Component({
     selector: 'zek-modal',
@@ -49,7 +48,7 @@ export class ZekModal extends CoreComponent {
         }, 1);
     }
 
-    private _uniqueId: string = `zek-modal-${++uniqueId}`;
+    private _uniqueId: string = `zek-modal-${this.uniqueId}`;
     /** The unique ID for the radio button. */
     @Input() id: string = this._uniqueId;
     modalId = `${this.id}-modal`;
@@ -207,7 +206,11 @@ export class ZekModal extends CoreComponent {
     protected getModalElement() {
         return document.getElementById(this.modalId);
     }
-    protected getModal() {
+    /**
+     * Creates  with method new bootstrap.Modal(modalId, { backdrop: 'static' });
+     * @returns boostrap modal
+     */
+    protected createModal() {
         const modalEl = this.getModalElement();
         return new bootstrap.Modal(modalEl, { backdrop: 'static' });
     }
@@ -221,14 +224,14 @@ export class ZekModal extends CoreComponent {
 
     // private isShown = false;
     show(model?: any) {
-        if (!model) model = {};
+        if (!ObjectHelper.isDefined(model)) model = {};
         this.model = model;
 
         // this.modal?.show();
 
 
         if (!this._modal) {
-            this._modal = this.getModal();
+            this._modal = this.createModal();
         }
         if (this._modal) {
             this._modal.show();
@@ -237,7 +240,7 @@ export class ZekModal extends CoreComponent {
     }
 
 
-    cancel(){
+    cancel() {
         this.onCancel.emit();
         this.hide();
     }

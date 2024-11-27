@@ -6,9 +6,6 @@ import { KeyPairOption } from './model';
 import { CommonModule } from '@angular/common';
 
 
-let uniqueId = 0;
-
-
 const ZEK_SELECT_MULTIPLE_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ZekSelectMultiple),
@@ -31,7 +28,7 @@ export class ZekSelectMultiple extends CoreUiComponent {
         super(renderer, elementRef);
     }
 
-    private _uniqueId: string = `zek-select-${++uniqueId}`;
+    private _uniqueId: string = `zek-select-${this.uniqueId}`;
     /** The unique ID for the radio button. */
     @Input() id: string = this._uniqueId;
 

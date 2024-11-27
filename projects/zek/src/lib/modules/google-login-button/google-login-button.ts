@@ -1,11 +1,10 @@
-import { Component, Directive, EventEmitter, Inject, Input, Output } from "@angular/core";
+import { Directive, EventEmitter, Inject, Input, Output } from "@angular/core";
 import { loader } from './loader';
 import { GOOGLE_CLIENT_ID } from "../../tokens";
 import { CoreComponent, BooleanInput, NumberInput } from "../../components";
 import { Convert } from "../../utils";
 
 declare let google: any;
-let uniqueId = 0;
 
 export interface GoogleLoginConfig {
     client_id: string;
@@ -25,7 +24,7 @@ export class ZekGoogleLoginButton extends CoreComponent {
         super();
     }
 
-    private _uniqueId: string = `zek-google-button-container-${++uniqueId}`;
+    private _uniqueId: string = `zek-google-button-container-${this.uniqueId}`;
     @Input() id: string = this._uniqueId;
 
     private _prompt = true;

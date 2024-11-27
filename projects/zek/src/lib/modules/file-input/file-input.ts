@@ -6,8 +6,6 @@ import { CoreUiComponent } from '../../components/core-ui.component';
 import { BooleanInput } from '../../components/types';
 import { Convert } from '../../utils/convert';
 
-let uniqueId = 0;
-
 @Component({
     standalone: true,
     imports: [CommonModule, FormsModule],
@@ -25,7 +23,7 @@ export class ZekFileInput extends CoreUiComponent {
 
     private readonly fileService = inject(FileService);
 
-    private _uniqueId: string = `zek-file-input-${++uniqueId}`;
+    private _uniqueId: string = `zek-file-input-${this.uniqueId}`;
     /** The unique ID for the tag. */
     @Input() id: string = this._uniqueId;
 

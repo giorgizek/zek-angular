@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { BooleanInput, CoreUiComponent, NumberInput } from '../../components';
 import { Convert, MathHelper } from '../../utils';
 
-let uniqueId = 0;
-
 @Component({
     standalone: true,
     imports: [CommonModule, FormsModule],
@@ -74,7 +72,7 @@ export class ZekTag extends CoreUiComponent {
         }
     }
 
-    private _uniqueId: string = `zek-tag-${++uniqueId}`;
+    private _uniqueId: string = `zek-tag-${this.uniqueId}`;
     /** The unique ID for the tag. */
     @Input() id: string = this._uniqueId;
 
