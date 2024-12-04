@@ -2,6 +2,7 @@
 // import { Tree } from "../models/tree.model";
 
 import { KeyPair, KeyPairEx, Tree } from "../models";
+import { IFlattenTree } from "../models/flatten-tree";
 
 
 export class ArrayHelper {
@@ -93,62 +94,59 @@ export class ArrayHelper {
         return array.filter(x => x !== undefined && x !== null && x[key] === filterValue);
     }
 
-    static flattenArray(array: any[]): any[] {
-        let result: any[] = [];
-        if (array) {
-            array.forEach(tree => {
-                tree.indent = 0;
-                result.push(tree);
-                result = result.concat(this.getChildren(tree));
-            });
-        }
-        return result;
-    }
-
-    private static getChildren(tree: Tree, indent: number = 1): any[] {
-        let result: any[] = [];
-        if (tree.children) {
-            tree.childrenCount = tree.children.length;
-            tree.children.forEach(child => {
-                child.indent = indent;
-                result.push(child);
-                result = result.concat(this.getChildren(child, indent + 1));
-            });
+   
+    static flatten(tree: Tree | Tree[], indent: number = 0): IFlattenTree[] {
+        let result: IFlattenTree[] = [];
+        // If the input is an array of trees, we process each one
+        if (Array.isArray(tree)) {
+            for (const item of tree) {
+                result = result.concat(this.flatten(item, indent));
+            }
         } else {
-            tree.childrenCount = 0;
-        }
-
-        delete tree.children;
-        delete tree.childrenIds;
-        //delete tree.childrenCount;
-        //delete tree.indent;
-        return result;
-    }
-
-
-
-    static treeToKeyPairArray(array: Tree[]) {
-        let result: KeyPair[] = [];
-        if (array) {
-            array.forEach(tree => {
-                result.push({ key: tree.key, value: tree.value });
-                result = result.concat(this.getIndentChildren(tree));
-            });
+            // Add the current tree node to the result
+            let item = {
+                key: tree.key,
+                value: tree.value,
+                indent: indent,
+                count: Array.isArray(tree.children) ? tree.children?.length : 0
+            } as IFlattenTree;
+            result.push(item);
+            // If there are children, recursively flatten them
+            if (Array.isArray(tree.children)) {
+                for (const child of tree.children) {
+                    result = result.concat(this.flatten(child, indent + 1));
+                }
+            }
         }
 
         return result;
     }
 
+    static flattenDropDownList(tree: Tree | Tree[], indent: number = 0) {
+        let result: IFlattenTree[] = [];
+        // If the input is an array of trees, we process each one
+        if (Array.isArray(tree)) {
+            for (const item of tree) {
+                result = result.concat(this.flattenDropDownList(item, indent));
+            }
+        } else {
+            // Add the current tree node to the result
+            let item = {
+                key: tree.key,
+                value: '&emsp;'.repeat(indent) + tree.value,
+                indent: indent,
+                count: Array.isArray(tree.children) ? tree.children?.length : 0
+            } as IFlattenTree;
+            result.push(item);
+            // If there are children, recursively flatten them
+            if (Array.isArray(tree.children)) {
+                for (const child of tree.children) {
+                    result = result.concat(this.flattenDropDownList(child, indent + 1));
+                }
 
-    private static getIndentChildren(tree: Tree, indent: number = 1): KeyPair[] {
-        let result: KeyPair[] = [];
-        if (tree.children) {
-            tree.children.forEach(child => {
-                //result.push({ key: child.key, value: '└' + '─'.repeat(indent) + child.value });
-                result.push({ key: child.key, value: '&emsp;'.repeat(indent) + child.value });
-                result = result.concat(this.getChildren(child, indent + 1));
-            });
+            }
         }
+
         return result;
     }
 
