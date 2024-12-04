@@ -17,6 +17,7 @@ export class AuthService {
         if (!this._isInitialized) {
             const user = StorageHelper.get(AuthService.USER_KEY);
             if (user) {
+                //convert string to specified types
                 user.id = ObjectHelper.isDefined(user.id) ? Convert.parseNumber(user.id) : user.id;
                 user.expired = ObjectHelper.isDefined(user.expired) ? DateHelper.parseDate(user.expired) : user.expired;
                 user.refreshTokenTime = ObjectHelper.isDefined(user.refreshTokenTime) ? DateHelper.parseDate(user.refreshTokenTime) : user.refreshTokenTime;
@@ -68,13 +69,11 @@ export class AuthService {
 
 
     isAuthenticated() {
-        const expired = this.getExpired() || new Date(0);// if getExpired is null return min JS date
+        const expired = this.getExpired()
 
         const newValue = new Date() < expired;
         if (this._oldValue !== newValue) {
             this._oldValue = newValue;
-
-            this.emitOnSignedIn();
 
             //if user is signed in and expired we need to logout (remove from localStorage)
             if (!newValue) {
@@ -84,6 +83,7 @@ export class AuthService {
         }
         return newValue;
     }
+
     emitOnSignedIn() {
         if (this._onSignedInSubject) {
             this._onSignedInSubject.next(this._oldValue);
@@ -125,31 +125,30 @@ export class AuthService {
         StorageHelper.set(AuthService.USER_KEY, user);
         this._user = null;
         this._isInitialized = false;//user get method will init user
-        this.isAuthenticated();//this method need to execute subject.next();        
+        this.emitOnSignedIn();
     }
     logout() {
-        this.login(null);
+        StorageHelper.set(AuthService.USER_KEY, null);
+        this._user = null;
+        this._isInitialized = false;
+        this.emitOnSignedIn();
+    }
+    
+
+
+
+    protected getExpired() {
+        return this.user?.expired ?? new Date(0);// if getExpired is null return min JS date;
     }
 
+    // protected getRefreshTokenExpired(): Date | null | undefined {
+    //     const user = this.user;
+    //     if (user) {
+    //         return user.refreshTokenTime;
+    //     }
 
-
-    protected getExpired(): Date | null | undefined {
-        const user = this.user;
-        if (user) {
-            return user.expired;
-        }
-
-        return null;
-    }
-
-    protected getRefreshTokenExpired(): Date | null | undefined {
-        const user = this.user;
-        if (user) {
-            return user.refreshTokenTime;
-        }
-
-        return null;
-    }
+    //     return null;
+    // }
 
 
     // isInRole(allowedRoles: string[]): boolean {
