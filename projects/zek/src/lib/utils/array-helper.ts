@@ -94,26 +94,27 @@ export class ArrayHelper {
         return array.filter(x => x !== undefined && x !== null && x[key] === filterValue);
     }
 
-   
-    static flatten(tree: Tree | Tree[], indent: number = 0): IFlattenTree[] {
-        let result: IFlattenTree[] = [];
+
+    static flatten(array: any, indent: number = 0) {
+        let result: any[] = [];
         // If the input is an array of trees, we process each one
-        if (Array.isArray(tree)) {
-            for (const item of tree) {
+        if (Array.isArray(array)) {
+            for (const item of array) {
                 result = result.concat(this.flatten(item, indent));
             }
         } else {
             // Add the current tree node to the result
-            let item = {
-                key: tree.key,
-                value: tree.value,
-                indent: indent,
-                count: Array.isArray(tree.children) ? tree.children?.length : 0
-            } as IFlattenTree;
+            const item = Object.assign({}, array);
+            item.indent = indent;
+            item.count = Array.isArray(array.children)
+                ? array.children.length
+                : 0;
+            delete item.children;
+            delete item.childrenIds;
             result.push(item);
             // If there are children, recursively flatten them
-            if (Array.isArray(tree.children)) {
-                for (const child of tree.children) {
+            if (Array.isArray(array.children)) {
+                for (const child of array.children) {
                     result = result.concat(this.flatten(child, indent + 1));
                 }
             }
@@ -135,7 +136,7 @@ export class ArrayHelper {
                 key: tree.key,
                 value: '&emsp;'.repeat(indent) + tree.value,
                 indent: indent,
-                count: Array.isArray(tree.children) ? tree.children?.length : 0
+                count: Array.isArray(tree.children) ? tree.children.length : 0
             } as IFlattenTree;
             result.push(item);
             // If there are children, recursively flatten them
