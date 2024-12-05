@@ -7,7 +7,7 @@ import { BitwiseHelper } from '../utils/bitwise-helper';
 @Injectable()
 export class AuthService {
     private _isInitialized = false;
-    private _oldValue = false;
+    private _auth = false;
     private _user: LoginUser | null = null;
 
     static USER_KEY = 'user';
@@ -16,23 +16,29 @@ export class AuthService {
     get user() {
         if (!this._isInitialized) {
             const user = StorageHelper.get(AuthService.USER_KEY);
-            if (user) {
-                //convert string to specified types
-                user.id = ObjectHelper.isDefined(user.id) ? Convert.parseNumber(user.id) : user.id;
-                user.expired = ObjectHelper.isDefined(user.expired) ? DateHelper.parseDate(user.expired) : user.expired;
-                user.refreshTokenTime = ObjectHelper.isDefined(user.refreshTokenTime) ? DateHelper.parseDate(user.refreshTokenTime) : user.refreshTokenTime;
-
-                if (Array.isArray(user.roles)) {
-                    user.roles = user.roles.map(function (e: any) { return e ? e.toUpperCase() : e; });
-                }
-            }
-            this._user = user;
-            this._isInitialized = true;
-            this._starRefreshTokenTimer();
+            this._init(user);
         }
         return this._user;
     }
 
+    /**
+     * Inits user (parses fields and starts refresh token timer if needed)
+     * @param user user from json or storage
+     */
+    private _init(user: any){
+        if (user) {
+            //convert string to specified types
+            user.expired = ObjectHelper.isDefined(user.expired) ? DateHelper.parseDate(user.expired) : user.expired;
+            user.refreshTokenTime = ObjectHelper.isDefined(user.refreshTokenTime) ? DateHelper.parseDate(user.refreshTokenTime) : user.refreshTokenTime;
+
+            if (Array.isArray(user.roles)) {
+                user.roles = user.roles.map(function (e: any) { return e ? e.toUpperCase() : e; });
+            }
+        }
+        this._user = user;
+        this._isInitialized = true;
+        this._starRefreshTokenTimer();
+    }
 
     private _timerId: any;
     private _starRefreshTokenTimer() {
@@ -68,12 +74,17 @@ export class AuthService {
     }
 
 
-    isAuthenticated() {
+    private get _isAuthenticated() {
         const expired = this.getExpired()
-
-        const newValue = new Date() < expired;
-        if (this._oldValue !== newValue) {
-            this._oldValue = newValue;
+        return new Date() < expired;
+    }
+    /**
+     * Dynamic property. gets auth user and checks expired;
+     */
+    get isAuthenticated() {
+        const newValue = this._isAuthenticated;
+        if (this._auth !== newValue) {
+            this._auth = newValue;
 
             //if user is signed in and expired we need to logout (remove from localStorage)
             if (!newValue) {
@@ -86,7 +97,7 @@ export class AuthService {
 
     emitOnSignedIn() {
         if (this._onSignedInSubject) {
-            this._onSignedInSubject.next(this._oldValue);
+            this._onSignedInSubject.next(this._auth);
         }
     }
 
@@ -121,22 +132,19 @@ export class AuthService {
 
 
 
-    login(user: LoginToken | LoginUser | null) {
+    private _login(user: any) {
         StorageHelper.set(AuthService.USER_KEY, user);
-        this._user = null;
         this._isInitialized = false;//user get method will init user
-        this._oldValue = true;
+        this._init(user);
+        this._auth = ObjectHelper.isDefined(user);
         this.emitOnSignedIn();
+    }
+    login(user: LoginToken | LoginUser) {
+        this._login(user);
     }
     logout() {
-        StorageHelper.set(AuthService.USER_KEY, null);
-        this._user = null;
-        this._isInitialized = false;
-        this._oldValue = false;
-        this.emitOnSignedIn();
+        this._login(null);
     }
-
-
 
 
     protected getExpired() {

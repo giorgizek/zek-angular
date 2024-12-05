@@ -8,7 +8,7 @@ export const zekAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     const auth = inject(AuthService);
     const router = inject(Router);
 
-    if (!auth.isAuthenticated()) {
+    if (!auth.isAuthenticated) {
         router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
