@@ -125,15 +125,17 @@ export class AuthService {
         StorageHelper.set(AuthService.USER_KEY, user);
         this._user = null;
         this._isInitialized = false;//user get method will init user
+        this._oldValue = true;
         this.emitOnSignedIn();
     }
     logout() {
         StorageHelper.set(AuthService.USER_KEY, null);
         this._user = null;
         this._isInitialized = false;
+        this._oldValue = false;
         this.emitOnSignedIn();
     }
-    
+
 
 
 

@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 //import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 import { HttpParameterCodec } from '@angular/common/http';
 import { API_BASE_URL } from '../tokens';
+import { UrlHelper } from '../utils';
 
 export interface WebApiConfig {
     baseUrl: string;
@@ -23,7 +24,8 @@ export class WebApiClient {
     }
 
     get<T = any>(url: string, params?: any): Observable<T> {
-        return this.http.get<T>(this.baseUrl + url, { headers: this.getHeaders(), params: this.toHttpParams(params) });
+        const combinedUrl = UrlHelper.combine(this.baseUrl, url);
+        return this.http.get<T>(combinedUrl, { headers: this.getHeaders(), params: this.toHttpParams(params) });
         /*.catch(catchError(this.handleError(url)))
         .do((res: Response) => {
             // Handle success, maybe display notification
@@ -37,16 +39,20 @@ export class WebApiClient {
     }
 
     getString(url: string, params?: object): Observable<string | null> {
-        return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'text', params: this.toHttpParams(params) });
+        const combinedUrl = UrlHelper.combine(this.baseUrl, url);
+        return this.http.get(combinedUrl, { headers: this.getHeaders(), responseType: 'text', params: this.toHttpParams(params) });
     }
     getBytes(url: string, params?: any): Observable<ArrayBuffer> {
-        return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'arraybuffer', params: this.toHttpParams(params) });
+        const combinedUrl = UrlHelper.combine(this.baseUrl, url);
+        return this.http.get(combinedUrl, { headers: this.getHeaders(), responseType: 'arraybuffer', params: this.toHttpParams(params) });
     }
     getBlob(url: string, params?: any): Observable<Blob> {
-        return this.http.get(this.baseUrl + url, { headers: this.getHeaders(), responseType: 'blob', params: this.toHttpParams(params) });
+        const combinedUrl = UrlHelper.combine(this.baseUrl, url);
+        return this.http.get(combinedUrl, { headers: this.getHeaders(), responseType: 'blob', params: this.toHttpParams(params) });
     }
     postBlob(url: string, body: any): Observable<Blob> {
-        return this.http.post(this.baseUrl + url, body, { headers: this.getHeaders(), responseType: 'blob' });
+        const combinedUrl = UrlHelper.combine(this.baseUrl, url);
+        return this.http.post(combinedUrl, body, { headers: this.getHeaders(), responseType: 'blob' });
     }
 
 
@@ -99,26 +105,26 @@ export class WebApiClient {
     //}
 
     post<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.post<T>(this.baseUrl + url, body, { headers: this.getHeaders(body) });
+        return this.http.post<T>(UrlHelper.combine(this.baseUrl, url), body, { headers: this.getHeaders(body) });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     put<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.put<T>(this.baseUrl + url, body, { headers: this.getHeaders(body) });
+        return this.http.put<T>(UrlHelper.combine(this.baseUrl, url), body, { headers: this.getHeaders(body) });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     delete(url: string, body?: any | null): Observable<any> {
-        return this.http.request('delete', this.baseUrl + url, { body, headers: this.getHeaders(body) });
+        return this.http.request('delete', UrlHelper.combine(this.baseUrl, url), { body, headers: this.getHeaders(body) });
         //return this.http.delete(environment.url + url, { headers: this.getHeaders() });
         //.pipe(
         //catchError(this.handleError(url))
         //);
     }
     patch<T = any>(url: string, body?: any | null): Observable<T> {
-        return this.http.patch<T>(this.baseUrl + url, body, { headers: this.getHeaders(body) });
+        return this.http.patch<T>(UrlHelper.combine(this.baseUrl, url), body, { headers: this.getHeaders(body) });
     }
 
 
