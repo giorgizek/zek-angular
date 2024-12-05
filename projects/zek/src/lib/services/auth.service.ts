@@ -25,7 +25,7 @@ export class AuthService {
      * Inits user (parses fields and starts refresh token timer if needed)
      * @param user user from json or storage
      */
-    private _init(user: any){
+    private _init(user: any) {
         if (user) {
             //convert string to specified types
             user.expired = ObjectHelper.isDefined(user.expired) ? DateHelper.parseDate(user.expired) : user.expired;
@@ -86,9 +86,14 @@ export class AuthService {
         if (this._auth !== newValue) {
             this._auth = newValue;
 
+
             //if user is signed in and expired we need to logout (remove from localStorage)
             if (!newValue) {
-                this.logout();
+                this.logout();//this executes emitOnSignedIn so we don't need here execute emitOnSignedIn
+            }
+            else {
+                //this line need if you already logged in and refresh page. (System will init user from storage and verify)
+                this.emitOnSignedIn();
             }
             return newValue;
         }
