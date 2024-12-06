@@ -95,28 +95,29 @@ export class ArrayHelper {
     }
 
 
+
     static flatten(array: any, indent: number = 0) {
         let result: any[] = [];
-        // If the input is an array of trees, we process each one
-        if (Array.isArray(array)) {
-            for (const item of array) {
-                result = result.concat(this.flatten(item, indent));
+        if (!Array.isArray(array)) {
+            const flattenedItem = {
+                ...array, // shallow copy the current item
+                indent, // add the current indent level
+                count: Array.isArray(array.children) ? array.children.length : 0 // set count based on children
+            };
+
+            delete flattenedItem.children;
+            delete flattenedItem.childrenIds;
+            result.push(flattenedItem);
+
+            if (flattenedItem.count) {
+                result.push(...this.flatten(array.children, indent + 1)); // Use spread operator for efficiency
             }
+
+            return result;
         } else {
-            // Add the current tree node to the result
-            const item = Object.assign({}, array);
-            item.indent = indent;
-            item.count = Array.isArray(array.children)
-                ? array.children.length
-                : 0;
-            delete item.children;
-            delete item.childrenIds;
-            result.push(item);
-            // If there are children, recursively flatten them
-            if (Array.isArray(array.children)) {
-                for (const child of array.children) {
-                    result = result.concat(this.flatten(child, indent + 1));
-                }
+            
+            for (const item of array) {
+                result.push(...this.flatten(item, indent));
             }
         }
 
@@ -126,11 +127,7 @@ export class ArrayHelper {
     static flattenDropDownList(tree: Tree | Tree[], indent: number = 0) {
         let result: IFlattenTree[] = [];
         // If the input is an array of trees, we process each one
-        if (Array.isArray(tree)) {
-            for (const item of tree) {
-                result = result.concat(this.flattenDropDownList(item, indent));
-            }
-        } else {
+        if (!Array.isArray(tree)) {
             // Add the current tree node to the result
             let item = {
                 key: tree.key,
@@ -141,11 +138,13 @@ export class ArrayHelper {
             result.push(item);
             // If there are children, recursively flatten them
             if (Array.isArray(tree.children)) {
-                for (const child of tree.children) {
-                    result = result.concat(this.flattenDropDownList(child, indent + 1));
-                }
-
+                result.push(...this.flattenDropDownList(tree.children, indent + 1)); // Use spread operator for efficiency
             }
+        } else {
+            for (const item of tree) {
+                result.push(...this.flattenDropDownList(item, indent));
+            }
+
         }
 
         return result;
