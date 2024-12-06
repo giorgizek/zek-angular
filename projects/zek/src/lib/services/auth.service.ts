@@ -39,12 +39,20 @@ export class AuthService {
 
 
     private _starTimer() {
-        this._stopTimer();
+        this._stopTimer();      
 
-        if (this._user) {
-            this._timerId = setInterval(() => {
-                this._onTick();
-            }, 1000);
+        let interval = this.getExpired().getTime() - new Date().getTime();
+        if (interval < 1000)
+            interval = 1000;
+        if (interval > 0 && this._user) {
+            this._refreshTimerId = setInterval(() => {
+                this.emitOnRefreshToken();
+            }, interval);
+            if (this._user) {
+                this._timerId = setInterval(() => {
+                    this._onTick();
+                }, 1000);
+            }
         }
     }
     private _stopTimer() {
