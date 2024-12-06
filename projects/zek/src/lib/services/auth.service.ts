@@ -36,38 +36,28 @@ export class AuthService {
         return this._auth;
     }
 
-
-
     private _starTimer() {
-        this._stopTimer();      
+        this._stopTimer();
 
-        let interval = this.getExpired().getTime() - new Date().getTime();
+        let interval = this.getExpired().getTime() - new Date().getTime() + 1000;
         if (interval < 1000)
             interval = 1000;
         if (interval > 0 && this._user) {
-            this._refreshTimerId = setInterval(() => {
-                this.emitOnRefreshToken();
+            this._timerId = setTimeout(() => {
+                this._onTick();
             }, interval);
-            if (this._user) {
-                this._timerId = setInterval(() => {
-                    this._onTick();
-                }, 1000);
-            }
         }
     }
     private _stopTimer() {
         if (typeof this._timerId === 'number') {
-            clearInterval(this._timerId);
+            clearTimeout(this._timerId);
         }
     }
 
     private _onTick() {
         const newValue = this._isAuthenticated;
-        if (this._auth !== newValue) {
-            this._auth = newValue;
-            if (!newValue) {
-                this.logout();
-            }
+        if (this._auth !== newValue && !newValue) {
+            this.logout();
         }
     }
 
@@ -154,6 +144,7 @@ export class AuthService {
             this.emitOnSignedIn();
         }
 
+        //restart timers for new timeouts
         this._starTimer();
         this._starRefreshTokenTimer();
     }
