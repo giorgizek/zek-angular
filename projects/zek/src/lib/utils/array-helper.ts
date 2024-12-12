@@ -2,7 +2,8 @@
 // import { Tree } from "../models/tree.model";
 
 import { KeyPair, KeyPairEx, Tree } from "../models";
-import { IFlattenTree } from "../models/flatten-tree";
+import { IFlattenTree, INode, ITreeNode } from "../models/tree";
+
 
 
 export class ArrayHelper {
@@ -115,7 +116,7 @@ export class ArrayHelper {
 
             return result;
         } else {
-            
+
             for (const item of array) {
                 result.push(...this.flatten(item, indent));
             }
@@ -172,4 +173,56 @@ export class ArrayHelper {
     static enumToKeyPairExArray(value: any): KeyPairEx<number, string>[] {
         return this.enumToKeyPairBaseArray<KeyPairEx<number, string>>(value);
     }
+
+
+
+
+
+    /**
+     * Method to create a tree from a flat array of nodes
+     * @param array 
+     * @param safe if tue and some nodes not have parent thand adds as a root node. if false than thoose nodes skipped.
+     * @returns 
+     */
+    static createTree(array: INode[], safe = true): ITreeNode[] {
+        const tree: ITreeNode[] = [];
+
+        // Map to store nodes by their id for easy access
+        const map: { [key: number]: ITreeNode } = {};
+
+        // Step 1: Loop over the array to build the nodes
+        for (const item of array) {
+            const node: ITreeNode = {
+                id: item.id,
+                parentId: item.parentId ?? null,
+                name: item.name ?? null,
+                children: null
+            };
+            map[node.id] = node;
+        }
+
+        for (const item of array) {
+            const node = map[item.id];
+
+            // Step 2: Check if it's a root or child and assign to parent or tree
+            if (typeof node.parentId === 'undefined' || node.parentId === null) {
+                // Root node, add directly to the tree
+                tree.push(node);
+            } else {
+                // Non-root node, find its parent and add to its children
+                let parentNode = map[node.parentId];
+                if (parentNode) {
+                    if (!Array.isArray(parentNode.children))
+                        parentNode.children = [];
+                    parentNode.children.push(node);
+                } else if (safe) {
+                    //if save=true and parent node not exists, then we add as a root node
+                    tree.push(node);
+                }
+            }
+        }
+
+        return tree;
+    }
+
 }
