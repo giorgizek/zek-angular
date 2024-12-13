@@ -116,8 +116,8 @@ export class WebApiClient {
         //catchError(this.handleError(url))
         //);
     }
-    delete(url: string, body?: any | null): Observable<any> {
-        return this.http.request('delete', UrlHelper.combine(this.baseUrl, url), { body, headers: this.getHeaders(body) });
+    delete<T = any>(url: string, body?: any | null): Observable<T> {
+        return this.http.request<T>('delete', UrlHelper.combine(this.baseUrl, url), { body, headers: this.getHeaders(body) });
         //return this.http.delete(environment.url + url, { headers: this.getHeaders() });
         //.pipe(
         //catchError(this.handleError(url))
