@@ -138,11 +138,7 @@ export class AuthService {
             }
         }
         this._user = user as any;
-        //if old value was false and we set true then we need to emit
-        if (!this._auth) {
-            this._auth = true;
-            this.emitOnSignedIn();
-        }
+        this.emitOnSignedIn();
 
         //restart timers for new timeouts
         this._starTimer();
