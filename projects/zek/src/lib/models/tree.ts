@@ -16,3 +16,9 @@ export interface INode {
 export interface ITreeNode extends INode {
     children: ITreeNode[] | null;
 }
+export interface IFlattenTreeNode {
+    id?: number | null;
+    name?: string | null;
+    indent: number;
+    count: number;
+}

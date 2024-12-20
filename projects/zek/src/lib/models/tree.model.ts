@@ -1,5 +1,8 @@
 import { KeyPairChecked } from './key-pair.model';
 
+/**
+ * @deprecated use ITreeNode
+ */
 export class Tree extends KeyPairChecked<number, string> {
     parentId?: number | null;
     children?: Tree[] | null;

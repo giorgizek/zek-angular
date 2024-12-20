@@ -2,7 +2,7 @@
 // import { Tree } from "../models/tree.model";
 
 import { KeyPair, KeyPairEx, Tree } from "../models";
-import { IFlattenTree, INode, ITreeNode } from "../models/tree";
+import { IFlattenTree, IFlattenTreeNode, INode, ITreeNode } from "../models/tree";
 
 
 
@@ -125,12 +125,15 @@ export class ArrayHelper {
         return result;
     }
 
+    /**
+    * @deprecated use flattenDropDownList2
+    */
     static flattenDropDownList(tree: Tree | Tree[], indent: number = 0) {
         let result: IFlattenTree[] = [];
         // If the input is an array of trees, we process each one
         if (!Array.isArray(tree)) {
             // Add the current tree node to the result
-            let item = {
+            let item: IFlattenTree = {
                 key: tree.key,
                 value: '&emsp;'.repeat(indent) + tree.value,
                 indent: indent,
@@ -145,12 +148,35 @@ export class ArrayHelper {
             for (const item of tree) {
                 result.push(...this.flattenDropDownList(item, indent));
             }
-
         }
 
         return result;
     }
 
+    static flattenTreeNodeDropDownList(tree: ITreeNode | ITreeNode[], indent: number = 0) {
+        let result: IFlattenTreeNode[] = [];
+        // If the input is an array of trees, we process each one
+        if (!Array.isArray(tree)) {
+            // Add the current tree node to the result
+            let item: IFlattenTreeNode = {
+                id: tree.id,
+                value: '&emsp;'.repeat(indent) + tree.name,
+                indent: indent,
+                count: Array.isArray(tree.children) ? tree.children.length : 0
+            } as IFlattenTree;
+            result.push(item);
+            // If there are children, recursively flatten them
+            if (Array.isArray(tree.children)) {
+                result.push(...this.flattenTreeNodeDropDownList(tree.children, indent + 1)); // Use spread operator for efficiency
+            }
+        } else {
+            for (const item of tree) {
+                result.push(...this.flattenTreeNodeDropDownList(item, indent));
+            }
+        }
+
+        return result;
+    }
 
 
     private static enumToKeyPairBaseArray<T extends KeyPair<number, string>>(value: any): T[] {
