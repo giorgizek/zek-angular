@@ -12,6 +12,7 @@ export interface INode {
     id: number;
     parentId?: number | null;
     name: string | null;
+    checked?: boolean | null;
 }
 export interface ITreeNode extends INode {
     children: ITreeNode[] | null;
@@ -21,4 +22,5 @@ export interface IFlattenTreeNode {
     name?: string | null;
     indent: number;
     count: number;
+    checked?: boolean | null;
 }
