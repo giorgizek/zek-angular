@@ -17,7 +17,5 @@ export * from './nav.model';
 export * from './pager.model';
 export * from './print.model';
 export * from './tree.model';
+export * from './tree';
 export * from './valid-event-args.model';
-
-
-//export * from './';
