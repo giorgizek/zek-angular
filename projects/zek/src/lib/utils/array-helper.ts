@@ -160,7 +160,7 @@ export class ArrayHelper {
             // Add the current tree node to the result
             let item: IFlattenTreeNode = {
                 id: tree.id,
-                value: '&emsp;'.repeat(indent) + tree.name,
+                name: '&emsp;'.repeat(indent) + tree.name,
                 indent: indent,
                 count: Array.isArray(tree.children) ? tree.children.length : 0
             } as IFlattenTree;
