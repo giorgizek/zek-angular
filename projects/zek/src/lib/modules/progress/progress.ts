@@ -1,11 +1,7 @@
 ﻿import { Component, Input } from '@angular/core';
 import { BooleanInput, NumberInput } from '../../components';
-import { Convert } from '../../utils';
+import { Convert, MathHelper } from '../../utils';
 import { CommonModule } from '@angular/common';
-
-function clamp(v: number, min = 0, max = 100) {
-    return Math.max(min, Math.min(max, v));
-}
 
 type Background = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'body' | 'white' | 'transparent';
 
@@ -24,7 +20,7 @@ export class ZekProgress {
         return this._value;
     }
     set value(v: NumberInput) {
-        const tmp = clamp(Convert.toNumber(v) || 0);
+        const tmp = MathHelper.clamp(Convert.toNumber(v) || 0, 0, 100);
         if (this._value !== tmp) {
             this._value = tmp;
         }

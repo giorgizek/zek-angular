@@ -138,6 +138,12 @@ export class AuthService {
             }
         }
         this._user = user as any;
+
+        // if (!this._auth) {
+        //     this._auth = true;
+        //     this.emitOnSignedIn();
+        // }
+        this._auth = true;
         this.emitOnSignedIn();
 
         //restart timers for new timeouts

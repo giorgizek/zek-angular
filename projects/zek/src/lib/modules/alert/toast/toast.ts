@@ -1,15 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BootstrapHelper, Convert } from '../../../utils';
-//declare let bootstrap: any;
+import { BootstrapHelper, Convert, MathHelper } from '../../../utils';
 
 import { AlertService, Toast } from '../../../services/alert.service';
 import { NumberInput } from '../../../components';
 import { CommonModule } from '@angular/common';
-
-function clamp(v: number, min = 10, max = 3600000) {
-    return Math.max(min, Math.min(max, v));
-}
 
 @Component({
     standalone: true,
@@ -24,7 +19,7 @@ export class ZekToast implements OnInit, OnDestroy {
         return this._delay;
     }
     set delay(v: NumberInput) {
-        const tmp = clamp(Convert.toNumber(v) || 0);
+        const tmp = MathHelper.clamp(Convert.toNumber(v) || 0, 10, 3600000);
         if (this._delay !== tmp) {
             this._delay = tmp;
         }
