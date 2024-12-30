@@ -71,7 +71,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListI
             if (!totalCount && this.model.pager) {
                 totalCount = this.model.pager ? (this.model.pager.totalItemCount || 0) : 0;
             }
-            this.pager = PagerHelper.get(totalCount, this.internalFilter.page, this.internalFilter.pageSize);
+            this.pager = PagerHelper.get(totalCount, this.model.pageNumber, this.model.pageSize);
             this.onBindModelCompleted();
         }
         else {
