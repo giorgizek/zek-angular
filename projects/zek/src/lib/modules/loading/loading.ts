@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ZekLoadingService } from './loading-interceptor';
 
 @Component({
+    standalone: false,
     selector: 'zek-loading',
     styleUrls: ['./loading.css'],
     template: `

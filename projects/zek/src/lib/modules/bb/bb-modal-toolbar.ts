@@ -3,6 +3,7 @@ import { BooleanInput } from '../../components';
 import { Convert } from '../../utils';
 
 @Component({
+    standalone: false,
     selector: 'zek-bb-modal-toolbar',
     templateUrl: './bb-modal-toolbar.html',
 })

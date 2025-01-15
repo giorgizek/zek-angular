@@ -18,6 +18,7 @@ const ZEK_BB_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Component({
+    standalone: false,
     selector: 'zek-bb',
     templateUrl: './bb.component.html',
     providers: [ZEK_BB_CONTROL_VALUE_ACCESSOR],

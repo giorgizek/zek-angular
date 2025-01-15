@@ -3,6 +3,7 @@ import { DateHelper } from '../../utils';
 import { DatePipe } from '@angular/common';
 
 @Pipe({
+    standalone: false,
     name: 'utcToLocal'
 })
 export class ZekUtcToLocalPipe implements PipeTransform {

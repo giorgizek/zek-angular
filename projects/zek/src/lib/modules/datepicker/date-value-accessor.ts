@@ -14,6 +14,7 @@ const DATE_VALUE_ACCESSOR = {
 
 
 @Directive({
+    standalone: false,
     selector: '[zek-date],input[type=date][formControlName],input[type=date][formControl],input[type=date][ngModel]',//,input[type=date][ngModel]
     providers: [DATE_VALUE_ACCESSOR],
     host: {

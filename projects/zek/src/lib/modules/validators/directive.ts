@@ -97,6 +97,7 @@ export const RANGE_VALIDATOR: any = {
 };
 
 @Directive({
+    standalone: false,
     selector: 'input[type=number][range][formControlName],input[type=number][range][formControl],input[type=number][range][ngModel]',
     providers: [RANGE_VALIDATOR],
     host: { '[attr.range]': '_enabled ? range : null' }
@@ -132,6 +133,7 @@ export const MATCH_VALIDATOR: any = {
 };
 
 @Directive({
+    standalone: false,
     selector: '[match][formControlName],match][formControl],[match][ngModel]',
     providers: [MATCH_VALIDATOR],
     host: { '[attr.match]': '_enabled ? match : null' }

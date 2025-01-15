@@ -14,6 +14,7 @@ export type GoogleLoginButtonTextInput =
 
 
 @Directive({
+    standalone: false,
     selector: 'zek-google-login',
     host: {
         '[attr.id]': 'id',

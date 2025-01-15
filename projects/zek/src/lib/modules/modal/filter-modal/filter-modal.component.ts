@@ -2,6 +2,7 @@
 import { ZekModal } from '../modal/modal.component';
 
 @Component({
+    standalone: false,
     selector: 'zek-filter-modal',
     templateUrl: './filter-modal.component.html'
 })

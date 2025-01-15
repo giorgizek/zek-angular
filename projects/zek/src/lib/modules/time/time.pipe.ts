@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 //import { toDate } from '../../extensions';
 
 @Pipe({
+    standalone: false,
     name: 'time'
 })
 export class TimePipe implements PipeTransform {

@@ -8,6 +8,7 @@ import { ModalSize } from '../../../models';
 declare let bootstrap: any;
 
 @Component({
+    standalone: false,
     selector: 'zek-modal',
     templateUrl: './modal.component.html'
 })
@@ -291,6 +292,7 @@ export class ZekModal extends CoreComponent {
  * @deprecated Please use ZekModal
  */
 @Component({
+    standalone: false,
     selector: 'zek-delete-modal',
     templateUrl: './modal.component.html'
 })
@@ -308,6 +310,7 @@ export class ZekDeleteModal extends ZekModal {
  * @deprecated Please use ZekModal
  */
 @Component({
+    standalone: false,
     selector: 'zek-approve-modal',
     templateUrl: './modal.component.html'
 })
@@ -325,6 +328,7 @@ export class ZekApproveModal extends ZekModal {
  * @deprecated Please use ZekModal
  */
 @Component({
+    standalone: false,
     selector: 'zek-submit-modal',
     templateUrl: './modal.component.html'
 })
@@ -342,6 +346,7 @@ export class ZekSubmitModal extends ZekModal {
  * @deprecated Please use ZekModal
  */
 @Component({
+    standalone: false,
     selector: 'zek-disapprove-modal',
     templateUrl: './modal.component.html'
 })
@@ -360,6 +365,7 @@ export class ZekDisapproveModal extends ZekModal {
  * @deprecated Please use ZekModal
  */
 @Component({
+    standalone: false,
     selector: 'zek-restore-modal',
     templateUrl: './modal.component.html'
 })
