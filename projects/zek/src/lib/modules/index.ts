@@ -7,6 +7,7 @@ export * from './card';
 export * from './countdown';
 export * from './date-ago';
 export * from './datepicker';
+export * from './dropdown';
 export * from './edit-toolbar';
 export * from './file';
 export * from './file-input';

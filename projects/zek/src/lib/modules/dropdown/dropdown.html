@@ -1,0 +1,24 @@
+<div class="btn-group" id="dropdown-{{id}}">
+    <button class="btn btn-{{css}} dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <!--  <ng-container *ngIf="!_text">{{placeholder}}</ng-container> {{_text}} -->
+        {{label}}
+    </button>
+    <ul class="dropdown-menu dropdown-menu-scrollable">
+        <li class="px-2 py-1">
+            <input type="text" class="form-control"
+                [id]="inputId"
+                [name]="inputId"
+                [(ngModel)]="searchText"
+                (ngModelChange)="onTextChange()">
+        </li>
+        <ng-container *ngIf="normalizedItems">
+            <li>
+                <a class="dropdown-item" href="javascript:void(0)" *ngFor="let item of filteredItems" (click)="toggleChecked(item)">
+                    <span *ngIf="item.checked"><i class="fa-regular fa-square-check"></i></span>
+                    <span *ngIf="!item.checked"><i class="fa-regular fa-square"></i></span>
+                    {{item.value}}
+                </a>
+            </li>
+        </ng-container>
+    </ul>
+</div>
