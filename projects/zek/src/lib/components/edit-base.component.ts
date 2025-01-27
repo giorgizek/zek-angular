@@ -75,7 +75,6 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
     }
     async approve() {
         if (this.id) {
-            this.approveModel.ids = [this.id];
             const approved = await this.internalApprove(this.approveModel);
             if (approved) {
                 this.load();
@@ -152,7 +151,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
     }
 
     protected override async internalApprove(model?: any): Promise<boolean> {
-        const data = await firstValueFrom(this.service.approve(model));
+        const data = await firstValueFrom(this.service.approve(this.id, model));
         if (data && data.length > 0) {
             const message = await firstValueFrom(this.translate.get('Alert.Approved'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');
@@ -165,7 +164,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
     }
 
     protected override async internalDisapprove(model?: any): Promise<boolean> {
-        const data = await firstValueFrom(this.service.disapprove(model));
+        const data = await firstValueFrom(this.service.disapprove(this.id, model));
         if (data && data.length > 0) {
             const message = await firstValueFrom(this.translate.get('Alert.Disapproved'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');
@@ -178,7 +177,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
     }
 
     protected async internalSubmit(model?: any): Promise<boolean> {
-        const data = await firstValueFrom(this.service.approve(model));
+        const data = await firstValueFrom(this.service.approve(this.id, model));
         if (data && data.length > 0) {
             const message = await firstValueFrom(this.translate.get('Alert.Submitted'));
             this.alert.success(message, null, 'fa-solid fa-floppy-disk');

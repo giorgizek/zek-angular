@@ -17,10 +17,13 @@ export interface IService {
     get2(id: any, id2: any): Observable<any>;
     save(model: any): Observable<any>;
     restore(id: any): Observable<any>;
-    approve(model: any): Observable<any>;
-    disapprove(model: any): Observable<any>;
+    approve(id: any, model?: any | null) : Observable<any>;
+    bulkApprove(model: any): Observable<any>;
+    disapprove(id: any, model?: any | null): Observable<any>;
+    bulkDisapprove(model: any): Observable<any>;
     batch(model: any): Observable<any>;
 }
+
 export class CrudService extends BaseService implements IService {
     constructor(
         controller: string,
@@ -58,22 +61,30 @@ export class CrudService extends BaseService implements IService {
     }
 
     restore(id: any) {
-        return this.api.patch(`api/${this.controller}/${id}/Restore`).pipe(catchError(this.handleError(this.restore.name, null)));
+        return this.api.patch(`api/${this.controller}/${id}/restore`).pipe(catchError(this.handleError(this.restore.name, null)));
     }
 
-    approve(model: any) {
-        return this.api.patch(`api/${this.controller}/Approve`, model).pipe(catchError(this.handleError(this.approve.name, null)));
+
+    approve(id: any, model?: any | null) {
+        return this.api.patch(`api/${this.controller}/${id}/approve`, model).pipe(catchError(this.handleError(this.approve.name, null)));
     }
-    disapprove(model: any) {
-        return this.api.patch(`api/${this.controller}/Disapprove`, model).pipe(catchError(this.handleError(this.disapprove.name, null)));
+    bulkApprove(model: any) {
+        return this.api.patch(`api/${this.controller}/bulk-approve`, model).pipe(catchError(this.handleError(this.bulkApprove.name, null)));
+    }
+
+    disapprove(id: any, model?: any | null) {
+        return this.api.patch(`api/${this.controller}/${id}/disapprove`, model).pipe(catchError(this.handleError(this.disapprove.name, null)));
+    }
+    bulkDisapprove(model: any) {
+        return this.api.patch(`api/${this.controller}/bulk-disapprove`, model).pipe(catchError(this.handleError(this.bulkDisapprove.name, null)));
     }
 
     batch(model: any) {
-        return this.api.post(`api/${this.controller}/Batch`, model).pipe(catchError(this.handleError(this.batch.name, null)));
+        return this.api.post(`api/${this.controller}/batch`, model).pipe(catchError(this.handleError(this.batch.name, null)));
     }
 
 
     export(model: any, fileTypeId: any): Observable<Blob | null> {
-        return this.api.getBlob(`api/${this.controller}/Export/${fileTypeId}`, model).pipe(catchError(this.handleError('export', null)));
+        return this.api.getBlob(`api/${this.controller}/export/${fileTypeId}`, model).pipe(catchError(this.handleError('export', null)));
     }
 }
