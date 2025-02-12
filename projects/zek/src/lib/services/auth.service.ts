@@ -18,10 +18,6 @@ export class AuthService {
         const user = StorageHelper.get(AuthService.USER_KEY);
         if (user) {
             this._init(user);
-
-            if (this._isAuthenticated) {
-                this.emitOnRefreshToken();
-            }
         }
     }
 
