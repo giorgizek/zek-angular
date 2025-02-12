@@ -15,10 +15,10 @@ export class ZekValidation implements OnInit, OnDestroy {
     alerts: Alert[] = [];
     private subscription?: Subscription;
 
-    constructor(private readonly alertService: AlertService) { }
+    constructor(private readonly alert: AlertService) { }
 
     ngOnInit() {
-        this.subscription = this.alertService.getAlert().subscribe((alert: Alert) => {
+        this.subscription = this.alert.getAlert().subscribe((alert: Alert) => {
             if (!alert) {
                 // clear alerts when an empty alert is received
                 this.alerts = [];
@@ -35,7 +35,7 @@ export class ZekValidation implements OnInit, OnDestroy {
 
 
     clear() {
-        this.alertService.clear();
+        this.alert.clear();
     }
     remove(alert: Alert) {
         this.alerts = this.alerts.filter(x => x !== alert);
