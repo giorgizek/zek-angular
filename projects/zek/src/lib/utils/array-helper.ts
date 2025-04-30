@@ -1,7 +1,7 @@
 // import { KeyPair } from "../models/key-pair.model";
 // import { Tree } from "../models/tree.model";
 
-import { KeyPair, KeyPairEx, Tree } from "../models";
+import { IdName, KeyPair, KeyPairEx, Tree } from "../models";
 import { IFlattenTree, IFlattenTreeNode, INode, ITreeNode } from "../models/tree";
 
 
@@ -200,6 +200,16 @@ export class ArrayHelper {
         return this.enumToKeyPairBaseArray<KeyPairEx<number, string>>(value);
     }
 
+    static enumToArray<T extends IdName<number, string>>(value: any): T[] {
+        const keys = Object.keys(value);
+        const slice = keys.length / 2;
+        const result: T[] = [];
+        for (let i = slice; i < keys.length; i++) {
+            const name = keys[i];
+            result.push({ id: + value[name], name: name } as T);
+        }
+        return result;
+    }
 
 
 

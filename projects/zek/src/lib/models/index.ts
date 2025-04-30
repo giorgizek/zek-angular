@@ -8,6 +8,7 @@ export * from './edit-base.model';
 export * from './file.model';
 export * from './filter.model';
 export * from './gender.model';
+export * from './id-name.model';
 export * from './key-pair.model';
 export * from './list-base.model';
 export * from './login.model';
