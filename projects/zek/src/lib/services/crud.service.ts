@@ -18,6 +18,7 @@ export interface IService {
     save(model: any): Observable<any>;
     restore(id: any): Observable<any>;
     approve(id: any, model?: any | null) : Observable<any>;
+    submit(id: any, model?: any | null) : Observable<any>;
     bulkApprove(model: any): Observable<any>;
     disapprove(id: any, model?: any | null): Observable<any>;
     bulkDisapprove(model: any): Observable<any>;
@@ -65,6 +66,9 @@ export class CrudService extends BaseService implements IService {
     }
 
 
+    submit(id: any, model?: any | null) {
+        return this.api.patch(`api/${this.controller}/${id}/submit`, model).pipe(catchError(this.handleError(this.submit.name, null)));
+    }
     approve(id: any, model?: any | null) {
         return this.api.patch(`api/${this.controller}/${id}/approve`, model).pipe(catchError(this.handleError(this.approve.name, null)));
     }
