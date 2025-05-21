@@ -183,15 +183,11 @@ export class ArrayHelper {
         const keys = Object.keys(value);
         const slice = keys.length / 2;
         const result: T[] = [];
-        // for (let i = 0; i < slice; i++) {
-        //     result.push({ key: +keys[i], value: keys[i + slice] } as T);
-        // }
         for (let i = slice; i < keys.length; i++) {
             const name = keys[i];
             result.push({ key: + value[name], value: name } as T);
         }
         return result;
-        //return Array.from(keys.slice(keys.length / 2), x => { key:x, value:'aaa' } as Object);
     }
     static enumToKeyPairArray(value: any): KeyPair<number, string>[] {
         return this.enumToKeyPairBaseArray<KeyPair<number, string>>(value);
