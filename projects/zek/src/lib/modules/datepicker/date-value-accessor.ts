@@ -1,7 +1,8 @@
-import { Directive, ElementRef, OnDestroy, forwardRef, Inject } from '@angular/core'
+import { Directive, ElementRef, OnDestroy, forwardRef, Inject, OnChanges, SimpleChanges, Input } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DATE_FORMAT, LANGUAGE } from '../../tokens';
 import { DateHelper } from '../../utils';
+import { StringInput } from '../../components';
 
 declare let Datepicker: any;
 
@@ -22,10 +23,12 @@ const DATE_VALUE_ACCESSOR = {
         //აღარ არის საჭირო რადგანაც ახა ვერსიაში updateOnBlur=true აკეთებს მაგას "(keyup)": "onKeyUp($event)",
     }
 })
-export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
+export class DateValueAccessor implements ControlValueAccessor, OnDestroy, OnChanges {
     //@Input() ngModel: any;
     private datepicker?: any;
     private oldValue?: Date | null = null;
+    @Input() min?: StringInput;
+    @Input() max?: StringInput;
 
     constructor(private el: ElementRef,
         @Inject(DATE_FORMAT) format: string,
@@ -71,17 +74,17 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
             this.onChangeDate(e);//execude 
         });
 
-        setTimeout(() => {
-            const min = this.el.nativeElement.getAttribute('min');
-            const max = this.el.nativeElement.getAttribute('max');
+        // setTimeout(() => {
+        //     const min = this.el.nativeElement.getAttribute('min');
+        //     const max = this.el.nativeElement.getAttribute('max');
 
-            const minDate = min ? DateHelper.toDate(min) : null;
-            const maxDate = max ? DateHelper.toDate(max) : null;
-            this.datepicker.setOptions({
-                minDate: minDate,//String|Date|Number
-                maxDate: maxDate,//String|Date|Number
-            });
-        }, 0);
+        //     const minDate = min ? DateHelper.toDate(min) : null;
+        //     const maxDate = max ? DateHelper.toDate(max) : null;
+        //     this.datepicker.setOptions({
+        //         minDate: minDate,//String|Date|Number
+        //         maxDate: maxDate,//String|Date|Number
+        //     });
+        // }, 0);
     }
 
     // onKeyUp(e: any) {
@@ -102,11 +105,31 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy {
     // }
     // }
 
+
     ngOnDestroy() {
         this.el.nativeElement.removeEventListener('changeDate', this.onChangeDate);
 
         if (this.datepicker && typeof this.datepicker.destroy === 'function') {
             this.datepicker.destroy()
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['min']) {
+            const minDate = this.min ? DateHelper.toDate(this.min) : null;
+            if (this.datepicker) {
+                this.datepicker.setOptions({
+                    minDate: minDate,
+                });
+            }
+        }
+        if (changes['max']) {
+            const maxDate = this.max ? DateHelper.toDate(this.max) : null;
+            if (this.datepicker) {
+                this.datepicker.setOptions({
+                    maxDate: maxDate
+                });
+            }
         }
     }
 
