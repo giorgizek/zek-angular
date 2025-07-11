@@ -215,7 +215,7 @@ export class EditBaseComponent<TModel = any> extends EditFormComponent<TModel> {
         }
     }
     export(fileTypeId: number) {
-        this.service.export({ id: this.id }, fileTypeId).subscribe(data => {
+        this.service.export(this.id, fileTypeId).subscribe(data => {
             this.downloadFile(data, 'export.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         });
     }

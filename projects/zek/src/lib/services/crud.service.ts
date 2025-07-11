@@ -4,21 +4,21 @@ import { HttpErrorHandler } from "./http-error-handler.service";
 import { PagedList } from "../models";
 import { BaseService } from "./base.service";
 import { WebApiClient } from "./web.api";
-import { UrlHelper } from "../utils";
+import { Convert, ObjectHelper, UrlHelper } from "../utils";
 
 export interface IService {
     getAll(filter: any): Observable<PagedList>;
     delete(id: any): Observable<any>;
     delete2(id: any, id2: any): Observable<any>;
-    export(filter: any, fileTypeId: any): Observable<Blob | null>;
+    export(model: any, fileTypeId: any): Observable<Blob | null>;
     sum(filter: any): Observable<any>;
 
     get(id: any): Observable<any>;
     get2(id: any, id2: any): Observable<any>;
     save(model: any): Observable<any>;
     restore(id: any): Observable<any>;
-    approve(id: any, model?: any | null) : Observable<any>;
-    submit(id: any, model?: any | null) : Observable<any>;
+    approve(id: any, model?: any | null): Observable<any>;
+    submit(id: any, model?: any | null): Observable<any>;
     bulkApprove(model: any): Observable<any>;
     disapprove(id: any, model?: any | null): Observable<any>;
     bulkDisapprove(model: any): Observable<any>;
@@ -89,6 +89,8 @@ export class CrudService extends BaseService implements IService {
 
 
     export(model: any, fileTypeId: any): Observable<Blob | null> {
-        return this.api.getBlob(`api/${this.controller}/export/${fileTypeId}`, model).pipe(catchError(this.handleError('export', null)));
+        return Convert.isNumber(model)
+            ? this.api.getBlob(`api/${this.controller}/${model}/export/${fileTypeId}`).pipe(catchError(this.handleError('export', null)))
+            : this.api.getBlob(`api/${this.controller}/export/${fileTypeId}`, model).pipe(catchError(this.handleError('export', null)));
     }
 }
