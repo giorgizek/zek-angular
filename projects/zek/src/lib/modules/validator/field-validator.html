@@ -1,4 +1,4 @@
-<ng-container *ngIf="field && field.invalid && field.errors && (field.dirty || field.touched || field.formDirective?.submitted)">
+<ng-container *ngIf="hasErrors">
     <ng-container *ngIf="field.errors.required">{{ 'Validation.Required' | translate }}</ng-container>
     <ng-container *ngIf="field.errors.minlength">{{ 'Validation.MinLengthFormat' | translate:{ value: field.errors.minlength.requiredLength } }}</ng-container>
     <ng-container *ngIf="field.errors.maxlength">{{ 'Validation.MaxLengthFormat' | translate:{ value: field.errors.maxlength.requiredLength } }}</ng-container>
