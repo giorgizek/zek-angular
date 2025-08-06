@@ -9,6 +9,7 @@ export * from './error-helper';
 export * from './excel-helper';
 export * from './file.helper';
 export * from './filter-helper';
+export * from './guid';
 export * from './handler';
 export * from './html-helper';
 export * from './jwt-helper';
