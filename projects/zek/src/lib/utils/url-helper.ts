@@ -30,7 +30,7 @@ export class UrlHelper {
     static combine(...parts: any[]) {
         let result = '';
         for (const part of parts) {
-            if (typeof part === 'undefined' && part === null)
+            if (typeof part === 'undefined' || part === null)
                 continue;
             const str = `${part}`;
             result = this.combineEnsureSingleSeparator(result, str, '/');
