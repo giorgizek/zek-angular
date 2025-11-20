@@ -72,6 +72,7 @@ export class ArrayHelper {
     //     return arr;
     // }
 
+
     static distinct(array: any[]) {
         const length = array.length;
         const result = []
@@ -83,6 +84,33 @@ export class ArrayHelper {
 
             seen.add(value);
             result.push(value);
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns a new array with duplicates removed based on a specific key or selector.
+     * @param array The source array.
+     * @param keySelector A function that returns the value to compare by.
+     */
+    static distinctBy<T, K>(array: T[], keySelector: (item: T) => K): T[] {
+        // Guard clause for null/undefined or empty arrays
+        if (!array || array.length === 0) {
+            return [];
+        }
+
+        const seen = new Set<K>();
+        const result: T[] = [];
+
+        // Using a for...of loop is often cleaner than standard for loop in modern JS
+        for (const item of array) {
+            const key = keySelector(item);
+
+            if (!seen.has(key)) {
+                seen.add(key);
+                result.push(item);
+            }
         }
 
         return result;
