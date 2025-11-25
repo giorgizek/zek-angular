@@ -11,4 +11,11 @@
 
 export class IdNameChecked<TId = any, TName = any> extends IdName<TId, TName> {
     checked?: boolean | null;
+
+    constructor(init?: Partial<IdNameChecked>) {
+        super();
+        if (init) {
+            Object.assign(this, init);
+        }
+    }
 }
