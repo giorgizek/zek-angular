@@ -70,24 +70,25 @@ export class ObjectHelper {
 
 
     static deepCopy<T = any>(value: any): T {
+        // 1. Guard clause: if value is null or not an object, return it.
+        // (This handles primitives and breaks recursion)
         if (!this.isObject(value))
             return value;
 
-        let output: any = {};
+        // 2. Handle Arrays
         if (Array.isArray(value)) {
-            output = value.map(x => this.deepCopy(x));
+            return value.map(x => this.deepCopy(x)) as any;
         }
-        else {
-            Object.keys(value).forEach((key: any) => {
-                const v = value[key];
 
-                if (this.isObject(v)) {
-                    output[key] = this.deepCopy(v);
-
-                } else {
-                    Object.assign(output, { [key]: v });
-                }
-            });
+        // 3. Handle Objects
+        const output: any = {};
+        for (const key of Object.keys(value)) {
+            const v = value[key];
+            if (this.isObject(v)) {
+                output[key] = this.deepCopy(v);
+            } else {
+                Object.assign(output, { [key]: v });
+            }
         }
 
         return output as T;
