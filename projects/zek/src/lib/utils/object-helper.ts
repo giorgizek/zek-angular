@@ -94,4 +94,50 @@ export class ObjectHelper {
         return output as T;
     }
 
+    static deepEquals(a: any, b: any): boolean {
+        // 1. Strict equality for primitives
+        if (a === b) return true;
+
+        // 2. If one is null/undefined or types differ → not equal
+        if (a == null || b == null || typeof a !== typeof b)
+            return false;
+
+        // 3. Date comparison
+        if (a instanceof Date && b instanceof Date) {
+            return a.getTime() === b.getTime();
+        }
+
+        // 4. Arrays
+        if (Array.isArray(a)) {
+            if (!Array.isArray(b)) return false;
+            if (a.length !== b.length) return false;
+
+            for (let i = 0; i < a.length; i++) {
+                if (!this.deepEquals(a[i], b[i])) return false;
+            }
+            return true;
+        }
+
+        // 5. Objects
+        if (this.isObject(a)) {
+            if (!this.isObject(b)) return false;
+
+            const keysA = Object.keys(a);
+            const keysB = Object.keys(b);
+
+            if (keysA.length !== keysB.length) return false;
+
+            for (const key of keysA) {
+                if (!keysB.includes(key)) return false;
+                if (!this.deepEquals(a[key], b[key])) return false;
+            }
+            return true;
+        }
+
+        // 6. Fallback
+        return false;
+    }
+
+
+
 }
