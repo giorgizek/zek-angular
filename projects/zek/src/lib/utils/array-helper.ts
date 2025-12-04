@@ -3,6 +3,7 @@
 
 import { IdName, KeyPair, KeyPairEx, Tree } from "../models";
 import { IFlattenTree, IFlattenTreeNode, INode, ITreeNode } from "../models/tree";
+import { ObjectHelper } from "./object-helper";
 
 
 
@@ -116,11 +117,34 @@ export class ArrayHelper {
         return result;
     }
 
-    static filterByKey(filterValue: any, key: string, array: any[]) {
-        if (typeof filterValue === 'undefined' || filterValue == null || (typeof key === 'string' && key.length === 0))
-            return array;
 
-        return array.filter(x => x !== undefined && x !== null && x[key] === filterValue);
+    /**
+     * Filters an array based on whether the value derived by the keySelector 
+     * equals the filterValue.
+     * @param filterValue The value to match.
+     * @param keySelector A function that takes an item of type T and returns the key value of type K.
+     * @param array The array of items to filter.
+     * @returns A new array containing only the items that match the filter criteria.
+     */
+    static filterByKey<T, K>(filterValue: K, keySelector: (item: T) => K, array: T[]): T[] {
+        // 1. Handle edge cases: if filterValue is undefined or null, or the array is null/empty,
+        //    return the array or an empty array, respectively.
+        if (typeof filterValue === 'undefined' || filterValue === null || !array) {
+            return array || [];
+        }
+
+        // 2. Filter the array using the keySelector for comparison
+        return array.filter((item: T) => {
+            // Ensure the item itself is not undefined or null before trying to get its key
+            if (!ObjectHelper.isDefined(item)) {
+                return false;
+            }
+            // Get the specific key value for the current item
+            const itemKey = keySelector(item);
+
+            // Return true if the item's key value strictly equals the filterValue
+            return itemKey === filterValue;
+        });
     }
 
 
