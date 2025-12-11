@@ -187,7 +187,7 @@ export class DateValueAccessor implements ControlValueAccessor, OnDestroy, OnCha
 
 
     private isReadOnly() {
-        return this.el.nativeElement.disabled || this.el.nativeElement.readOnly;
+        return this.el.nativeElement.disabled || this.el.nativeElement.readonly  || this.el.nativeElement.readOnly;
     }
 
 
