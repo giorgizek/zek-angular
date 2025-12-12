@@ -117,6 +117,12 @@ export class ArrayHelper {
         return result;
     }
 
+    static filterByKeyString(filterValue: any, key: string, array: any[]) {
+        if (typeof filterValue === 'undefined' || filterValue == null || (typeof key === 'string' && key.length === 0))
+            return array;
+
+        return array.filter(x => x !== undefined && x !== null && x[key] === filterValue);
+    }
 
     /**
      * Filters an array based on whether the value derived by the keySelector 
@@ -146,6 +152,7 @@ export class ArrayHelper {
             return itemKey === filterValue;
         });
     }
+
 
 
 

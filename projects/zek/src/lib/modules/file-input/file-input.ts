@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FileService } from '../../services/file.service';
 import { CoreUiComponent } from '../../components/core-ui.component';
@@ -20,7 +20,7 @@ import { Convert } from '../../utils/convert';
 export class ZekFileInput extends CoreUiComponent {
     // @Input() model!: string[] | null;
     @Output() readonly onUpload = new EventEmitter<Array<any>>();
-
+    @ViewChild('fileInput') fileInput: any;
     private readonly fileService = inject(FileService);
 
     private _uniqueId: string = `zek-file-input-${this.uniqueId}`;
@@ -53,8 +53,6 @@ export class ZekFileInput extends CoreUiComponent {
         this._multiple = Convert.toBooleanProperty(v);
     }
 
-    // files: File[] | null = null;
-
     clickInput() {
         const el = document.getElementById(this.inputId);
         if (el) {
@@ -79,5 +77,8 @@ export class ZekFileInput extends CoreUiComponent {
                 this.onUpload.emit(data.value);
             }
         })
+
+        if (this.fileInput)
+            this.fileInput.nativeElement.value = '';
     }
 }

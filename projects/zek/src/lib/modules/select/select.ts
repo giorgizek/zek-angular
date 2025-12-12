@@ -143,7 +143,7 @@ export class ZekSelectMultiple extends CoreUiComponent {
                 let notUnique: any[] = [];
                 if (this.valueField) {
                     for (const currentValue of value) {
-                        const items = ArrayHelper.filterByKey(currentValue, this.valueField, this._data);
+                        const items = ArrayHelper.filterByKeyString(currentValue, this.valueField, this._data);
                         notUnique = notUnique.concat(items);
                     }
                 } else {
@@ -158,7 +158,7 @@ export class ZekSelectMultiple extends CoreUiComponent {
         } else {
             if (Array.isArray(this._data)) {
                 if (this.valueField) {
-                    this._selected = ArrayHelper.filterByKey(value, this.valueField, this._data);
+                    this._selected = ArrayHelper.filterByKeyString(value, this.valueField, this._data);
                 } else {
                     this._selected = this._data.filter(x => x === value);
                 }
