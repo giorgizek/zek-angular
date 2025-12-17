@@ -37,8 +37,9 @@ export class EditFormComponent<TModel = any> extends BaseComponent<TModel> {
             this.model = await this.getModel();
         }
         else {
-            this.initCreate();
+            await this.initCreate();
         }
+        this.onBindModelCompleted();
     }
 
     protected initCreate() {

@@ -107,6 +107,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListI
             const tmp = StorageHelper.get('filter');
             if (tmp && tmp.url && tmp.url === this.url && tmp.filter) {
                 this.filter = Object.assign({}, tmp.filter);
+                //this.filter = { ...tmp.filter };
                 //we dont need this.assignFilter(); because after initStoredFilter(); will be assigned.
             } else {
                 localStorage.removeItem('filter');
