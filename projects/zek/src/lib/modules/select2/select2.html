@@ -1,7 +1,13 @@
-<div class="input-group position-relative" id="dropdown-menu-container-{{elementId}}">
-  <input type="text" class="form-control" placeholder="{{placeholder}}" data-bs-toggle="dropdown" id="input-{{elementId}}" [(ngModel)]="text" (ngModelChange)="onTextChange($event)" (focus)="onFocus($event)" (blur)="inputUnfocused()">
-  <button class="btn btn-outline-secondary dropdown-toggle" id="btn-{{elementId}}" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent"></button>
-  <ul class="dropdown-menu dropdown-menu-start w-100 scrollable-menu" id="dropdown-menu-{{elementId}}">
+<div class="input-group position-relative" id="dropdown-menu-container-{{uniqueId}}">
+  <input type="text" class="form-control" placeholder="{{placeholder}}" data-bs-toggle="dropdown"
+    id="input-{{uniqueId}}"
+    [disabled]="disabled"
+    [(ngModel)]="text"
+    (ngModelChange)="onTextChange($event)"
+    (focus)="onFocus($event)"
+    (blur)="inputUnfocused()">
+  <button [disabled]="disabled" class="btn btn-outline-secondary dropdown-toggle" id="btn-{{uniqueId}}" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent"></button>
+  <ul class="dropdown-menu dropdown-menu-start w-100 scrollable-menu" id="dropdown-menu-{{uniqueId}}">
     <ng-container *ngIf="textField">
       <li *ngFor="let entry of filteredData">
         <a href="javascript:void(0)" (click)="selectItem(entry)" class="dropdown-item">{{entry[textField]}}</a>

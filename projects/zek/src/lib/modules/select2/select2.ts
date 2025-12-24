@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { RandomHelper, StringHelper } from '../../utils';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Convert, StringHelper } from '../../utils';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BooleanInput, CoreComponent } from '../../components';
 
 @Component({
     standalone: true,
@@ -11,11 +12,23 @@ import { FormsModule } from '@angular/forms';
     imports: [CommonModule, FormsModule]
 
 })
-export class ZekSelect2 implements OnDestroy {
+export class ZekSelect2 extends CoreComponent {
     filter?: string | null;
     text?: string | null;
 
-    readonly elementId = RandomHelper.randomHex();
+    private _disabled = false;
+    get disabled(): boolean {
+        return this._disabled;
+    }
+    @Input()
+    set disabled(value: BooleanInput) {
+        const v = Convert.toBooleanProperty(value);
+        if (this._disabled !== v) {
+            this._disabled = v;
+            this.onDisabledChanged();
+        }
+    }
+    onDisabledChanged() { }
 
     private _data: Array<any> = [];
     @Input()
@@ -83,10 +96,7 @@ export class ZekSelect2 implements OnDestroy {
     //     this._dropdown = v;
     // }
 
-    ngOnDestroy() {
-        // this.dropdown?.dispose();
-        // this.dropdown = null;
-    }
+
 
 
     onTextChange(text: string) {
