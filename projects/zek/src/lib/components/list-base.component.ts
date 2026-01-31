@@ -6,7 +6,7 @@ import { BaseComponent } from './base.component';
 import { ApproveModel, FilterBase, PagedList, Pager, PrintType } from '../models';
 import { ZekModal } from '../modules/modal/modal/modal.component';
 import { AlertService } from '../services/alert.service';
-import { ArrayHelper, Convert, FilterHelper, PagerHelper, StorageHelper, StringHelper, UrlHelper } from '../utils';
+import { ArrayHelper, Convert, FilterHelper, PagerHelper, SessionStorageHelper, StringHelper, UrlHelper } from '../utils';
 import { firstValueFrom } from 'rxjs';
 import { BooleanInput } from './types';
 // declare let bootstrap: any;
@@ -49,9 +49,6 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListI
 
     readonly translate = inject(TranslateService);
     readonly alert = inject(AlertService);
-
-
-
 
 
 
@@ -104,16 +101,16 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListI
         const filterParam = this.getQueryParam('filter') || this.getParam('filter');
 
         if (filterParam) {
-            const tmp = StorageHelper.get('filter');
+            const tmp = SessionStorageHelper.get('filter');
             if (tmp && tmp.url && tmp.url === this.url && tmp.filter) {
                 this.filter = Object.assign({}, tmp.filter);
                 //this.filter = { ...tmp.filter };
                 //we dont need this.assignFilter(); because after initStoredFilter(); will be assigned.
             } else {
-                localStorage.removeItem('filter');
+                SessionStorageHelper.remove('filter');
             }
         } else {
-            localStorage.removeItem('filter');
+            SessionStorageHelper.remove('filter');
         }
     }
     async changePage(page: number) {
@@ -150,7 +147,7 @@ export class ListBaseComponent<TService extends IService = IService, TPagedListI
             this.internalSaveFilter()
     }
     private internalSaveFilter() {
-        StorageHelper.set('filter', {
+        SessionStorageHelper.set('filter', {
             url: this.url,
             filter: this.internalFilter
         });
