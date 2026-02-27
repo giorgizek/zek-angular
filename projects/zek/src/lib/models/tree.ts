@@ -6,8 +6,6 @@ export interface IFlattenTree<TKey = any, TValue = any> {
 }
 
 
-
-
 export interface INode {
     id: number;
     parentId?: number | null;
