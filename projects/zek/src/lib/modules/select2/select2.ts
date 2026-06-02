@@ -156,6 +156,13 @@ export class ZekSelect2 extends CoreComponent {
         // }
     }
     inputUnfocused() {
+        if (this._selectedItem !== undefined && this._selectedItem !== null) {
+            this.setText();
+        }
+
+        this.filter = null;
+        this.filterData();
+
         // this.expanded = false;
     }
 
@@ -180,7 +187,9 @@ export class ZekSelect2 extends CoreComponent {
 
             //set value
             let v;
-            if (this.valueField === undefined || this.valueField === null || this.valueField === '') {
+            if (item === undefined || item === null) {
+                v = null;
+            } else if (this.valueField === undefined || this.valueField === null || this.valueField === '') {
                 // this.value = v
                 v = item;
             } else {
@@ -196,5 +205,7 @@ export class ZekSelect2 extends CoreComponent {
         }
     }
 
-
+    clear() {
+        this.selectItem(null);
+    }
 }
