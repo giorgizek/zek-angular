@@ -124,10 +124,8 @@ export class ZekSelect2 extends CoreComponent {
         //   this.dropdown.show();
         // }
         // let dropdown = document.getElementById(`dropdown-menu-container-${this.elementId}`);
-        // console.log(dropdown);
 
         // if (dropdown) {
-        //   console.log(dropdown.classList);
 
         //   if (!dropdown.classList.contains('show')) {
         //     let el = document.getElementById(`input-${this.elementId}`);
@@ -156,14 +154,13 @@ export class ZekSelect2 extends CoreComponent {
         // }
     }
     inputUnfocused() {
-        if (this._selectedItem !== undefined && this._selectedItem !== null) {
-            this.setText();
-        }
+        this.setText();
+    }
 
-        this.filter = null;
-        this.filterData();
-
-        // this.expanded = false;
+    onItemMouseDown(event: MouseEvent, item: any) {
+        // Keep focus on input so blur handler does not run before selection.
+        event.preventDefault();
+        this.selectItem(item);
     }
 
     private setText() {
@@ -187,9 +184,7 @@ export class ZekSelect2 extends CoreComponent {
 
             //set value
             let v;
-            if (item === undefined || item === null) {
-                v = null;
-            } else if (this.valueField === undefined || this.valueField === null || this.valueField === '') {
+            if (this.valueField === undefined || this.valueField === null || this.valueField === '') {
                 // this.value = v
                 v = item;
             } else {
@@ -205,7 +200,5 @@ export class ZekSelect2 extends CoreComponent {
         }
     }
 
-    clear() {
-        this.selectItem(null);
-    }
+
 }
